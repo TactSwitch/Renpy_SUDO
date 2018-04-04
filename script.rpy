@@ -165,10 +165,22 @@ label startAvA:
 
     show screen char("ava sleep")
     a "..."
-    a "SnZzZzZzZzZzZz"
+    a "SnZzZzZzZzZzZz."
     hide screen char
-    show
-    a ""
+    show screen char("ava surprised")
+    a "OH!"
+    hide screen char
+    show screen char("ava nervous")
+    a "Sorry, I must've dosed off."
+    hide screen char
+    show screen char("ava neutral")
+    a "Uhm..."
+    hide screen char
+    show screen char("ava happy")
+    a "Im the Anti-Virus-Amalgam on this system."
+    hide screen char
+    show screen char("ava vhappy")
+    a "You can just call me AvA though."
 #EOL#####################################
 #EOL#####################################
     return
