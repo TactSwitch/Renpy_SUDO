@@ -31,6 +31,9 @@ init:
     image ava sad = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Sad.png", 550,550))
     image ava sleep_only = im.Scale("AvA_Sleep.png", 550,550)
     image ava sleep = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Sleep.png", 550,550))
+    image ava surprised_only = im.Scale("AvA_Surprised.png", 550,550)
+    image ava surprised = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Surprised.png", 550,550))
+
     #NED Images
 
 
@@ -42,23 +45,11 @@ init:
 
 label start:
 
-
-
-
     call screen power_button("power")
-
 
 label firstScreen:
 
     show bg desktop
-
-
-
-
-
-
-
-
 
     show screen char("admin nod")
     hide screen char
@@ -68,62 +59,36 @@ label firstScreen:
     i "Congratiulations on your placement here at LBN."
     i "I am the System ADMIN Manager."
     i "Or, SAD-Man, For short."
-    i "I have no previous record of your employee profile."
-    i "Are you familiar with the functionality of your workstation?"
-
-
-
-label firstTextInput:
-
-    hide screen char
-    show screen char("admin normal")
-
-    $ t1 = renpy.input("Type yes or no, then hit enter:")
-
-    if not t1:
-
-        hide screen char
-        show screen char("admin nod")
-
-        i "Please respond"
-
-        jump firstTextInput
-
-    $ t1 = t1.strip()
-
-    if "no" in t1:
-
-        jump tutorial
-
-    elif "yes" in t1:
-
-        jump noTutorial
-
-
-label nullFirstText:
-
     hide screen char
     show screen char("admin nod")
-    i "I do not understand."
+    i "I have no previous record of your employee profile."
+    hide screen char
+    show screen char("admin normal")
+    i "I take it you are not yet familiar with the functionality of your workstation."
 
-    jump firstTextInput
+
 
 label tutorial:
 
-    i "Ok, I will run you through the basics."
+    i "Here are the basics:"
     i "The primary mode of system interaction is the INPUT popup."
     i "Everything from communication, to executing commands, happens in the INPUT popup."
     i "Simply type what you desire and hit enter."
     i "Neither punctuation, nor capitalization, is necessary, and will only confuse the system."
+    hide screen char
+    show screen char("admin nod")
     i "I will provide an example of the INPUT popup:"
+    hide screen char
+    show screen char("admin normal")
 
     $ t2 = renpy.input("INPUT:")
+
 
     if "hello" in t2 or "hi" in t2:
 
         hide screen char
         show screen char("admin nod")
-        i "Um, yes hello."
+        i "Yes hello."
         hide screen char
         show screen char("admin normal")
         i "As I was saying."
