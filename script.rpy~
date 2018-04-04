@@ -1,0 +1,123 @@
+﻿# The script of the game goes in this file.
+
+# Declare characters used by this game. The color argument colorizes the
+# name of the character.
+
+define e = Character("Eileen")
+
+
+
+
+
+label start:
+
+   
+
+    scene bg room
+
+    "."
+    ".."
+    "..."
+    "Uhh."
+    "..."
+    "W-"
+    "..."
+    "Hello?"
+    "..."  
+    "You can't speak..."
+    "Here I'll try and rig something up."
+    #CommandPrompt animation
+    #Window changing around anim
+    "Ok, its pretty rough so you'll have to be delicate."
+    "Keep it short, sweet, and simple."
+    "Use caps at the beggining of sentences, but dont bother with puncuation or abbreviation."
+    
+    
+    
+label firstTextInput:
+   
+    $ t1 = ""
+    
+    $ t1 = renpy.input("")
+
+    if not t1:
+        
+        "Come on, say something"
+        
+        jump firstTextInput
+        
+    $ t1 = t1.strip()
+
+    if "Hi" in t1 or "Hello" in t1:      
+
+        jump greeting
+        
+            
+    elif "What" in t1:
+         
+        jump whatAsked
+    
+    elif "Where" in t1:
+        
+        jump whereAsked
+        
+        
+label nullFirstText:
+
+     "What?"
+     
+     jump firstTextInput
+
+     
+label greeting:
+   
+    "Um, Hi."
+    "..."
+    "Right."
+    
+    if "your name" in t1:
+        
+        "My name is Nathan."
+        
+    jump preamble1
+    
+    
+label whatAsked:
+    
+    if "this" in t1:
+        
+        "What youre looking at is the backbone of the game."
+        "The one you broke."
+    
+    elif "your name" in t1:
+        
+        "My name is Nathan."
+        
+    elif "going on" in t1:
+    
+        "What's going on is you somehow managing to break my game."
+        "Thats what's going on."
+        
+    else:
+        
+        "What do you mean \"what,\""
+        "you broke my game."
+        
+    jump preamble1
+    
+    
+label whereAsked:
+    
+    if "am I" in t1 or "is this" in t1:
+        
+        "Well I presume you are sitting in a chair somewhere playing this game."
+        "What you are looking at, however, is the backbone of this game."
+    
+        jump preamble
+        
+        
+label preamble1:
+
+    "You "
+    
+    return
