@@ -4,6 +4,17 @@
 # name of the character.
 
 init:
+
+    #Input Function
+    python:
+        def inp(inp1, returnTo):
+            inp1 = renpy.input("INPUT:")
+            inp1 = inp1.strip()
+            if not inp1:
+                Jump (returnTo);
+
+
+
     #backgrouns and UI Images
     image power = "power button.png"
     image bg desktop = im.Scale("desktop.png", 1280, 720)
@@ -35,11 +46,15 @@ init:
     image ava surprised = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Surprised.png", 550,550))
 
     #NED Images
+    image ned normal_only = im.Scale("NED_Normal.png", 550,550)
+    image ned normal = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Normal.png", 550,550))
+    image ned nod_only = im.Scale("NED_Nod.png", 550,550)
+    image ned nod = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Nod.png", 550,550))
 
-
-
+    #Characters
     $ i = Character ('SAD-Man', color = (0, 0, 0, 255))
-    $ a = Character ('AvA', color=(0, 0, 0, 255), image = "ava")
+    $ a = Character ('AvA', color = (255, 255, 255, 255), image = "ava")
+    $ n = Character ('NED', color = (0, 150, 150, 255), image = "ned")
 
 
 
@@ -110,23 +125,27 @@ label secondTextInput:
     $ t2 = renpy.input("INPUT:")
 
     if not t2:
-
         "NULL"
 
         jump secondTextInput
 
     $ t2 = t2.strip()
 
-    if "./AvA" in t2:
+
+
+    if t2 == "./AvA":
         jump startAvA
 
+    elif t2 == "./NED":
+        jump startNED
 
+    else:
+        jump secondTextInput
 label startAvA:
 
     "Launching: {w=0.5}||{w=0.7}|||||||{w=0.2}||||||||{w=1.4}||||||||||{w=2}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=1.2}|||||||||{w=0.2}|||{nw}"
 
     "AvA.sh Ready:"
-
 
     show screen char("ava sleep")
     a "..."
@@ -146,6 +165,44 @@ label startAvA:
     hide screen char
     show screen char("ava vhappy")
     a "You can just call me AvA though."
+
+$ avaStarted = True
+
+label startNED:
+
+    if avaStarted == True:
+        show screen char2("ned normal")
+        n "Hello."
+
+    else:
+        show screen char2("ned normal")
+        n "Hello."
+        n "I am the Neural Entropy Delineation"
+        n "For efficiency of interaction, I also respond to the abbreviation: NED"
+        n "Given similarities to previous events, I predict you are the new system-manager for this system correct?"
+
+        $ t3 = renpy.input("INPUT:")
+        $ t3 = t3.strip()
+
+        if not t3:
+            "NULL"
+
+        if "y" in t3 or "correct" in t3:
+            hide screen char
+            show screen char2("ned nod")
+            n "It is good to have my predictions verified."
+            hide screen char
+            show screen char2("ned normal")
+            n "The logs show that you have already interacted with the SAD-man."
+            n "There is more than the SAD-man and myself on this system."
+
+        elif "n" in t3 :
+            n "Strange."
+            n "That does not correlate."
+
+
+
+
 #EOL#####################################
 #EOL#####################################
     return

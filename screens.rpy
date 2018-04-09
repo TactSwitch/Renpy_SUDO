@@ -97,7 +97,19 @@ screen char(charimg):
             add charimg
             xmaximum 500
 
+## Character Window 2 ################################################################
 
+screen char2(charimg):
+
+    drag:
+        drag_name "char"
+        yalign 1.0 xalign 0.5
+        drag_handle (0, 0, 1.0, 40)
+
+
+        window id "window":
+            add charimg
+            xmaximum 500
 
 
 ## Image Button Test Screen ####################################################
