@@ -54,7 +54,7 @@ init:
     #Characters
     $ i = Character ('SAD-Man', color = (0, 0, 0, 255))
     $ a = Character ('AvA', color = (255, 255, 255, 255), image = "ava")
-    $ n = Character ('NED', color = (0, 150, 150, 255), image = "ned")
+    $ n = Character ('NED', color = (255, 255, 255, 255), image = "ned")
 
 
 
@@ -124,14 +124,14 @@ label secondTextInput:
 
     $ t2 = renpy.input("INPUT:")
 
+
+
+    $ t2 = t2.strip()
+
     if not t2:
         "NULL"
 
         jump secondTextInput
-
-    $ t2 = t2.strip()
-
-
 
     if t2 == "./AvA":
         jump startAvA
@@ -140,6 +140,7 @@ label secondTextInput:
         jump startNED
 
     else:
+        "Unrecognized Command."
         jump secondTextInput
 label startAvA:
 
