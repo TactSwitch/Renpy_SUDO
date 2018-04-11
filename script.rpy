@@ -12,8 +12,9 @@ init:
             inp1 = inp1.strip()
             if not inp1:
                 Jump (returnTo);
-
-
+    #Sounds
+    define audio.honkytronk = "/sounds/HonkyTronkPt1.wav"
+    define audio.ominous = "/sounds/Ominous.wav"
 
     #backgrouns and UI Images
     image power = "power button.png"
@@ -146,23 +147,28 @@ label startAvA:
 
     "Launching: {w=0.5}||{w=0.7}|||||||{w=0.2}||||||||{w=1.4}||||||||||{w=2}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=1.2}|||||||||{w=0.2}|||{nw}"
 
-    "AvA.sh Ready:"
-
     show screen char("ava sleep")
     a "..."
     a "SnZzZzZzZzZzZz."
+
     hide screen char
     show screen char("ava surprised")
+    voice "/voice/A_OH.wav"
     a "OH!"
+
     hide screen char
     show screen char("ava nervous")
     a "Sorry, I must've dosed off."
+
     hide screen char
     show screen char("ava neutral")
+    voice "/voice/A_VShort.wav"
     a "Uhm..."
+
     hide screen char
     show screen char("ava happy")
     a "Im the Anti-Virus-Amalgam on this system."
+
     hide screen char
     show screen char("ava vhappy")
     a "You can just call me AvA though."
@@ -174,6 +180,8 @@ label startNED:
     if avaStarted == True:
         show screen char2("ned normal")
         n "Hello."
+
+        play music honkytronk loop
 
     else:
         show screen char2("ned normal")
