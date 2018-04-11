@@ -85,11 +85,12 @@ style frame:
 
 ## Character Window ################################################################
 
-screen char(charimg):
+screen char(charimg, xalig = 1.0, yalig = 0.5):
 
     drag:
         drag_name "char"
-        yalign 1.0 xalign 0.5
+        xalign xalig
+        yalign yalig
         drag_handle (0, 0, 1.0, 40)
 
 
@@ -99,11 +100,12 @@ screen char(charimg):
 
 ## Character Window 2 ################################################################
 
-screen char2(charimg):
+screen char2(charimg, xalig = 1.0, yalig = 0.5):
 
     drag:
         drag_name "char"
-        yalign 1.0 xalign 0.5
+        xalign xalig
+        yalign yalig
         drag_handle (0, 0, 1.0, 40)
 
 

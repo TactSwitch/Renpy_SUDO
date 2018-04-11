@@ -109,7 +109,7 @@ label tutorial:
         show screen char("admin normal")
         i "As I was saying."
 
-label noTutorial:
+label afterTutorial:
 
     i "For information on what is possible with the INPUT popup, see the Employee Reference Book. There should be a link to it in the bottom-left corner of your screen."
     i "This is the end of my interaction with you"
@@ -178,10 +178,9 @@ $ avaStarted = True
 label startNED:
 
     if avaStarted == True:
-        show screen char2("ned normal")
+        show screen char2("ned normal",0.5,0.5)
+        play music honkytronk loop fadein 1.0
         n "Hello."
-
-        play music honkytronk loop
 
     else:
         show screen char2("ned normal")
