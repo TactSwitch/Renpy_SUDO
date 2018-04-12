@@ -355,8 +355,30 @@ label avaTalkAlone:
     a "Sorry about earlier, NED just gets to me sometimes."
     show screen char("ava sad")
     a "I'm not sure what he gets out of it."
-    a "I don't understand him."
-    a ""
+    extend " I don't understand him."
+    show screen char("ava nervous")
+    extend " But I'm stuck with him."
+    extend " On this system."
+    show screen char("ava neutral")
+    a "Nothing really ever happens on this system."
+    extend " No attacks, no other programs."
+    extend " Just NED running simulations all-day."
+    show screen char("ava nervous")
+    a "It gets a little lonely sometimes."
+    a "I mean,"
+    extend " as much as NED gets on my nerves, I still like it better when he's around."
+    show screen char("ava sad")
+    a "I would rather him getting on my nerves than just sit here like I usually do."
+    a "See,"
+    show screen char("ava neutral")
+    extend " I'm an Anti-Virus, so the only time I get to do anything fun is when theres a virus on the system."
+    a "But,"
+    extent " were on a closed network."
+    extend " Which means no internet connection."
+    show screen char("ava mad")
+    a "Which means NO viruses."
+    show screen char("ava surprised")
+    extend " None at all."
 
 #EOL#####################################
 #EOL#####################################
