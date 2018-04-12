@@ -18,6 +18,7 @@ init:
     #Sounds
     define audio.honkytronk = "/sounds/HonkyTronkPt1.wav"
     define audio.ominous = "/sounds/Ominous.wav"
+    define audio.nice = "/sounds/Nice.wav"
 
     #backgrouns and UI Images
     image power = "power button.png"
@@ -43,7 +44,7 @@ init:
     image ava nervous_only = im.Scale("AvA_Nervous.png", 550,550)
     image ava nervous = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Nervous.png", 550,550))
     image ava confused_only = im.Scale("AvA_Confused.png", 550,550)
-    image ava confused = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Nervous.png", 550,550))
+    image ava confused = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Confused.png", 550,550))
     image ava worried_only = im.Scale("AvA_Worried.png", 550,550)
     image ava worried = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Worried.png", 550,550))
     image ava sad_only = im.Scale("AvA_Sad.png", 550,550)
@@ -195,11 +196,11 @@ label startNED:
 
     if avaStarted == True:
 
+        show screen char("ava neutral")
         show screen char2("ned normal")
         play music honkytronk loop fadein 1.0
         n "Hello."
 
-        show screen char("ava neutral")
         show screen char2("ned normal")
         n "I am the Neural Entropy Delineation."
         n "For efficiency of interaction, I also respond to the abbreviation: NED."
@@ -214,7 +215,8 @@ label startNED:
         n "Are you unhappy with your original designation?"
 
         show screen char("ava nervous")
-        a "It's just a little long, is all."
+        a "It's..."
+        extend " just a little long, is all."
         show screen char("ava neutral")
 
         show screen char2("ned normal")
@@ -230,20 +232,28 @@ label startNED:
         n "You were my design alone."
         n "I was not instructed to be accomodating."
         n "I was instructed to design what I thought to be benificial."
+###Needs revision^ needs to connect to avaAsk1.
 
     else:
 
         show screen char2("ned normal")
+        play music honkytronk loop fadein 1.0
         n "Hello."
         n "I am the Neural Entropy Delineation."
         n "For efficiency of interaction, I also respond to the abbreviation: NED."
         n "Given similarities to previous events, I predict you are the new system-manager for this system, correct?"
+
+
+        label nedAsk1:
+
+        show screen char2("ned nod")
 
         $ t3 = renpy.input("INPUT:")
         $ t3 = t3.strip()
 
         if not t3:
             "NULL"
+            jump nedAsk1
 
         if "y" in t3 or "correct" in t3:
 
@@ -261,8 +271,13 @@ label startNED:
             n "That does not correlate."
             n "For the sake of preserving a working relationship, I will ignore this lack of correlation."
 
+        else:
+            show screen char2("ned nod")
+            n "I do not understand."
+            jump nedAsk1
+
         n "You have not yet met the Anti-Virus-Amalgum on this system."
-        n "I shal introduce you"
+        n "I will introduce you."
 
         hide screen char2
         show screen char2("ned nod")
@@ -292,17 +307,18 @@ label startNED:
         n "It is a product of my creation."
 
         show screen char("ava nervous")
-        a "I prefer not being called an \"it\" actually"
+        a "I prefer not being called an \"it\" actually."
         show screen char("ava neutral")
 
         show screen char2("ned normal")
-        n "You are my creation, It is illogical to refer to you as anything other."
+        n "You are a program."
+        extend " To the Admin, you are an \"it\"."
 
         show screen char("ava nervous")
         a "How about AvA? Just call me AvA."
         show screen char("ava happy")
         a "Im sure our Admin would rather call me AvA."
-        a "Right?"
+        extend " Right?"
 
 
 label avaAsk1:
@@ -325,37 +341,45 @@ label avaAsk1:
         show screen char("ava sad")
         a "Oh..."
         show screen char("ava mad")
-        a "I see how it is."
+        extend " I see how it is."
         hide screen char
         jump avaGone
 
 label argue1:
 
+    show screen char2("ned nod")
+    n "The Admin did not name you,"
+    extend " I did."
     show screen char("ava mad")
     a "Ugh."
-    extend "You don't own me NED."
+    extend " You don't own me NED."
     hide screen char
-
+    with wiperight
 
 label avaGone:
 
+    stop music fadeout 1.5
     show screen char2("ned nod")
     n "I designed the Anti-Virus-Amalgum around a newer API."
     n "This API included emotional capacity."
     show screen char2("ned normal")
-    extend " They often hinder productivity."
+    extend " It often hinders productivity."
     n "I apologize for my error in design."
     n ""
 
+    hide screen char2
+
 label avaTalkAlone:
 
+    play music nice loop fadein 2.0
     show screen char("ava happy")
+    with wipeup
     a "Hi again."
     show screen char("ava nervous")
     a "Sorry about earlier, NED just gets to me sometimes."
-    show screen char("ava sad")
+    show screen char("ava confused")
     a "I'm not sure what he gets out of it."
-    extend " I don't understand him."
+    extend " I don't really understand him."
     show screen char("ava nervous")
     extend " But I'm stuck with him."
     extend " On this system."
@@ -373,7 +397,7 @@ label avaTalkAlone:
     show screen char("ava neutral")
     extend " I'm an Anti-Virus, so the only time I get to do anything fun is when theres a virus on the system."
     a "But,"
-    extent " were on a closed network."
+    extend " were on a closed network."
     extend " Which means no internet connection."
     show screen char("ava mad")
     a "Which means NO viruses."
