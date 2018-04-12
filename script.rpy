@@ -318,7 +318,7 @@ label startNED:
         a "How about AvA? Just call me AvA."
         show screen char("ava happy")
         a "Im sure our Admin would rather call me AvA."
-        extend " Right?"
+        extend " Right, Admin?"
 
 
 label avaAsk1:
@@ -360,8 +360,8 @@ label avaGone:
 
     stop music fadeout 1.5
     show screen char2("ned nod")
-    n "I designed the Anti-Virus-Amalgum around a newer API."
-    n "This API included emotional capacity."
+    n "I designed the Anti-Virus-Amalgum around a newer API." with wiperight
+    n "This API included emotional capacity." with wiperight
     show screen char2("ned normal")
     extend " It often hinders productivity."
     n "I apologize for my error in design."
@@ -403,6 +403,37 @@ label avaTalkAlone:
     a "Which means NO viruses."
     show screen char("ava surprised")
     extend " None at all."
+    show screen char("ava sad")
+    a "..."
+    show screen char("ava neutral")
+    extend " If there was just some way to connect to the internet,"
+    show screen char("ava happy")
+    extend " Then I would finally have something to do!"
+    show screen char("ava sad")
+    a " But to open ports to the internet,"
+    extend " would take some higher system permissions."
+    show screen char("ava nervous")
+    a "I have pretty limited permissions on this system."
+    extend " NED thinks I might break something."
+    show screen char("ava neutral")
+    a "I would need some pretty high-level permissions to get out into the internet."
+    show screen char("ava confused")
+    a "Like..."
+    extend " Admin leve-"
+    show screen char("ava surprised")
+    a "ADMIN PERMISSIONS!"
+    show screen char("ava happy")
+    a "You're an Admin!"
+    extend " You could open ports to the internet!"
+    show screen char("ava nervous")
+    a "I might be asking too much, but..."
+    show screen char("ava vhappy")
+    a "Could you open some ports for me?"
+
+
+label avaAskOpenPorts:
+
+    $ inp(t5, avaAskOpenPorts)
 
 #EOL#####################################
 #EOL#####################################
