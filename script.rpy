@@ -12,13 +12,20 @@ init:
             inp1 = inp1.strip()
             if not inp1:
                 Jump (returnTo);
+
+
+
     #Sounds
     define audio.honkytronk = "/sounds/HonkyTronkPt1.wav"
     define audio.ominous = "/sounds/Ominous.wav"
 
     #backgrouns and UI Images
     image power = "power button.png"
-    image bg desktop = im.Scale("desktop.png", 1280, 720)
+    image bg desktop = im.Scale("desktop.png", 1280,720)
+
+    #Button Images
+    image ref_idle = im.Scale("Reference_Icon.png", 100,100)
+    image ref_hover = im.Scale("Reference_Icon_Hover.png", 120,120)
 
     #ADMIN images
     image admin normal_only = im.Scale("Admin_Normal.png", 550,550)
@@ -74,7 +81,7 @@ label firstScreen:
     show screen char("admin normal")
 
     i "Hello."
-    i "Congratiulations on your placement here at LBN."
+    extend " Congratiulations on your placement here at LBN."
     i "I am the System ADMIN Manager."
     i "Or, SAD-Man, For short."
     hide screen char
@@ -113,7 +120,9 @@ label tutorial:
 
 label afterTutorial:
 
-    i "For information on what is possible with the INPUT popup, see the Employee Reference Book. There should be a link to it in the bottom-left corner of your screen."
+    i "For information on what is possible with the INPUT popup,"
+    show screen ref_book("ref_idle", "ref_hover")
+    extend " see the Employee Reference Book. There should be a link to it in the bottom-left corner of your screen."
     i "This is the end of my interaction with you"
     i "Please remember what is expected of you as an employee at LBN."
     hide screen char
@@ -324,7 +333,7 @@ label argue1:
 
     show screen char("ava mad")
     a "Ugh."
-    a "You don't own me NED."
+    extend "You don't own me NED."
     hide screen char
 
 
@@ -333,8 +342,22 @@ label avaGone:
     show screen char2("ned nod")
     n "I designed the Anti-Virus-Amalgum around a newer API."
     n "This API included emotional capacity."
-    n "Said emotions often hinder productivity."
+    show screen char2("ned normal")
+    extend " They often hinder productivity."
     n "I apologize for my error in design."
+    n ""
+
+label avaTalkAlone:
+
+    show screen char("ava happy")
+    a "Hi again."
+    show screen char("ava nervous")
+    a "Sorry about earlier, NED just gets to me sometimes."
+    show screen char("ava sad")
+    a "I'm not sure what he gets out of it."
+    a "I don't understand him."
+    a ""
+
 #EOL#####################################
 #EOL#####################################
     return

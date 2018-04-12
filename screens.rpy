@@ -113,13 +113,42 @@ screen char2(charimg):
             add charimg
             xmaximum 500
 
+## Reference doc pages
+
+screen ref_page():
+
+    $ refPageOpen = True
+    frame:
+        xpadding 10
+        ypadding 10
+        xalign 0.5
+        yalign 0.5
+
+        vbox:
+            text "Display"
+            null height 10
+            textbutton "Fullscreen" action Preference("display", "fullscreen")
+            textbutton "FuckYou" action Hide("ref_page")
+
+## Reference doc Button
+
+screen ref_book(idlimg, hovimg):
+
+
+    imagebutton:
+        xalign 0.0 yalign 0.0
+        idle idlimg
+        hover hovimg
+
+        action Show("ref_page")
+
+
 
 ## Image Button Test Screen ####################################################
 
 screen power_button(img):
 
     imagebutton:
-
         xalign 0.5 yalign 0.5
         idle img
         action [Jump ("firstScreen")]
