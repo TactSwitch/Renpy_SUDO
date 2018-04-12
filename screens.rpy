@@ -124,7 +124,8 @@ screen ref_page():
         xalign 0.5
         yalign 0.5
 
-        vbox:
+        window:
+            add "os window.png"
             text "Display"
             null height 10
             textbutton "Fullscreen" action Preference("display", "fullscreen")
