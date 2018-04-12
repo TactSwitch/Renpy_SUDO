@@ -45,6 +45,8 @@ init:
     image ava sleep = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Sleep.png", 550,550))
     image ava surprised_only = im.Scale("AvA_Surprised.png", 550,550)
     image ava surprised = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Surprised.png", 550,550))
+    image ava mad_only = im.Scale("AvA_Mad.png", 550,550)
+    image ava mad = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Mad.png", 550,550))
 
     #NED Images
     image ned normal_only = im.Scale("NED_Normal.png", 550,550)
@@ -178,9 +180,23 @@ $ avaStarted = True
 label startNED:
 
     if avaStarted == True:
-        show screen char2("ned normal",0.5,0.5)
+        show screen char2("ned normal")
         play music honkytronk loop fadein 1.0
         n "Hello."
+        show screen char("ava neutral")
+        show screen char2("ned normal")
+        n "I am the Neural Entropy Delineation."
+        n "For efficiency of interaction, I also respond to the abbreviation: NED."
+        n "Given similarities to previous events, I predict you are the new system-manager for this system."
+        n "I see you have already interacted with the Anti-Virus-Amalgum"
+        show screen char("ava nervous")
+        a "I told them to just call me AvA..."
+        show screen char2("ned normal")
+
+        show screen char("ava neutral")
+        n "Are you unhappy with your original designation?"
+        show screen char ("ava nervous")
+        a "It's just a little long."
 
     else:
         show screen char2("ned normal")
@@ -207,9 +223,14 @@ label startNED:
         elif "n" in t3 :
             n "Strange."
             n "That does not correlate."
+        n "For the sake of preserving a working relationship, I will ignore this lack of correlation."
+        n "You have not yet met the Anti-Virus-Amalgum on this system."
+        n "I shal introduce you"
+        hide screen char2
+        show screen char2("ned nod")
+        "Launching: {w=0.5}||{w=0.7}|||||||{w=0.2}||||||||{w=1.4}||||||||||{w=2}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=1.2}|||||||||{w=0.2}|||{nw}"
 
-
-
+label argue1:
 
 #EOL#####################################
 #EOL#####################################
