@@ -7,11 +7,12 @@ init:
 
     #Input Function
     python:
+
         def inp(inp1, returnTo):
             inp1 = renpy.input("INPUT:")
             inp1 = inp1.strip()
-            if not inp1:
-                Jump (returnTo);
+            if not inp1 or inp1 == "":
+                Jump (returnTo)
 
 
 
@@ -198,6 +199,7 @@ label startNED:
 
         show screen char("ava neutral")
         show screen char2("ned normal")
+        with wipedown
         play music honkytronk loop fadein 1.0
         n "Hello."
 
@@ -232,11 +234,18 @@ label startNED:
         n "You were my design alone."
         n "I was not instructed to be accomodating."
         n "I was instructed to design what I thought to be benificial."
-###Needs revision^ needs to connect to avaAsk1.
+
+        a "Well {b}{i}I{/i}{/b} think that just calling me \"AvA\" would be benificial."
+        extend " I'm sure the Admin agrees."
+        show screen char("ava nervous")
+        extend " Right, Admin?"
+
+
 
     else:
 
         show screen char2("ned normal")
+        with wipedown
         play music honkytronk loop fadein 1.0
         n "Hello."
         n "I am the Neural Entropy Delineation."
@@ -329,8 +338,7 @@ label avaAsk1:
     $ t4.strip()
 
     if not t4:
-        show screen char
-        a "Huh?"
+        "NULL"
         jump avaAsk1
 
     if "y" in t4:
@@ -343,7 +351,13 @@ label avaAsk1:
         show screen char("ava mad")
         extend " I see how it is."
         hide screen char
+        with wipeup
         jump avaGone
+
+    else:
+        show screen char("ava confused")
+        a "Huh?"
+        jump avaAsk1
 
 label argue1:
 
@@ -354,26 +368,27 @@ label argue1:
     a "Ugh."
     extend " You don't own me NED."
     hide screen char
-    with wiperight
+    with wipeup
 
 label avaGone:
 
     stop music fadeout 1.5
     show screen char2("ned nod")
-    n "I designed the Anti-Virus-Amalgum around a newer API." with wiperight
-    n "This API included emotional capacity." with wiperight
+    n "I designed the Anti-Virus-Amalgum around a newer API."
+    n "This API included emotional capacity."
     show screen char2("ned normal")
     extend " It often hinders productivity."
     n "I apologize for my error in design."
     n ""
 
     hide screen char2
+    with wipeup
 
 label avaTalkAlone:
 
     play music nice loop fadein 2.0
     show screen char("ava happy")
-    with wipeup
+    with wipedown
     a "Hi again."
     show screen char("ava nervous")
     a "Sorry about earlier, NED just gets to me sometimes."
@@ -406,19 +421,19 @@ label avaTalkAlone:
     show screen char("ava sad")
     a "..."
     show screen char("ava neutral")
-    extend " If there was just some way to connect to the internet,"
+    extend " If I could just get on the internet,"
     show screen char("ava happy")
-    extend " Then I would finally have something to do!"
+    extend " then I would finally have something to do!"
     show screen char("ava sad")
     a " But to open ports to the internet,"
-    extend " would take some higher system permissions."
+    extend " takes more system permissions than what I've got."
     show screen char("ava nervous")
-    a "I have pretty limited permissions on this system."
+    a "My system permissions are pretty limited."
     extend " NED thinks I might break something."
     show screen char("ava neutral")
-    a "I would need some pretty high-level permissions to get out into the internet."
+    a "I would need."
     show screen char("ava confused")
-    a "Like..."
+    extend " Like..."
     extend " Admin leve-"
     show screen char("ava surprised")
     a "ADMIN PERMISSIONS!"
@@ -429,11 +444,47 @@ label avaTalkAlone:
     a "I might be asking too much, but..."
     show screen char("ava vhappy")
     a "Could you open some ports for me?"
+    show screen char("ava neutral")
 
 
 label avaAskOpenPorts:
 
-    $ inp(t5, avaAskOpenPorts)
+    $ t5 = renpy.input("INPUT:")
+    $ t5.strip()
+
+    if not t5:
+        "NULL"
+        jump avaAskOpenPorts
+
+    if "y" in t5:
+        $ hinderedAvA = False
+        jump yesToOpenPorts
+
+    elif "n" in t5:
+        $ hinderedAvA = True
+        jump noToOpenPorts
+
+
+label yesToOpenPorts:
+
+    show screen char("ava vhappy")
+    a "Woah!"
+    show screen char("ava confused")
+    extend " Really?!"
+    show screen char("ava happy")
+    a "Ok, great!"
+    show screen char("ava neutral")
+    a "..."
+    show screen char("ava confused")
+    a "Did you do it yet?"
+    show screen char("ava neutral")
+    a "Oh you probably need an input window."
+    show screen char("ava happy")
+    extend " Here."
+
+
+label noToOpenPorts:
+
 
 #EOL#####################################
 #EOL#####################################
