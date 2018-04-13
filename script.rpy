@@ -67,8 +67,8 @@ init:
     $ i = Character ('SAD-Man', color = (0, 0, 0, 255))
     $ a = Character ('AvA', color = (50, 50, 255, 255), image = "ava")
     $ n = Character ('NED', color = (255, 255, 70, 255), image = "ned")
-
-
+        #NVL Narrator
+    $ c = Character ('', kind=nvl, colour=(0,0,0,0))
 
 label start:
 
@@ -378,7 +378,9 @@ label avaGone:
     n "This API included emotional capacity."
     show screen char2("ned normal")
     extend " It often hinders productivity."
-    n "I apologize for my error in design."
+    n "As a neural network, I am capable of error."
+    extend " I apologize for my error on AvA's design."
+    n "I hope my mistake does not inhibit your functionality as System Admin."
     n ""
 
     hide screen char2
@@ -444,10 +446,12 @@ label avaTalkAlone:
     a "I might be asking too much, but..."
     show screen char("ava vhappy")
     a "Could you open some ports for me?"
-    show screen char("ava neutral")
+
 
 
 label avaAskOpenPorts:
+
+    show screen char("ava neutral")
 
     $ t5 = renpy.input("INPUT:")
     $ t5.strip()
@@ -464,6 +468,10 @@ label avaAskOpenPorts:
         $ hinderedAvA = True
         jump noToOpenPorts
 
+    else:
+        show screen char("ava confused")
+        a "Huh?"
+        jump avaAskOpenPorts
 
 label yesToOpenPorts:
 
@@ -482,6 +490,26 @@ label yesToOpenPorts:
     show screen char("ava happy")
     extend " Here."
 
+
+label openPortsInput:
+
+    $ t6 = renpy.input("INPUT: User~ ")
+    $ t6.strip()
+
+    if not t6:
+        "NULL"
+        jump openPortsInput
+
+    if "ls" in t6:
+        "{b}desktop\ndownloads\npublic\nports\n/{/b}"
+
+
+
+    if "cd" in t6:
+
+        if t6 == "cd ports":
+
+            c "What do you want to do with the ports?"
 
 label noToOpenPorts:
 
