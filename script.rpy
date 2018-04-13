@@ -56,6 +56,8 @@ init:
     image ava surprised = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Surprised.png", 550,550))
     image ava mad_only = im.Scale("AvA_Mad.png", 550,550)
     image ava mad = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Mad.png", 550,550))
+    image ava disgust_only = im.Scale("AvA_Disgust.png", 550,550)
+    image ava disgust = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Disgust.png", 550,550))
 
     #NED Images
     image ned normal_only = im.Scale("NED_Normal.png", 550,550)
@@ -433,7 +435,15 @@ label avaTalkAlone:
     a "I just wish I had internet access."
     show screen char("ava happy")
     extend " Then I would finally have something to do!"
-    show screen char("ava sad")
+    show screen char("ava confused")
+    a "I mean, technically, I could already get out if I wanted too."
+    extend " It just means using some of my offensive-security features to elivate my current system permissions."
+    a "But that would take alot of time, "
+    extend " and effort."
+    show screen char("ava nervous")
+    a "Yea it's almost not even worth it."
+    extend " It would be alot easier to just open some ports"
+    show screen char("ava confused")
     a " But to open ports to the internet,"
     extend " takes more system permissions than what I've got."
     show screen char("ava nervous")
@@ -518,16 +528,31 @@ label openPortsInput:
 
             c "What do you want to do with the ports?"
 
-label noToOpenPorts:
-
-label avaGUI:
-
     show screen char("ava neutral")
     a "I have one question before I go..."
     show screen char("ava sad")
     a ""
     show screen char("ava nervous")
     a "It's kinda sily but..."
+
+label noToOpenPorts:
+
+    show screen char("ava disgust")
+    a "Oh?"
+    extend " I guess you think I'm incapable too huh?"
+    extend " You and NED are one and the same."
+    show screen char("ava neutral")
+    a "I was happy knowing there would be someone new on this system to talk to."
+    show screen char("ava mad")
+    a "But it looks like I just got another NED to deal with."
+    a "Y'know what?!"
+    extend " I'm still going to get onto the internet."
+    extend " I'll prove to both you {b}and{/b} NED that I am a capable Anti-Virus."
+    a "I bet you think my emotions are just some hinderance too!"
+    
+label avaGUI:
+
+
     extend " Do you think my emotions get in the way?"
 
     $ t7 = renpy.input("INPUT: User~ ")
@@ -613,11 +638,23 @@ label avaLeave:
 
     show screen char("ava neutral")
     a "Well,"
-    extend " better get going if I don't want NED catching me."
-    extend " He typically has me run a system scan before he starts his night-time simulations."
-    a "See-ya!"
+    extend " better get going before NED finds out."
+    a "Goodbye."
+
     hide screen char
     with wipeup
+    $ renpy.pause(2)
+    show screen char("ava happy")
+    a "Phew! those fibe-op speeds are hard to keep up with!"
+    extend "I would have stayed out for longer but-"
+
+    show screen char2("ned normal")
+    show screen char("ava surprised")
+    n "AvA."
+    show screen char("ava nervous")
+    a "Yes NED?"
+    show screen char2("ned nod")
+    n "Your t"
 #EOL#####################################
 #EOL#####################################
     return
