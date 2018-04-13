@@ -117,19 +117,34 @@ screen char2(charimg):
 
 screen ref_page():
 
-    $ refPageOpen = True
-    frame:
-        xpadding 10
-        ypadding 10
-        xalign 0.5
-        yalign 0.5
+    drag:
+        drag_name "ref_page"
+        yalign 0.5 xalign 0.5
+        drag_handle (0, 0, 1.0, 40)
+
+
 
         window:
-            add "os window.png"
-            text "Display"
-            null height 10
-            textbutton "Fullscreen" action Preference("display", "fullscreen")
-            textbutton "FuckYou" action Hide("ref_page")
+            ymaximum 500
+            xmaximum 600
+            background Frame("/gui/textbox.png", 200, 200, 200, 200, tile = True)
+
+            text "{u}     {b}User Reference{/b}     {/u}":
+                size 20
+                slow_cps 20
+                xalign 0.5
+                ypos 8
+
+
+            viewport id "vp":
+                xsize 550
+                ysize 420
+                anchor (-30,-50)
+                mousewheel True
+                text "{b}Programs:\n\n{/b}   -Key programs are located in the home directory\n   -To launch programs in the home directory, use the {u}./{/u} command:\n\n         ./program_name\n\n      Example:\n         To launch the \"AvA\" program, type: ./AvA \n\n\n{b}Directories:{/b}\n\n    -To navigate directories, use the {u}cd{/u} command:\n\n        cd directory_name\n\n       Example:\n        To enter the \"desktop\" directory, type: cd desktop" :
+                    slow_cps 1000
+                    #outlines [ (absolute(0), "#fff", absolute(0), absolute(-1)) ]
+
 
 ## Reference doc Button
 
@@ -141,7 +156,7 @@ screen ref_book(idlimg, hovimg):
         idle idlimg
         hover hovimg
 
-        action Show("ref_page")
+        action ToggleScreen("ref_page")
 
 
 
