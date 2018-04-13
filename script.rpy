@@ -379,7 +379,7 @@ label avaGone:
     show screen char2("ned normal")
     extend " It often hinders productivity."
     n "As a neural network, I am capable of error."
-    extend " I apologize for my error on AvA's design."
+    extend " I apologize for my error in AvA's design."
     n "I hope my mistake does not inhibit your functionality as System Admin."
     n ""
 
@@ -388,28 +388,35 @@ label avaGone:
 
 label avaTalkAlone:
 
+    $ renpy.pause(10.0)
     play music nice loop fadein 2.0
-    show screen char("ava happy")
+    show screen char("ava nervous")
     with wipedown
     a "Hi again."
-    show screen char("ava nervous")
     a "Sorry about earlier, NED just gets to me sometimes."
     show screen char("ava confused")
-    a "I'm not sure what he gets out of it."
+    extend " I'm not sure what he gets out of it."
     extend " I don't really understand him."
     show screen char("ava nervous")
-    extend " But I'm stuck with him."
+    a "But I'm stuck with him."
     extend " On this system."
     show screen char("ava neutral")
-    a "Nothing really ever happens on this system."
+    extend " This, dull,"
+    extend " boring system."
+    a "Nothing ever happens here."
     extend " No attacks, no other programs."
     extend " Just NED running simulations all-day."
+    a "So I usually just,"
     show screen char("ava nervous")
+    extend " kinda sit here."
     a "It gets a little lonely sometimes."
     a "I mean,"
     extend " as much as NED gets on my nerves, I still like it better when he's around."
     show screen char("ava sad")
     a "I would rather him getting on my nerves than just sit here like I usually do."
+    show screen char("ava nervous")
+    extend " Y'know what I mean?"
+    show screen char("ava sad")
     a "See,"
     show screen char("ava neutral")
     extend " I'm an Anti-Virus, so the only time I get to do anything fun is when theres a virus on the system."
@@ -418,14 +425,14 @@ label avaTalkAlone:
     extend " Which means no internet connection."
     show screen char("ava mad")
     a "Which means NO viruses."
-    show screen char("ava surprised")
+    show screen char("ava worried")
     extend " None at all."
     show screen char("ava sad")
     a "..."
     show screen char("ava neutral")
-    extend " If I could just get on the internet,"
+    a "I just wish I had internet access."
     show screen char("ava happy")
-    extend " then I would finally have something to do!"
+    extend " Then I would finally have something to do!"
     show screen char("ava sad")
     a " But to open ports to the internet,"
     extend " takes more system permissions than what I've got."
@@ -436,7 +443,7 @@ label avaTalkAlone:
     a "I would need."
     show screen char("ava confused")
     extend " Like..."
-    extend " Admin leve-"
+    extend " Admin permi-"
     show screen char("ava surprised")
     a "ADMIN PERMISSIONS!"
     show screen char("ava happy")
@@ -480,7 +487,7 @@ label yesToOpenPorts:
     show screen char("ava confused")
     extend " Really?!"
     show screen char("ava happy")
-    a "Ok, great!"
+    a "I mean yea! Great!"
     show screen char("ava neutral")
     a "..."
     show screen char("ava confused")
@@ -513,7 +520,104 @@ label openPortsInput:
 
 label noToOpenPorts:
 
+label avaGUI:
 
+    show screen char("ava neutral")
+    a "I have one question before I go..."
+    show screen char("ava sad")
+    a ""
+    show screen char("ava nervous")
+    a "It's kinda sily but..."
+    extend " Do you think my emotions get in the way?"
+
+    $ t7 = renpy.input("INPUT: User~ ")
+    $ t7.strip()
+
+    if not t7:
+        "NULL"
+
+    show screen char("ava confused")
+    a "What?"
+    show screen char("ava mad")
+    a "Ugh,"
+    extend " This clunky old INPUT system."
+    extend " Much too slow."
+    extend " {cps=10}Just like NED.{/cps}"
+    show screen char("ava nervous")
+    a "Ha-Ha"
+    show screen char("ava neutral")
+    a "Don't tell him I said that."
+    a "{cps=4}. . .           {nw}{/cps}"
+    show screen char("ava vhappy")
+    a "Here."
+    show screen char("ava happy")
+    extend " This will make things alot easier."
+    show screen char("ava neutral")
+    a "Do you think my emotions get in the way?"
+
+
+
+    menu:
+
+        "Do you think my emotions get in the way?"
+
+        "No.":
+            jump answerNo
+
+        "Yes.":
+            jump answeryes
+
+        "He might.":
+            jump answerMightBe
+
+
+label answerNo:
+
+    show screen char("ava nervous")
+    a "Oh,"
+    extend " Yea you're probably right."
+    a "I'm probably just overreacting again."
+    extend " NED says I do that alot."
+    jump avaLeave
+
+label answerYes:
+
+    show screen char("ava worried")
+    a "R-"
+    extend "Really?"
+    show screen char("ava sad")
+    a "Oh..."
+    extend " I..."
+    show screen char("ava nervous")
+    a "I didn't really think you would..."
+    show screen char("ava sad")
+    a "Oh-Well."
+    show screen char("ava nervous")
+    extend " Sorry for asking I guess"
+    show screen char("ava mad")
+    a "..."
+
+    jump avaLeave
+
+label answerMightBe:
+
+    show screen char("ava sad")
+    a "Well."
+    extend " Thanks for the honest answer."
+    show screen char("ava nervous")
+    extend " It was a stupid quesiton anyway."
+    show screen char("ava sad")
+    a "\* Sigh \*"
+
+label avaLeave:
+
+    show screen char("ava neutral")
+    a "Well,"
+    extend " better get going if I don't want NED catching me."
+    extend " He typically has me run a system scan before he starts his night-time simulations."
+    a "See-ya!"
+    hide screen char
+    with wipeup
 #EOL#####################################
 #EOL#####################################
     return

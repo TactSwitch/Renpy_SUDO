@@ -82,8 +82,12 @@ style frame:
 ################################################################################
 ## In-game screens
 ################################################################################
+$ choiceHappening = False
 
 ## Character Window ################################################################
+python:
+    Drag(drag_name="char", draggable=True, droppable=True)
+
 
 screen char(charimg):
 
@@ -92,6 +96,7 @@ screen char(charimg):
         xalign 0
         yalign 0.5
         drag_handle (0, 0, 1.0, 40)
+
 
 
         window id "window":
@@ -113,6 +118,7 @@ screen char2(charimg):
             add charimg
             xmaximum 500
 
+        
 ## Reference doc pages
 
 screen ref_page():
@@ -208,12 +214,15 @@ screen say(who, what):
             xmaximum 500
 
 
+
             if who is not None:
 
                 window:
                     id "namebox"
                     style "namebox"
                     text who id "who"
+
+
 
             text what id "what"
 
@@ -224,6 +233,7 @@ screen say(who, what):
         #if not renpy.variant("small"):
 
             add SideImage() xalign 0.0 yalign 1.0
+
 
 
     ## Make the namebox available for styling through the Character object.
@@ -246,6 +256,7 @@ style window:
     ysize gui.textbox_height
 
     background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
+
 
 style namebox:
     xpos gui.name_xpos
@@ -321,6 +332,8 @@ style input:
 
 screen choice(items):
     style_prefix "choice"
+
+    $ choiceHappening = True
 
     vbox:
         for i in items:
