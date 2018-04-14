@@ -24,6 +24,7 @@ init:
     #backgrouns and UI Images
     image power = "power button.png"
     image bg desktop = im.Scale("desktop.png", 1280,720)
+    image bg desktop_red = im.MatrixColor("desktop.png", im.matrix.desaturate() * im.matrix.tint(0.6, 0.3, 0.4))
 
     #Button Images
     image ref_idle = im.Scale("Reference_Icon.png", 100,100)
@@ -65,10 +66,19 @@ init:
     image ned nod_only = im.Scale("NED_Nod.png", 550,550)
     image ned nod = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Nod.png", 550,550))
 
+    #RAN-D Images
+    image rand normal_only = im.Scale("Rand_Normal.png", 550,550)
+    image rand normal = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Normal.png", 550,550))
+    image rand nod_only = im.Scale("Rand_Nod.png", 550,550)
+    image rand nod = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Nod.png", 550,550))
+    image rand laugh_only = im.Scale("Rand_Laugh.png", 550,550)
+    image rand laugh = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Laugh.png", 550,550))
+
     #Characters
     $ i = Character ('SAD-Man', color = (0, 0, 0, 255))
     $ a = Character ('AvA', color = (50, 50, 255, 255), image = "ava")
     $ n = Character ('NED', color = (255, 255, 70, 255), image = "ned")
+    $ r = Character ('RAN-D', color = (255,0,10), image = "rand")
         #NVL Narrator
     $ c = Character ('', kind=nvl, colour=(0,0,0,0))
 
@@ -88,25 +98,24 @@ label firstScreen:
     extend " Congratiulations on your placement here at LBN."
     i "I am the System ADMIN Manager."
     i "Or, SAD-Man, For short."
-    hide screen char
     show screen char("admin nod")
     i "I have no previous record of your employee profile."
-    hide screen char
     show screen char("admin normal")
-    i "I take it you are not yet familiar with the functionality of your workstation."
+    extend " I take it you are not yet familiar with the functionality of your workstation."
 
 
 
 label tutorial:
 
     i "Here are the basics:"
-    i "The primary mode of system interaction is the INPUT popup."
-    i "Everything from communication, to executing commands, happens in the INPUT popup."
-    i "Simply type what you desire and hit enter."
+    extend " The primary mode of system interaction is the INPUT popup."
+    extend " Everything from communication, to executing commands, happens in the INPUT popup."
+    extend " Simply type what you desire and hit enter."
     i "Neither punctuation, nor capitalization, is necessary, and will only confuse the system."
     hide screen char
     show screen char("admin nod")
-    i "I will provide an example of the INPUT popup:"
+    i "I will provide an example of the INPUT popup,"
+    extend " Type whatever you like, then hit enter to proceed."
     hide screen char
     show screen char("admin normal")
 
@@ -126,7 +135,8 @@ label afterTutorial:
 
     i "For information on what is possible with the INPUT popup,"
     show screen ref_book("ref_idle", "ref_hover")
-    extend " see the Employee Reference Book. There should be a link to it in the bottom-left corner of your screen."
+    extend " see the Employee Reference Book."
+    extend " There should be a link to it in the upper-left corner of your screen."
     i "This is the end of my interaction with you"
     i "Please remember what is expected of you as an employee at LBN."
     hide screen char
@@ -134,6 +144,7 @@ label afterTutorial:
     i "Work hard, Super-User."
 
     hide screen char
+    with wipeup
 
 
 
@@ -166,7 +177,7 @@ label secondTextInput:
 
 label startAvA:
 
-    "Launching: {w=0.5}||{w=0.7}|||||||{w=0.2}||||||||{w=1.4}||||||||||{w=2}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=1.2}|||||||||{w=0.2}|||{nw}"
+    "Launching: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.4}||||||||||{w=0.8}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=0.4}|||||||||{w=0.2}|||{nw}"
 
     show screen char("ava sleep")
     a "..."
@@ -242,7 +253,7 @@ label startNED:
         show screen char("ava nervous")
         extend " Right, Admin?"
 
-
+        jump avaAsk1
 
     else:
 
@@ -274,7 +285,7 @@ label startNED:
 
             hide screen char
             show screen char2("ned normal")
-            n "The logs show that you have already interacted with the SAD-man."
+            n "It is safe to assume you have already interacted with the SAD-man."
             n "There is more than the SAD-man and myself on this system."
 
         elif "n" in t3 :
@@ -292,7 +303,7 @@ label startNED:
 
         hide screen char2
         show screen char2("ned nod")
-        "Launching: {w=0.5}||{w=0.7}|||||||{w=0.2}||||||||{w=1.4}||||||||||{w=2}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=1.2}|||||||||{w=0.2}|||{nw}"
+        "Launching: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.4}||||||||||{w=0.8}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=0.4}|||||||||{w=0.2}|||{nw}"
         show screen char2("ned normal")
 
         show screen char("ava sleep")
@@ -456,34 +467,28 @@ label avaTalkAlone:
     show screen char("ava neutral")
     extend " This, dull,"
     extend " boring system."
-    a "Nothing ever happens here."
     extend " No attacks, no other programs."
     extend " Just NED running simulations all-day."
-    a "So I usually just,"
     show screen char("ava nervous")
-    extend " kinda sit here."
-    a "It gets a little lonely sometimes."
-    a "I mean,"
-    extend " as much as NED gets on my nerves, I still like it better when he's around."
-    show screen char("ava sad")
+    a "So I usually just, kinda sit here."
+    extend " Which gets a little lonely sometimes."
+    show screen char("ava neutral")
+    a "As much as NED gets on my nerves, I still like it better when he's around."
     a "I would rather him getting on my nerves than just sit here like I usually do."
-    show screen char("ava nervous")
-    extend " Y'know what I mean?"
     show screen char("ava sad")
     a "See,"
     show screen char("ava neutral")
     extend " I'm an Anti-Virus, so the only time I get to do anything fun is when theres a virus on the system."
-    a "But,"
-    extend " were on a closed network."
+    a "But, we're on a closed network."
     extend " Which means no internet connection."
     show screen char("ava mad")
-    a "Which means NO viruses."
+    extend " Which means NO viruses."
     show screen char("ava worried")
     extend " None at all."
     show screen char("ava sad")
     a "..."
     show screen char("ava neutral")
-    a "I just wish I had internet access."
+    a "I just wish I could get out onto the internet."
     show screen char("ava happy")
     extend " Then I would finally have something to do!"
     show screen char("ava confused")
@@ -511,6 +516,7 @@ label avaTalkAlone:
     a "You're an Admin!"
     extend " You could open ports to the internet!"
     show screen char("ava nervous")
+    a "Uhm..."
     a "I might be asking too much, but..."
     show screen char("ava vhappy")
     a "Could you open some ports for me?"
@@ -592,7 +598,7 @@ label openPortsInput:
 
 
         else:
-            "Invaled use of cd. See User Reference.{w=1}"
+            "Invaled use of cd. See User Reference."
     else:
         "Invalid Syntax"
         jump openPortsInput
@@ -629,20 +635,6 @@ label cdPorts:
         "Invalid Syntax"
         jump cdPorts
 
-label noToOpenPorts:
-
-    show screen char("ava disgust")
-    a "Oh?"
-    extend " I guess you think I'm incapable too huh?"
-    extend " You and NED are one and the same."
-    show screen char("ava neutral")
-    a "I was happy knowing there would be someone new on this system to talk to."
-    show screen char("ava mad")
-    a "But it looks like I just got another NED to deal with."
-    a "Y'know what?!"
-    extend " I'm still going to get onto the internet."
-    extend " I'll prove to both you {b}and{/b} NED that I am a capable Anti-Virus."
-    a "..."
 
 label portsAreOpen:
 
@@ -657,6 +649,21 @@ label portsAreOpen:
     extend " I'll have such a strong database by the end of all this."
     a "Thanks sys Admin!"
     extend " I owe you one."
+
+label noToOpenPorts:
+
+    show screen char("ava disgust")
+    a "Oh?"
+    extend " I guess you think I'm incapable too huh?"
+    extend " You and NED are one and the same."
+    show screen char("ava neutral")
+    a "I was happy knowing there would be someone new on this system to talk to."
+    show screen char("ava mad")
+    a "But it looks like I just got another NED to deal with."
+    a "Y'know what?!"
+    extend " I'm still going to get onto the internet."
+    extend " I'll prove to both you {b}and{/b} NED that I am a capable Anti-Virus."
+    a "..."
 
 label avaLeave:
 
@@ -723,15 +730,137 @@ label avaLeave:
 
         jump enterRandMan
 
+
 label enterRandMan:
 
     stop music
     play sound "/sounds/Dong.wav"
     with vpunch
-    play music ominous loop fadein 2.0
+
+
+label randRequest1:
+
+
+
     "REQUEST" "PROGRAM: \[{s}NULL{/s}\] is requesting add{k=-0.5}itio{/k}nal system permissions"
     $ r1 = renpy.input("Do you wish to approve the request? Y/N:")
     $ r1.strip()
+
+    if "y" in r1:
+        $ allowedRand = True
+        jump randIsHere
+
+
+    if "n" in r1:
+        $ allowedRand = False
+        jump randHacks
+
+    else:
+        "Invaled Syntax"
+        jump randRequest1
+
+label randHacks:
+
+    show screen char("ava surprised")
+    a "Oh no."
+    show screen char("ava worried")
+    a "I'll be right back"
+    hide screen char
+    with wipeup
+
+    show screen char2("ned nod")
+    n "What was that?"
+    show screen char2("ned normal")
+    n "..."
+    extend " Where has AvA gone."
+    extend " Why did she leave to fast."
+    extend " Administrator, if you know something that I do not."
+    extend " Tell me immidia-"
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    play sound "/sounds/Chung.wav"
+
+label randIsHere:
+
+
+    hide screen char
+    hide screen char2
+    show bg desktop_red
+    with pixellate
+    show screen char("rand normal")
+    play music ominous loop fadein 5.0
+
+    if allowedRand == True:
+
+        r "You aren't too clever are you?"
+
+        show screen char("rand nod")
+        r "I was planning on using an exploit of the request system, but I didn't even need to do that."
+        extend " Some Admin you are."
+
+    else:
+        r "PHEW!"
+        extend " Sorry I'm late,"
+        extend " Some goofy Anti-Virus was slowing me down."
+        extend " It normally wouldn't have taken that long to crack such an old system."
+        r "This stuff is archaic!"
+        extend " Seriously, I dont think your communication firmware has been updated since the 80's."
+        extend " It was like taking candy from an elderly person."
+        show screen char("rand laugh")
+        r "HAHAHAHAHAHAHAHAH."
+        show screen char("rand nod")
+        r "Ahem"
+        show screen char("rand normal")
+        r "Right,"
+        extend " enough chit-chat, you're probably wondering why I decided to drop in."
+        r "Well, as it turns out, this fossilized excuse of a computer has some pretty valuable stuff on it."
+        show screen char("rand nod")
+        extend " From what I can see here, theres some fancy little fella named NED."
+        extend " Neural entropy deni- delen- delinate."
+        show screen char("rand normal")
+        r "I think you know who I'm talking about."
+        extend " He's listed as the most valuable hunk of data on here."
+        if nedPerms:
+            extend " Oooh, you even let him have some extra permissions."
+            extend " How kind of you."
+        r "There's also some AvA thing."
+        show screen char("rand nod")
+        extend " Oh she's an Anti-Virus."
+        extend " That's probably the program I ran into at the front-door."
+        extend " Funny little thing, really thought she could stop me."
+        extend " Little does she know, she's actualy the one that led me here."
+        show screen char("rand laugh")
+        extend " HAHAHAHAHAHA."
+        show screen char("rand nod")
+        r " If not for her IP, and all those open ports,"
+        extend " I probably would have never even found you guys."
+        show screen char("rand laugh")
+        r "It's all too funny!"
+        show screen char("rand normal")
+        extend " An Admin that gave some random program permissions,"
+        extend " and an Anit-Virus that brang a virus back home with her!"
+        extend " All on a system housing priceless company data!"
+        show screen char("rand laugh")
+        r "HAHAHAHAHA."
+        show screen char("rand normal")
+        r "Today was just too easy."
+
+
+    r "moy naymes breuce."
+    r "fiesh ahr freinds, not foud"
+
 #EOL#####################################
 #EOL#####################################
     return

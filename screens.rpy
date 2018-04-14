@@ -99,7 +99,6 @@ screen char(charimg):
         drag_handle (0, 0, 1.0, 40)
 
 
-
         window id "window":
             add charimg
             xmaximum 500
@@ -158,7 +157,7 @@ screen ref_page():
                 ysize 420
                 anchor (-20,-50)
                 draggable True
-                text "{b}Programs:{/b}\n\n-Key programs are located in the home directory\n-To launch programs in the home directory, use the {u}./{/u} command:\n\n./{i}program_name{/i}\n\nExample:\nTo launch the \"AvA\" program, type: ./AvA \n\n\n{b}Directories:{/b}\n\n-Directories are files in the system\n-Whenever you open an INPUT window, you are placed in the Home directory.\n-To navigate directories, use the {u}cd{/u} command:\n\ncd {i}directory_name{/i}\n\nExample:\nTo enter the \"desktop\" directory, type: cd desktop\n\n-To list the contents of the current directory, use the {u}ls{/u} command\n\n-":
+                text "{b}{size=20}Programs:{/size}{/b}\n\n-Key programs are located in the home directory\n-To launch programs in the home directory, use the {u}./{/u} command:\n\n./{i}program_name{/i}\n\nExample:\nTo launch the AvA program, type: \"./ava\"\n\n{b}Program List:\n\n- ava\n- ned\n- sadman{/b} \n\n\n{b}{size=20}Directories:{/size}{/b}\n\n-Directories are files in the system\n-Whenever you open an INPUT window, you are placed in the Home directory.\n-To navigate directories, use the {u}cd{/u} command:\n\ncd {i}directory_name{/i}\n\nExample:\nTo enter the \"desktop\" directory, type: cd desktop\n\n-To list the contents of the current directory, use the {u}ls{/u} command\n\n-":
                     text_align 0.0
                     slow_cps 1000
 
