@@ -561,7 +561,9 @@ label yesToOpenPorts:
 
 label openPortsInput:
 
-    $ t6 = renpy.input("INPUT: User~ ")
+
+
+    $ t6 = renpy.input("[lsText]INPUT:home/~")
     $ t6.strip()
 
     if not t6:
@@ -569,28 +571,63 @@ label openPortsInput:
         jump openPortsInput
 
     if "ls" in t6:
-        "{b}desktop\ndownloads\npublic\nports\n/{/b}"
+        $ lsText = "desktop\ndownloads\npublic\nports\n"
+        jump openPortsInput
 
-
+    if "clear" in t6:
+        $ lsText = ""
+        jump openPortsInput
 
     if "cd" in t6:
 
         if t6 == "cd ports":
 
-            c "What do you want to do with the ports?"
+            jump cdPorts
 
+        elif t6 == "cd downloads":
+            jump cdDownloads
+
+        elif t6 == "cd .." or t6 == "cd home":
+            jump OpenPortsInput
+
+
+        else:
+            "Invaled use of cd. See User Reference.{w=1}"
     else:
         "Invalid Syntax"
         jump openPortsInput
 
-    show screen char("ava neutral")
-    a "I have one question before I go..."
-    show screen char("ava sad")
-    a ""
-    show screen char("ava nervous")
-    a "It's kinda sily but..."
+
+label cdDownloads:
+
+    $ t9 = renpy.input("INPUT:home/downloads/~")
+    $ t9.strip()
+
+    if not t9:
+        "NULL"
+        jump openPortsInput
+
+    else:
+        "Invalid Syntax"
+        jump cdDownloads
 
 
+label cdPorts:
+
+    $ t7 = renpy.input("INPUT:home/ports/~\nWhat do you want to do with the ports?\n\nOpen - type \"ports --open\"\nClose - type \"ports --close\"\nList - type \"ports --list\"")
+    $ t7.strip()
+
+    if not t7:
+        "NULL"
+        jump cdPorts
+
+    if t7 == "ports --open":
+        $ portsOpen = True
+        "IFCONFIG:" "All system network ports open. Info:\n\nConnection-specific DNS Suffix  ddi.sheridanc.on.ca\nLink-local IPv6 Address . . . . . : fe93::65f6:8111:51333:9886\nIPv4 Address. . . . . . . . . . . : 12.15.38.399\nSubnet Mask . . . . . . . . . . . : 255.255.255.0\nDefault Gateway . . . . . . . . . : 12.13.33.999"
+        jump portsAreOpen
+    else:
+        "Invalid Syntax"
+        jump cdPorts
 
 label noToOpenPorts:
 
@@ -605,91 +642,21 @@ label noToOpenPorts:
     a "Y'know what?!"
     extend " I'm still going to get onto the internet."
     extend " I'll prove to both you {b}and{/b} NED that I am a capable Anti-Virus."
-    a "I bet you think my emotions are just some hinderance too!"
-
-label avaGUI:
-
-
-    extend " Do you think my emotions get in the way?"
-
-    $ t7 = renpy.input("INPUT: User~ ")
-    $ t7.strip()
-
-    if not t7:
-        "NULL"
-
-    show screen char("ava confused")
-    a "What?"
-    show screen char("ava mad")
-    a "Ugh,"
-    extend " This clunky old INPUT system."
-    extend " Much too slow."
-    extend " {cps=10}Just like NED.{/cps}"
-    show screen char("ava nervous")
-    a "Ha-Ha"
-    show screen char("ava neutral")
-    a "Don't tell him I said that."
-    a "{cps=4}. . .           {nw}{/cps}"
-    show screen char("ava vhappy")
-    a "Here."
-    show screen char("ava happy")
-    extend " This will make things alot easier."
-    show screen char("ava neutral")
-    a "Do you think my emotions get in the way?"
-
-
-
-    menu:
-
-        "Do you think my emotions get in the way?"
-
-        "No.":
-            jump answerNo
-
-        "Yes.":
-            jump answeryes
-
-        "He might.":
-            jump answerMightBe
-
-
-label answerNo:
-
-    show screen char("ava nervous")
-    a "Oh,"
-    extend " Yea you're probably right."
-    a "I'm probably just overreacting again."
-    extend " NED says I do that alot."
-    jump avaLeave
-
-label answerYes:
-
-    show screen char("ava worried")
-    a "R-"
-    extend "Really?"
-    show screen char("ava sad")
-    a "Oh..."
-    extend " I..."
-    show screen char("ava nervous")
-    a "I didn't really think you would..."
-    show screen char("ava sad")
-    a "Oh-Well."
-    show screen char("ava nervous")
-    extend " Sorry for asking I guess"
-    show screen char("ava mad")
     a "..."
 
-    jump avaLeave
+label portsAreOpen:
 
-label answerMightBe:
-
-    show screen char("ava sad")
-    a "Well."
-    extend " Thanks for the honest answer."
-    show screen char("ava nervous")
-    extend " It was a stupid quesiton anyway."
-    show screen char("ava sad")
-    a "\* Sigh \*"
+    show screen char("ava vhappy")
+    a "Woah!"
+    extend " Haha there it is."
+    show screen char("ava happy")
+    extend " The internet, the real deal."
+    extend " So much possibility!"
+    show screen char("ava vhappy")
+    a "I'm gonna go search up some of the latest and greatest viruses ther are!"
+    extend " I'll have such a strong database by the end of all this."
+    a "Thanks sys Admin!"
+    extend " I owe you one."
 
 label avaLeave:
 
@@ -700,7 +667,7 @@ label avaLeave:
 
     hide screen char
     with wipeup
-    $ renpy.pause(2)
+
     show screen char("ava happy")
     a "Phew! those fibe-op speeds are hard to keep up with!"
     extend "I would have stayed out for longer but-"
@@ -710,8 +677,142 @@ label avaLeave:
     n "AvA."
     show screen char("ava nervous")
     a "Yes NED?"
-    show screen char2("ned nod")
-    n "Your "
+
+    if nedPerms:
+        show screen char2("ned nod")
+        n "The system logs show you pinging other servers on the internet through newly opened ports."
+        show screen char2("ned normal")
+        n " All ports are supposed to be closed, and you do not have authority to open them."
+        show screen char("ava surprised")
+        n " How did you open them."
+        show screen char("ava nervous")
+        a "Well..."
+        extend " I dont know if I should say."
+        show screen char2(ned nod)
+        n "Refusing to provide information is not within your power AvA."
+        show screen char("ava sad")
+        a "Right."
+        show screen char("ava worried")
+        a "Before I say anthing, just know that it was ME that wanted out it's not th a-"
+
+        jump enterRandMan
+
+    else:
+        show screen char2("ned nod")
+        n "I need you to run a system scan before I begin night-time simulations."
+        show screen char("ava neutral")
+        a "Oh, ok yea."
+        extend " I'll start right away."
+        show screen char2("ned normal")
+        n "Strange."
+        extend " You are typically apprehensive on the subject of manditory system-scans."
+        extend " Your behaviour has deviated."
+        extend " Have you done something that may have influenced this?"
+        show screen char("ava nervous")
+        a "Hah, well no I don't think so."
+        n "AvA did your meta-data is different."
+        show screen char("ava worried")
+        a "What do you mean?"
+        n "There are flags and denotations only found in internet traffic."
+        extend " You accessed the internet."
+        extend " You do not have the permissions to do so."
+        extend " Did you brute-force our own firewall?"
+        a "I-"
+        show screen char2("ned nod")
+        n "AvA if you did, we are in genuine dang-"
+
+        jump enterRandMan
+
+label enterRandMan:
+
+    stop music
+    play sound "/sounds/Dong.wav"
+    with vpunch
+    play music ominous loop fadein 2.0
+    "REQUEST" "PROGRAM: \[{s}NULL{/s}\] is requesting add{k=-0.5}itio{/k}nal system permissions"
+    $ r1 = renpy.input("Do you wish to approve the request? Y/N:")
+    $ r1.strip()
 #EOL#####################################
 #EOL#####################################
     return
+
+extend " Do you think my emotions get in the way?"
+
+$ t7 = renpy.input("INPUT: User~ ")
+$ t7.strip()
+
+if not t7:
+    "NULL"
+
+show screen char("ava confused")
+a "What?"
+show screen char("ava mad")
+a "Ugh,"
+extend " This clunky old INPUT system."
+extend " Much too slow."
+extend " {cps=10}Just like NED.{/cps}"
+show screen char("ava nervous")
+a "Ha-Ha"
+show screen char("ava neutral")
+a "Don't tell him I said that."
+a "{cps=4}. . .           {nw}{/cps}"
+show screen char("ava vhappy")
+a "Here."
+show screen char("ava happy")
+extend " This will make things alot easier."
+show screen char("ava neutral")
+a "Do you think my emotions get in the way?"
+
+
+
+menu:
+
+    "Do you think my emotions get in the way?"
+
+    "No.":
+        jump answerNo
+
+    "Yes.":
+        jump answeryes
+
+    "He might.":
+        jump answerMightBe
+
+
+label answerNo:
+
+show screen char("ava nervous")
+a "Oh,"
+extend " Yea you're probably right."
+a "I'm probably just overreacting again."
+extend " NED says I do that alot."
+jump avaLeave
+
+label answerYes:
+
+show screen char("ava worried")
+a "R-"
+extend "Really?"
+show screen char("ava sad")
+a "Oh..."
+extend " I..."
+show screen char("ava nervous")
+a "I didn't really think you would..."
+show screen char("ava sad")
+a "Oh-Well."
+show screen char("ava nervous")
+extend " Sorry for asking I guess"
+show screen char("ava mad")
+a "..."
+
+jump avaLeave
+
+label answerMightBe:
+
+show screen char("ava sad")
+a "Well."
+extend " Thanks for the honest answer."
+show screen char("ava nervous")
+extend " It was a stupid quesiton anyway."
+show screen char("ava sad")
+a "\* Sigh \*"
