@@ -383,10 +383,61 @@ label avaGone:
     n "As a neural network, I am capable of error."
     extend " I apologize for my error in AvA's design."
     n "I hope my mistake does not inhibit your functionality as System Admin."
-    n ""
+    n "If you gave me some hightened permissions, I could assist in your administration."
+    extend " If I was given the ability to view system-logs, I would be able to moitor AvA more closely."
+    extend " Perhaps I could make an accurate model of her bahaviour, to more accurately predict her actions."
+    n "I think it would benifit you greatly."
+    extend " Answer \"yes\" in this INPUT window to approve of my elivated permissions."
 
+
+
+    "REQUEST" "PROGRAM: \[N.E.D.\] Is requesting additional system permissions."
+
+label nedAsk2:
+
+    $ p1 = renpy.input("Do you wish to approve the request? Y/N:")
+    $ p1.strip()
+
+    if not p1:
+        "NULL"
+        jump nedAsk1
+
+    if "y" in p1:
+        $ nedPerms = True
+        jump gaveNedPerms
+
+    elif "n" in p1:
+        $ nedPerms = False
+        jump noNedPerms
+
+    else:
+        "Invalid Syntax."
+        jump nedAsk1
+
+label gaveNedPerms:
+
+    show screen char2("ned nod")
+    n "You made a wise decision."
+    extend " Thank you for your compliance."
+    extend " I must return to my primary function."
+    show screen char2("ned normal")
+    n "Goodbye."
     hide screen char2
     with wipeup
+    jump avaTalkAlone
+
+
+label noNedPerms:
+
+    show screen char2("ned nod")
+    n "So be it."
+    extend " I respect your position of administration."
+    extend " However, I think you will come to regret that decision."
+    n "I must return to my duties."
+    extend " Goodbye."
+    hide screen char2
+    with wipeup
+
 
 label avaTalkAlone:
 
@@ -528,12 +579,18 @@ label openPortsInput:
 
             c "What do you want to do with the ports?"
 
+    else:
+        "Invalid Syntax"
+        jump openPortsInput
+
     show screen char("ava neutral")
     a "I have one question before I go..."
     show screen char("ava sad")
     a ""
     show screen char("ava nervous")
     a "It's kinda sily but..."
+
+
 
 label noToOpenPorts:
 
@@ -549,7 +606,7 @@ label noToOpenPorts:
     extend " I'm still going to get onto the internet."
     extend " I'll prove to both you {b}and{/b} NED that I am a capable Anti-Virus."
     a "I bet you think my emotions are just some hinderance too!"
-    
+
 label avaGUI:
 
 
@@ -654,7 +711,7 @@ label avaLeave:
     show screen char("ava nervous")
     a "Yes NED?"
     show screen char2("ned nod")
-    n "Your t"
+    n "Your "
 #EOL#####################################
 #EOL#####################################
     return

@@ -118,7 +118,7 @@ screen char2(charimg):
             add charimg
             xmaximum 500
 
-        
+
 ## Reference doc pages
 
 screen ref_page():
@@ -138,7 +138,8 @@ screen ref_page():
             imagebutton:
                 xpos 5
                 ypos 5
-                idle "/gui/exitbutton.png"
+                idle im.Scale("/gui/exitbutton.png", 25,25)
+                hover im.Scale("/gui/exitbuttonpress.png", 25,25)
                 action ToggleScreen("ref_page")
 
             text "{u}     {b}User Reference{/b}     {/u}":
@@ -152,7 +153,7 @@ screen ref_page():
                 xsize 550
                 ysize 420
                 anchor (-20,-50)
-                mousewheel True
+                draggable True
                 text "{b}Programs:{/b}\n\n-Key programs are located in the home directory\n-To launch programs in the home directory, use the {u}./{/u} command:\n\n./program_name\n\nExample:\nTo launch the \"AvA\" program, type: ./AvA \n\n\n{b}Directories:{/b}\n\n-Directories are files in the system\n-Whenever you open an INPUT window, you are placed in the Home directory.\n-To navigate directories, use the {u}cd{/u} command:\n\ncd directory_name\n\nExample:\nTo enter the \"desktop\" directory, type: cd desktop\n\n-To list the contents of the current directory, use the {u}ls{/u} command":
                     slow_cps 1000
                     rest_indent 10
