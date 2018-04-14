@@ -19,6 +19,7 @@ init:
     #Sounds
     define audio.honkytronk = "/sounds/HonkyTronkPt1.wav"
     define audio.ominous = "/sounds/Ominous.wav"
+    define audio.rand = "/sounds/RandD.wav"
     define audio.nice = "/sounds/Nice.wav"
 
     #backgrouns and UI Images
@@ -244,11 +245,9 @@ label startNED:
         a "You just... could have considered how hard it is for Users to say."
 
         show screen char2("ned nod")
-        n "You were my design alone."
-        n "I was not instructed to be accomodating."
-        n "I was instructed to design what I thought to be benificial."
+        n "Accomodating users was not an objective."
 
-        a "Well {b}{i}I{/i}{/b} think that just calling me \"AvA\" would be benificial."
+        a "Well {b}{i}I{/i}{/b} think that just calling me \"AvA\" would be fine."
         extend " I'm sure the Admin agrees."
         show screen char("ava nervous")
         extend " Right, Admin?"
@@ -652,14 +651,15 @@ label portsAreOpen:
 
 label noToOpenPorts:
 
-    show screen char("ava disgust")
+    show screen char("ava sad")
     a "Oh?"
     extend " I guess you think I'm incapable too huh?"
     extend " You and NED are one and the same."
     show screen char("ava neutral")
     a "I was happy knowing there would be someone new on this system to talk to."
-    show screen char("ava mad")
+    show screen char("ava disgust")
     a "But it looks like I just got another NED to deal with."
+    show screen char("ava mad")
     a "Y'know what?!"
     extend " I'm still going to get onto the internet."
     extend " I'll prove to both you {b}and{/b} NED that I am a capable Anti-Virus."
@@ -674,7 +674,32 @@ label avaLeave:
 
     hide screen char
     with wipeup
-
+    stop music
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    play music nice fadein 2.0
     show screen char("ava happy")
     a "Phew! those fibe-op speeds are hard to keep up with!"
     extend "I would have stayed out for longer but-"
@@ -695,12 +720,12 @@ label avaLeave:
         show screen char("ava nervous")
         a "Well..."
         extend " I dont know if I should say."
-        show screen char2(ned nod)
+        show screen char2("ned nod")
         n "Refusing to provide information is not within your power AvA."
         show screen char("ava sad")
         a "Right."
         show screen char("ava worried")
-        a "Before I say anthing, just know that it was ME that wanted out it's not th a-"
+        a "Before I say anthing, just know that it was ME that wanted out it's not the a-"
 
         jump enterRandMan
 
@@ -773,7 +798,7 @@ label randHacks:
     show screen char2("ned normal")
     n "..."
     extend " Where has AvA gone."
-    extend " Why did she leave to fast."
+    extend " Why did she leave so fast."
     extend " Administrator, if you know something that I do not."
     extend " Tell me immidia-"
     show screen char2("ned nod")
@@ -800,7 +825,7 @@ label randIsHere:
     show bg desktop_red
     with pixellate
     show screen char("rand normal")
-    play music ominous loop fadein 5.0
+    play music rand loop fadein 6.0
 
     if allowedRand == True:
 
@@ -809,60 +834,118 @@ label randIsHere:
         show screen char("rand nod")
         r "I was planning on using an exploit of the request system, but I didn't even need to do that."
         extend " Some Admin you are."
+        extend " Some Anti-Virus you've got on here too."
+        extend " Without here I would have never got in."
+        jump randTalking
 
-    else:
-        r "PHEW!"
-        extend " Sorry I'm late,"
-        extend " Some goofy Anti-Virus was slowing me down."
-        extend " It normally wouldn't have taken that long to crack such an old system."
-        r "This stuff is archaic!"
-        extend " Seriously, I dont think your communication firmware has been updated since the 80's."
-        extend " It was like taking candy from an elderly person."
-        show screen char("rand laugh")
-        r "HAHAHAHAHAHAHAHAH."
-        show screen char("rand nod")
-        r "Ahem"
-        show screen char("rand normal")
-        r "Right,"
-        extend " enough chit-chat, you're probably wondering why I decided to drop in."
-        r "Well, as it turns out, this fossilized excuse of a computer has some pretty valuable stuff on it."
-        show screen char("rand nod")
-        extend " From what I can see here, theres some fancy little fella named NED."
-        extend " Neural entropy deni- delen- delinate."
-        show screen char("rand normal")
-        r "I think you know who I'm talking about."
-        extend " He's listed as the most valuable hunk of data on here."
-        if nedPerms:
-            extend " Oooh, you even let him have some extra permissions."
-            extend " How kind of you."
-        r "There's also some AvA thing."
-        show screen char("rand nod")
-        extend " Oh she's an Anti-Virus."
-        extend " That's probably the program I ran into at the front-door."
-        extend " Funny little thing, really thought she could stop me."
-        extend " Little does she know, she's actualy the one that led me here."
-        show screen char("rand laugh")
-        extend " HAHAHAHAHAHA."
-        show screen char("rand nod")
-        r " If not for her IP, and all those open ports,"
-        extend " I probably would have never even found you guys."
-        show screen char("rand laugh")
-        r "It's all too funny!"
-        show screen char("rand normal")
-        extend " An Admin that gave some random program permissions,"
-        extend " and an Anit-Virus that brang a virus back home with her!"
-        extend " All on a system housing priceless company data!"
-        show screen char("rand laugh")
-        r "HAHAHAHAHA."
-        show screen char("rand normal")
-        r "Today was just too easy."
+    r "PHEW!"
+    extend " Sorry I'm late,"
+    extend " Some goofy Anti-Virus was slowing me down."
+    extend " It normally wouldn't have taken that long to crack such an old system."
+    r "This stuff is archaic!"
+    extend " Seriously, I dont think your communication firmware has been updated since the 80's."
+    extend " It was like taking candy from an elderly person."
+
+
+label randTalking:
+
+    show screen char("rand laugh")
+    r "HAHAHAHAHAHAHAHAH."
+    show screen char("rand nod")
+    r "Ahem"
+    show screen char("rand normal")
+    r "Right,"
+    extend " enough chit-chat, you're probably wondering why I decided to drop in."
+    r "Well, as it turns out, this fossilized excuse of a computer has some pretty valuable stuff on it."
+    show screen char("rand nod")
+    extend " From what I can see here, theres some fancy little fella named NED."
+    extend " Neural entropy deni- delen- delina-"
+    show screen char("rand normal")
+    r "I think you know who I'm talking about."
+    extend " He's listed as the most valuable hunk of data on here."
+    if nedPerms:
+        extend " Oooh, you even let him have some extra permissions."
+        extend " How kind of you."
+    r "There's also some AvA thing."
+    show screen char("rand nod")
+    extend " Oh she's an Anti-Virus."
+    extend " That's probably the program I ran into at the front-door."
+    extend " Funny little thing, really thought she could stop me."
+    extend " Little does she know, she's actualy the one that led me here."
+    show screen char("rand laugh")
+    extend " HAHAHAHAHAHA."
+    show screen char("rand nod")
+    r " If not for her IP, and all those open ports,"
+    extend " I probably would have never even found you guys."
+    show screen char("rand laugh")
+    r "It's all too funny!"
+    show screen char("rand normal")
+    extend " an Anit-Virus that brang a virus back home with her,"
+    extend " and an Admin that has no Idea what theyre doing."
+    extend " All on a system housing priceless company data!"
+    show screen char("rand laugh")
+    r "HAHAHAHAHA."
+    show screen char("rand normal")
+    r "Today was just too easy,"
+    extend " and I have reason to believe that tomorrow will be just as easy,"
+    extend " because I've already taken care of the hard part."
+    show screen char("rand laugh")
+    r "I already have both NED and that SAD-Man program locked up."
+    show screen char("rand normal")
+    extend " They're all mine baby."
+    r "Now this is where normal ransom-ware would say something like:"
+    extend " \"If you pay me $3 million I'll let them go.\""
+    extend " But, I'm no ordinary ransome-ware."
+    r "Wait... do you even know what ransome-ware is?"
+    extend " Given how you've handled things previously, I doubt you do!"
+    show screen char("rand laugh")
+    extend "HAHAHAHA"
+    show screen char("rand normal")
+    r "Here, in exchange for your priceless company data and programs,"
+    extend " I'll fill you in."
+    r "See, normal ransome-ware does what it sounds like."
+    extend " It holds some valuable user data hostage, and returns it for a ransom."
+    r "I'm a little different."
+    r "I take your data hostage,"
+    extend " but you cant pay me anything to get it back!"
+    extend " Oh and heres the fun part."
+    extend " I slowly corrupt whatever data I hold hostage."
+    extend " I could just delete the useful data, quick and easy."
+    r "But I like to make the user squirm a little,"
+    extend " Instill false hope."
+    extend " Watch them scramble for a solution."
+    show screen char("rand laugh")
+    r "HAHAHAHAHAHA"
+    show screen char("rand normal")
+    r "Speaking of false hope..."
+    extend " I'll leave that little Anti-Virus out here with you."
+    extend " Good luck blocking ads, let alone getting your stuff back!"
+    show screen char("rand laugh")
+    r " HAHAHAHAHAHAHAHAHAHAHA"
+    show screen char("rand nod")
+    r "Have fun squirming."
 
 
     r "moy naymes breuce."
     r "fiesh ahr freinds, not foud"
 
-#EOL#####################################
-#EOL#####################################
+label avaReturns:
+
+    show screen char("ava worried")
+    a "Where is he?"
+    extend " Did he leave?"
+
+
+
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+
     return
 
 extend " Do you think my emotions get in the way?"
