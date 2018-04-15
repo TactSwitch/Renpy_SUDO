@@ -29,7 +29,9 @@ define config.version = "1.0"
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
-define gui.about = _p("""
+define gui.about = _p("""This is a simple game that was made as an assignment for the Non-Linear Narrative class in Sheridan College's Game Design program.
+
+It was made entirely by one person in the span of a few weeks. There are definitely improvements to be made, and this project is open-source, so modify things as you see fit.
 """)
 
 

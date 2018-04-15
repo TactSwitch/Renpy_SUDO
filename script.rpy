@@ -3,17 +3,13 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
+
 init:
 
-    #Input Function
-    python:
 
-        def inp(inp1, returnTo):
-            inp1 = renpy.input("INPUT:")
-            inp1 = inp1.strip()
-            if not inp1 or inp1 == "":
-                Jump (returnTo)
 
+
+    $ oldSystem = False
 
 
     #Sounds
@@ -22,9 +18,16 @@ init:
     define audio.rand = "/sounds/RandD.wav"
     define audio.nice = "/sounds/Nice.wav"
 
+
+
+
     #backgrouns and UI Images
+
+    image sayImg = ConditionSwitch("oldSystem", "/gui/textboxold.png", "oldSystem == False", "/gui/textbox.png", xalign=0.5)
+
     image power = "power button.png"
-    image bg desktop = im.Scale("desktop.png", 1280,720)
+    image bg desktop = "desktop.png"
+    image bg desktop_old = "DesktopOld.png"
     image bg desktop_red = im.MatrixColor("desktop.png", im.matrix.desaturate() * im.matrix.tint(0.6, 0.3, 0.4))
 
     #Button Images
@@ -61,6 +64,18 @@ init:
     image ava disgust_only = im.Scale("AvA_Disgust.png", 550,550)
     image ava disgust = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Disgust.png", 550,550))
 
+    image ava vhappy old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_VHappy.png", 550,550))
+    image ava happy old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Happy.png", 550,550))
+    image ava neutral old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Neutral.png", 550,550))
+    image ava nervous old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Nervous.png", 550,550))
+    image ava confused old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Confused.png", 550,550))
+    image ava worried old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Worried.png", 550,550))
+    image ava sad old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Sad.png", 550,550))
+    image ava sleep old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Sleep.png", 550,550))
+    image ava surprised old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Surprised.png", 550,550))
+    image ava mad old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Mad.png", 550,550))
+    image ava disgust old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Disgust.png", 550,550))
+
     #NED Images
     image ned normal_only = im.Scale("NED_Normal.png", 550,550)
     image ned normal = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Normal.png", 550,550))
@@ -68,7 +83,7 @@ init:
     image ned nod = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Nod.png", 550,550))
 
     #RAN-D Images
-    image rand normal_only = im.Scale("Rand_Normal.png", 550,550)
+    image rand normal_only = im.Scale("Rand_Normal.png", 800,800)
     image rand normal = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Normal.png", 550,550))
     image rand nod_only = im.Scale("Rand_Nod.png", 550,550)
     image rand nod = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Nod.png", 550,550))
@@ -83,8 +98,12 @@ init:
         #NVL Narrator
     $ c = Character ('', kind=nvl, colour=(0,0,0,0))
 
+
+
 label start:
 
+
+    $ oldSystem = False
     call screen power_button("power")
 
 label firstScreen:
@@ -94,7 +113,7 @@ label firstScreen:
     show screen char("admin nod")
     hide screen char
     show screen char("admin normal")
-
+    play music nice fadein 5.0
     i "Hello."
     extend " Congratiulations on your placement here at LBN."
     i "I am the System ADMIN Manager."
@@ -138,7 +157,7 @@ label afterTutorial:
     show screen ref_book("ref_idle", "ref_hover")
     extend " see the Employee Reference Book."
     extend " There should be a link to it in the upper-left corner of your screen."
-    i "This is the end of my interaction with you"
+    i "This is the end of my interaction with you."
     i "Please remember what is expected of you as an employee at LBN."
     hide screen char
     show screen char("admin nod")
@@ -162,11 +181,11 @@ label secondTextInput:
 
         jump secondTextInput
 
-    if t2 == "./AvA":
+    if t2 == "./ava":
         $ avaStarted = True
         jump startAvA
 
-    elif t2 == "./NED":
+    elif t2 == "./ned":
         $ avaStarted = False
         jump startNED
 
@@ -208,6 +227,8 @@ label startAvA:
 
 
 label startNED:
+
+    stop music fadeout 4.0
 
     if avaStarted == True:
 
@@ -410,7 +431,7 @@ label nedAsk2:
 
     if not p1:
         "NULL"
-        jump nedAsk1
+        jump nedAsk2
 
     if "y" in p1:
         $ nedPerms = True
@@ -422,7 +443,7 @@ label nedAsk2:
 
     else:
         "Invalid Syntax."
-        jump nedAsk1
+        jump nedAsk2
 
 label gaveNedPerms:
 
@@ -801,37 +822,39 @@ label randHacks:
     extend " Why did she leave so fast."
     extend " Administrator, if you know something that I do not."
     extend " Tell me immidia-"
-    show screen char2("ned nod")
-    with Fade(0.001,0.0,0.001)
-    show screen char2("ned normal")
-    with Fade(0.001,0.0,0.001)
-    show screen char2("ned nod")
-    with Fade(0.001,0.0,0.001)
-    show screen char2("ned normal")
-    show screen char2("ned nod")
-    with Fade(0.001,0.0,0.001)
-    show screen char2("ned normal")
-    with Fade(0.001,0.0,0.001)
-    show screen char2("ned nod")
-    with Fade(0.001,0.0,0.001)
-    show screen char2("ned normal")
     play sound "/sounds/Chung.wav"
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned nod")
+    with Fade(0.001,0.0,0.001)
+    show screen char2("ned normal")
+    hide screen char2
 
 label randIsHere:
 
 
+    "{s}NULL{/s}" "Launching: {w=0.2}||{w=0.1}|||||||{w=0.2}||||||||{w=0.1}||||||||||{w=0.3}||{w=0.1}||||||||{w=0.1}|||||||||||||{w=0.2}|||||||||{w=0.2}|||{nw}"
     hide screen char
     hide screen char2
     show bg desktop_red
     with pixellate
-    show screen char("rand normal")
-    play music rand loop fadein 6.0
+
+    $ randSpeak = True
+
 
     if allowedRand == True:
 
         r "You aren't too clever are you?"
 
-        show screen char("rand nod")
         r "I was planning on using an exploit of the request system, but I didn't even need to do that."
         extend " Some Admin you are."
         extend " Some Anti-Virus you've got on here too."
@@ -840,15 +863,11 @@ label randIsHere:
 
     r "PHEW!"
     extend " Sorry I'm late,"
-    extend " Some goofy Anti-Virus was slowing me down."
+    extend " Some Anti-Virus was slowing me down."
     extend " It normally wouldn't have taken that long to crack such an old system."
     extend " Especially considering all the open ports! Who's the Admin around here? "
-    show screen char("rand laugh")
-    r "HAHAHAHAHAHAHAHAH."
-    show screen char("rand nod")
     r "Man,"
     extend " this stuff is archaic!"
-    show screen char("rand normal")
     extend " Seriously, I dont think your communication firmware has been updated since the 80's."
     extend " It was like taking candy from an elderly person."
 
@@ -856,6 +875,7 @@ label randIsHere:
 label randTalking:
 
     show screen char("rand laugh")
+    play music rand loop fadein 6.0
     r "HAHAHAHAHAHAHAHAH."
     show screen char("rand nod")
     r "Ahem"
@@ -872,9 +892,9 @@ label randTalking:
     if nedPerms:
         extend " Oooh, you even let him have some extra permissions."
         extend " How kind of you."
-    r "There's also some AvA thing."
+    r "There's also some AvA thing,"
     show screen char("rand nod")
-    extend " Oh she's an Anti-Virus."
+    extend " an Anti-Virus."
     extend " That's probably the program I ran into at the front-door."
     extend " Funny little thing, really thought she could stop me."
     extend " Little does she know, she's actualy the one that led me here."
@@ -941,17 +961,18 @@ label randTalking:
     show screen char("rand nod")
     r "Have fun squirming."
     hide screen char
-
-
-    r "moy naymes breuce."
-    r "fiesh ahr freinds, not foud"
+    stop music fadeout 4.0
+    $ renpy.pause(5.0)
 
 label avaReturns:
 
+
+
     show screen char("ava worried")
+    with wipedown
     a "Where is he?"
     extend " Where's NED?"
-
+    play music ominous loop fadein 5.0
     $ t7 = renpy.input("INPUT: User~ ")
     $ t7.strip()
 
@@ -1002,7 +1023,19 @@ label avaFindsOutAboutNED:
     if hinderedAvA == False:
         extend " You're lying."
         extend " You have to be."
-        extend " Theres no way that "
+        extend " Theres no way..."
+        a "RAN-D is supposed to be really dangerous."
+        extend " It was one of the first things I found on the internet."
+        extend " Everyone was atlking about this new ransome-war."
+        extend " Supposedly it's alot more malicious than normal."
+        a "Uhm, ok."
+        extend " Protocol, right, we should follow crisis protocol."
+        a "Theres a process for this kind of thing."
+        extend " First step is always Quarentine."
+        extend " We have to quarentine the system so this RAN-D thing doesn't do any more damage."
+        a "I could do the quarentine myself, but you would have to give me higher system permissions."
+
+        "REQUEST" "PROGRAM: \[A.v.A.\] Is requesting additional system permissions."
 
     else:
         extend " RAN-D?"
@@ -1011,7 +1044,7 @@ label avaFindsOutAboutNED:
         show screen char("ava confused")
         extend " That thing was ransome-ware??"
         extend " It was way more aggresive than ransome-ware should be."
-        extend " It was more like a trogan or a worm than anything else."
+        extend " It was more like a trojan or a worm than anything else."
         show screen char("ava worried")
         a "But youre telling me that,"
         extend " whatever that thing was,"
@@ -1021,9 +1054,180 @@ label avaFindsOutAboutNED:
         a "Theres a process for this kind of thing."
         extend " First step is always Quarentine."
         extend " We have to quarentine the system so this RAN-D thing doesn't do any more damage."
+        a "I could do the quarentine myself, but you would have to give me higher system permissions."
+
+        "REQUEST" "PROGRAM: \[A.v.A.\] Is requesting additional system permissions."
+
+label avaAskPerms:
+
+        $ p2 = renpy.input("Do you wish to approve the request? Y/N:")
+        $ p2.strip()
+
+        if not p2:
+            "NULL"
+            jump avaAskPerms
+
+        if "y" in p2:
+            jump guiQuar
+
+        elif "n" in p2:
+            jump manQuar
+
+        else:
+            "Invaled Syntax."
+            jump avaAskPerms
+
+
+label guiQuar:
+
+    a "Actually, before we lock this system up, I think I should scan around one last time."
+    extend " It might be a little risky, with RAN-D on te system, but it might help us figure what we're up against."
+    extend " I could find some useful temp files or meta-data on RAN-D."
+    a "You think it's a good idea?"
+
+    menu:
+
+        "You think it's a good idea?"
+
+        "Yea, go for it.":
+            jump lastScan
+
+        "Too risky, quarentine right away.":
+            show screen char("ava confused")
+            a "Alright, if you say so."
+            extend " I think this is a mistake though."
+            jump quarentine
+
+label manQuar:
+
+    show screen char("ava disgust")
+    a "What?"
+    extend " Seriously?"
+    show screen char("ava mad")
+    a "Whatever, you'll just have to do it yourself then."
+    show screen char("ava neutral")
+    extend " You probably have some kind of handbook that tells you how to do it."
+    extend " Be quick about it though."
+    show screen char("ava surprised")
+    a "Actually, wait!"
+    show screen char("ava neutral")
+    a "Before we lock this system up, I think I should scan around one last time."
+    extend " It might be a little risky, with RAN-D on the system, but it might help us figure what we're up against."
+    extend " I could find some useful temp files or meta-data on RAN-D."
+    a "You think it's a good idea?"
+
+    menu:
+
+        "You think it's a good idea?"
+
+        "Yea, go for it.":
+            jump lastScan
+
+        "Too risky, quarentine right away.":
+            show screen char("ava confused")
+            a "Alright, if you say so."
+            extend " I think this is a mistake, "
+            extend " but if you think it's the right thing to do, go for it."
+            jump manQuarInp
 
 
 
+
+label lastScan:
+
+    a "Yea, I think it's worth it."
+    extend " I'll be right back."
+    hide screen char
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    "{nw}"
+    show screen char("ava neutral")
+    a "Ok, it's done. "
+    jump quarentine
+
+label manQuarInp:
+
+    $ p3 = renpy.input("INPUT:")
+    $ p3.strip()
+
+    if not p3:
+        "NULL"
+        jump manQuarInp
+
+    if "./" in p3:
+
+        if p3 == "./quarentine":
+            show screen char("ava neutral")
+            a "Great,"
+            jump quarentine
+
+        if p3 == "./ned":
+            "Program \"NED\" not found."
+
+        else:
+            "Invaled use of ./ see reference book"
+            jump manQuarInp
+
+    else:
+        "Invalid Syntax"
+
+
+
+label quarentine:
+
+
+    extend " Now let's get out of here."
+    $ oldSystem = True
+
+
+label onOldSystem:
+
+    style window background "sayImg"
+
+
+    show bg desktop_old
+
+
+
+    hide screen char
+    show screen char("ava neutral old")
+    a "We on old sys now"
+    a "We on old sys now"
+    hide screen char
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
+    a "We on old sys now"
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
