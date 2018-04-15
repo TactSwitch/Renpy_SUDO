@@ -670,7 +670,7 @@ label avaLeave:
     show screen char("ava neutral")
     a "Well,"
     extend " better get going before NED finds out."
-    a "Goodbye."
+
 
     hide screen char
     with wipeup
@@ -842,7 +842,13 @@ label randIsHere:
     extend " Sorry I'm late,"
     extend " Some goofy Anti-Virus was slowing me down."
     extend " It normally wouldn't have taken that long to crack such an old system."
-    r "This stuff is archaic!"
+    extend " Especially considering all the open ports! Who's the Admin around here? "
+    show screen char("rand laugh")
+    r "HAHAHAHAHAHAHAHAH."
+    show screen char("rand nod")
+    r "Man,"
+    extend " this stuff is archaic!"
+    show screen char("rand normal")
     extend " Seriously, I dont think your communication firmware has been updated since the 80's."
     extend " It was like taking candy from an elderly person."
 
@@ -892,7 +898,7 @@ label randTalking:
     show screen char("rand laugh")
     r "I already have both NED and that SAD-Man program locked up."
     show screen char("rand normal")
-    extend " They're all mine baby."
+    extend " They're all mine."
     r "Now this is where normal ransom-ware would say something like:"
     extend " \"If you pay me $3 million I'll let them go.\""
     extend " But, I'm no ordinary ransome-ware."
@@ -922,8 +928,19 @@ label randTalking:
     extend " Good luck blocking ads, let alone getting your stuff back!"
     show screen char("rand laugh")
     r " HAHAHAHAHAHAHAHAHAHAHA"
+    show screen char2("ned normal")
+    n "HELP{nw}"
+    hide screen char2
+    show screen char2("ned normal")
+    n "HELP{nw}"
+    hide screen char2
+    show screen char("rand normal")
+    r "Oh!-"
+    r "Looks like Iv'e been speaking a little too long."
+    extend " Wouldnt want NED getting out, better get back in here."
     show screen char("rand nod")
     r "Have fun squirming."
+    hide screen char
 
 
     r "moy naymes breuce."
@@ -933,7 +950,77 @@ label avaReturns:
 
     show screen char("ava worried")
     a "Where is he?"
-    extend " Did he leave?"
+    extend " Where's NED?"
+
+    $ t7 = renpy.input("INPUT: User~ ")
+    $ t7.strip()
+
+    if not t7:
+        "NULL"
+
+    show screen char("ava confused")
+    a "What?"
+    show screen char("ava mad")
+    a "Oh, we don't have time for this."
+    show screen char("ava neutral")
+    extend " Here, this should make things faster."
+    a "I'll ask again, where is ned?"
+
+    $ a1 = True
+    $ a3 = True
+
+
+label firstMenuChoice:
+
+    menu:
+
+        "Where is NED?"
+
+        "Probably dead." if a1:
+
+            show screen char("ava worried")
+            a "Dont say something like that!"
+            $ a1 = False
+            jump firstMenuChoice
+
+        "RAN-D has taken him hostage.":
+
+            show screen char("ava worried")
+            jump avaFindsOutAboutNED
+
+        "He left to the store, he asked if you wanted anything." if a3:
+
+            show screen char("ava mad")
+            a "This is NOT the time for jokes Admin!"
+            $ a3 = False
+            jump firstMenuChoice
+
+
+label avaFindsOutAboutNED:
+
+    a "What?"
+    if hinderedAvA == False:
+        extend " You're lying."
+        extend " You have to be."
+        extend " Theres no way that "
+
+    else:
+        extend " RAN-D?"
+        extend " Wait."
+        extend " I think that was the thing that I was trying to keep out earlier."
+        show screen char("ava confused")
+        extend " That thing was ransome-ware??"
+        extend " It was way more aggresive than ransome-ware should be."
+        extend " It was more like a trogan or a worm than anything else."
+        show screen char("ava worried")
+        a "But youre telling me that,"
+        extend " whatever that thing was,"
+        extend " has NED hostage?"
+        a "Uhm, ok."
+        extend " Protocol, right, we should follow crisis protocol."
+        a "Theres a process for this kind of thing."
+        extend " First step is always Quarentine."
+        extend " We have to quarentine the system so this RAN-D thing doesn't do any more damage."
 
 
 
