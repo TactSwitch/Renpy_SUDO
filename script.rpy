@@ -1081,6 +1081,7 @@ label guiQuar:
         "You think it's a good idea?"
 
         "Yea, go for it.":
+            $ avaScanned = True
             jump lastScan
 
         "Too risky, quarentine right away.":
@@ -1112,6 +1113,7 @@ label manQuar:
         "You think it's a good idea?"
 
         "Yea, go for it.":
+            $ avaScanned = True
             jump lastScan
 
         "Too risky, quarentine right away.":
@@ -1413,13 +1415,14 @@ label randExplain:
     a "Hey!"
 
     r "What?"
-    extend " You would like that wouldnt you?"
+    extend " You would like that wouldn't you?"
 
     show screen char("ava disgust old")
     a "W-"
     show screen char("ava sad old")
     extend " No!"
 
+    show screen char("ava mad old")
     show rand nod_only
     r "Oh but I think you do,"
     show rand normal_only
@@ -1433,6 +1436,30 @@ label randExplain:
     show rand normal_only
     extend " None of that really matters anyway,"
     extend " NED's not going to be around much longer."
+    show rand laugh_only
+    r "HAHAHAHAHA."
+    hide rand
+    with pixellate
+
+    show screen char("ava sad old")
+    a "..."
+    show screen char("ava mad old")
+    a "I'm sick of this RAN-D guy."
+    extend "Let's get NED back."
+
+    a "We need to buy ourselves some time."
+    extend " The way I see it, the only way to do that is to slow down the corruption process."
+    extend " The only way to do that is to under-clock the system that RAN-D and NED are on."
+    a "What we can do after that is dependent on whether or not we under-clock."
+    extend " Under-clocking decreases performance significantly."
+    extend " Brute-forcing anything on the system would be out of the question."
+    extend " There are still other things we could try, but brute-forcing doesn't take any knowledge of our target."
+    extend " Other methods would require knowing what we're up against."
+
+    if avaScanned:
+        a "In the last scan I did before we left the other system, I was able to grab a bit of info on RAN-D."
+        if hinderedAvA == False:
+            extend 
 
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
