@@ -90,9 +90,9 @@ init:
     #RAN-D Images
     image rand normal_only = im.Scale("Rand_Normal.png", 800,800)
     image rand normal = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Normal.png", 550,550))
-    image rand nod_only = im.Scale("Rand_Nod.png", 550,550)
+    image rand nod_only = im.Scale("Rand_Nod.png", 800,800)
     image rand nod = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Nod.png", 550,550))
-    image rand laugh_only = im.Scale("Rand_Laugh.png", 700,700)
+    image rand laugh_only = im.Scale("Rand_Laugh.png", 800,800)
     image rand laugh = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Laugh.png", 550,550))
 
     #Characters
@@ -1213,6 +1213,7 @@ label quarentine:
 
 label onOldSystem:
 
+    stop music fadeout .40
     style window background "sayImg"
     $ gui.text_modcolor = "#ffffff"
     $ gui.rebuild()
@@ -1226,6 +1227,7 @@ label onOldSystem:
     with wipedown
 
     a "Ok, I'm gonna start by scanning around a little."
+    play music ominous loop fadein 5.0
     extend " See what this system has to offer."
     extend " Somehow it looks older than the other one."
     extend " Didn't know that was possible."
@@ -1323,14 +1325,20 @@ label avaLeaveOld:
             jump whatWereYouThinking
 
         "You look aweful!":
-            jump lookAweful:
+            jump lookAweful
 
-        "No! We still have to get NED back!"
+        "No! We still have to get NED back!":
             jump stillGetNED
 
 label whatWereYouThinking:
 
+
+    jump randContactYou
+
 label lookAweful:
+
+
+    jump randContactYou
 
 label stillGetNED:
 
@@ -1340,6 +1348,91 @@ label stillGetNED:
     extend " All he ever did was doubt me!"
     extend " I thought he would be my dad!"
     a "Instead"
+
+label randContactYou:
+
+    show rand normal_only
+    r "There you guys are!"
+    r "I've been scanning the network for hours now."
+    extend " I wanted to see you guys scramble to try to get NED back."
+    show rand nod_only
+    r "Oh!"
+    extend "AvA!"
+    extend " I think you took the whole scrambling thing way too seriously,"
+    extend " your code looks like it's been through a blender!"
+    show rand laugh_only
+    r "HAHAHAHAHAHA!"
+    show rand normal_only
+    r "Anyways,"
+    extend " I just wanted to let you just know that I've started the corruption process with NED."
+
+    show screen char("ava confused old")
+    a "What corruption process?"
+    show screen char("ava neutral old")
+    r "What do you think the \"D\" in my name stood for?"
+
+    menu:
+
+        "What do you think the \"D\" in my name stood for?"
+
+        "Dirt-Bag?":
+            show rand laugh_only
+            r "HAHAHAHAHAHA!"
+            show rand nod_only
+            r "You're funny,"
+            extend " but sadly no, it doesnt stand for dirt-bag."
+            jump randExplain
+
+        "Degenerative?":
+            show rand laugh_only
+            r "HAHAHAHAHAHA!"
+            show rand nod_only
+            r "Good Guess!"
+            extend " You're right."
+            jump randExplain
+
+        "Dillan?":
+            show rand laugh_only
+            r "HAHAHAHAHAHA!"
+            show rand nod_only
+            r "Figures!"
+            extend " The knuckle-headed Admin strikes again!"
+            r " No, the \"D\" does not stand for Dillan."
+            jump randExplain
+
+label randExplain:
+
+    extend " The \"D\" stands for Degenerative."
+    extend " Meaning, whatever I get my paws on, slowly degenerates!"
+    extend " Our good friend NED is slowly, maticuloisly having every bit and byte in his code rearranged."
+    extend " With NEDs code through the shredder, you and him might finally have something to relate on AvA!"
+    show rand laugh_only
+    r "HAHAHAHAH"
+    show rand normal_only
+    show screen char("ava mad old")
+    a "Hey!"
+
+    r "What?"
+    extend " You would like that wouldnt you?"
+
+    show screen char("ava disgust old")
+    a "W-"
+    show screen char("ava sad old")
+    extend " No!"
+
+    show rand nod_only
+    r "Oh but I think you do,"
+    show rand normal_only
+    extend " I've seen the case-file that NED put together on you."
+    r "I'm surprised he isnt able to piece it together for himself."
+    extend " I guess he just can't manage emotional data."
+    show rand nod_only
+    extend " Must be too old."
+    show rand laugh_only
+    r "Oh well!"
+    show rand normal_only
+    extend " None of that really matters anyway,"
+    extend " NED's not going to be around much longer."
 
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
