@@ -1424,7 +1424,7 @@ label randExplain:
     r "Oh but I think you do,"
     show rand normal_only
     extend " I've seen the case-file that NED put together on you."
-    r "I'm surprised he isnt able to piece it together for himself."
+    r "I'm surprised he isn't able to piece it together for himself."
     extend " I guess he just can't manage emotional data."
     show rand nod_only
     extend " Must be too old."
