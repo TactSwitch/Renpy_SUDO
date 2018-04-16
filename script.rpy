@@ -6,7 +6,8 @@
 
 init:
 
-
+    default gui.text_modcolor = "#000"
+    define gui.text_color = gui.text_modcolor
 
 
     $ oldSystem = False
@@ -17,17 +18,19 @@ init:
     define audio.ominous = "/sounds/Ominous.wav"
     define audio.rand = "/sounds/RandD.wav"
     define audio.nice = "/sounds/Nice.wav"
+    define audio.rand2 = "/sounds/ran-d2.wav"
 
 
 
 
     #backgrouns and UI Images
 
-    image sayImg = ConditionSwitch("oldSystem", "/gui/textboxold.png", "oldSystem == False", "/gui/textbox.png", xalign=0.5)
+    image sayImg = ConditionSwitch("oldSystem", im.MatrixColor("/gui/textboxold.png", im.matrix.invert()), "oldSystem == False", "/gui/textbox.png", xalign=0.5)
 
     image power = "power button.png"
     image bg desktop = "desktop.png"
     image bg desktop_old = "DesktopOld.png"
+    image bg desktop_old_invert = im.MatrixColor("DesktopOld.png", im.matrix.invert())
     image bg desktop_red = im.MatrixColor("desktop.png", im.matrix.desaturate() * im.matrix.tint(0.6, 0.3, 0.4))
 
     #Button Images
@@ -64,17 +67,19 @@ init:
     image ava disgust_only = im.Scale("AvA_Disgust.png", 550,550)
     image ava disgust = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("AvA_Disgust.png", 550,550))
 
-    image ava vhappy old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_VHappy.png", 550,550))
-    image ava happy old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Happy.png", 550,550))
-    image ava neutral old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Neutral.png", 550,550))
-    image ava nervous old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Nervous.png", 550,550))
-    image ava confused old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Confused.png", 550,550))
-    image ava worried old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Worried.png", 550,550))
-    image ava sad old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Sad.png", 550,550))
-    image ava sleep old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Sleep.png", 550,550))
-    image ava surprised old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Surprised.png", 550,550))
-    image ava mad old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Mad.png", 550,550))
-    image ava disgust old = im.Composite((500,500),(0,0),"CharBoxOld.png", (-30,-20), im.Scale("AvA_Disgust.png", 550,550))
+    image ava vhappy old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_VHappy.png", 550,550))
+    image ava happy old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Happy.png", 550,550))
+    image ava neutral old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Neutral.png", 550,550))
+    image ava nervous old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Nervous.png", 550,550))
+    image ava confused old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Confused.png", 550,550))
+    image ava worried old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Worried.png", 550,550))
+    image ava sad old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Sad.png", 550,550))
+    image ava sleep old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Sleep.png", 550,550))
+    image ava surprised old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Surprised.png", 550,550))
+    image ava mad old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Mad.png", 550,550))
+    image ava disgust old = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Disgust.png", 550,550))
+    image ava broken = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Broken.png", 550,550))
+    image ava glitch = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("AvA_Broken_Glitch.png", 550,550))
 
     #NED Images
     image ned normal_only = im.Scale("NED_Normal.png", 550,550)
@@ -87,7 +92,7 @@ init:
     image rand normal = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Normal.png", 550,550))
     image rand nod_only = im.Scale("Rand_Nod.png", 550,550)
     image rand nod = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Nod.png", 550,550))
-    image rand laugh_only = im.Scale("Rand_Laugh.png", 550,550)
+    image rand laugh_only = im.Scale("Rand_Laugh.png", 700,700)
     image rand laugh = im.Composite((500,500),(0,0),im.MatrixColor("CharBox.png", im.matrix.desaturate() * im.matrix.tint(1.0, 0.5, 0.6)), (-30,-20), im.Scale("Rand_Laugh.png", 550,550))
 
     #Characters
@@ -875,7 +880,7 @@ label randIsHere:
 label randTalking:
 
     show screen char("rand laugh")
-    play music rand loop fadein 6.0
+    play music rand2 loop fadein 6.0
     r "HAHAHAHAHAHAHAHAH."
     show screen char("rand nod")
     r "Ahem"
@@ -934,20 +939,6 @@ label randTalking:
     r "I'm a little different."
     r "I take your data hostage,"
     extend " but you cant pay me anything to get it back!"
-    extend " Oh and heres the fun part."
-    extend " I slowly corrupt whatever data I hold hostage."
-    extend " I could just delete the useful data, quick and easy."
-    r "But I like to make the user squirm a little,"
-    extend " Instill false hope."
-    extend " Watch them scramble for a solution."
-    show screen char("rand laugh")
-    r "HAHAHAHAHAHA"
-    show screen char("rand normal")
-    r "Speaking of false hope..."
-    extend " I'll leave that little Anti-Virus out here with you."
-    extend " Good luck blocking ads, let alone getting your stuff back!"
-    show screen char("rand laugh")
-    r " HAHAHAHAHAHAHAHAHAHAHA"
     show screen char2("ned normal")
     n "HELP{nw}"
     hide screen char2
@@ -959,7 +950,7 @@ label randTalking:
     r "Looks like Iv'e been speaking a little too long."
     extend " Wouldnt want NED getting out, better get back in here."
     show screen char("rand nod")
-    r "Have fun squirming."
+    r "Have fun!"
     hide screen char
     stop music fadeout 4.0
     $ renpy.pause(5.0)
@@ -1026,7 +1017,7 @@ label avaFindsOutAboutNED:
         extend " Theres no way..."
         a "RAN-D is supposed to be really dangerous."
         extend " It was one of the first things I found on the internet."
-        extend " Everyone was atlking about this new ransome-war."
+        extend " Everyone was talking about this new ransome-ware."
         extend " Supposedly it's alot more malicious than normal."
         a "Uhm, ok."
         extend " Protocol, right, we should follow crisis protocol."
@@ -1179,7 +1170,7 @@ label manQuarInp:
 
         if p3 == "./quarentine":
             show screen char("ava neutral")
-            a "Great,"
+            a "Great, now le-"
             jump quarentine
 
         if p3 == "./ned":
@@ -1196,38 +1187,160 @@ label manQuarInp:
 
 label quarentine:
 
-
-    extend " Now let's get out of here."
-    $ oldSystem = True
+    show screen char2("rand laugh")
+    hide screen char2
+    play sound "/sounds/Chung.wav"
+    show rand laugh_only
+    with hpunch
+    hide rand laugh_only
+    show rand laugh_only
+    hide rand laugh_only
+    show rand laugh_only
+    show screen char("ava surprised")
+    a "!{w=0.5}{nw}"
+    show screen char("ava worried")
+    a " Ok let's get out of here!"
+    "{cps=0}Ejecting:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{/cps}{w=0.2}{nw}"
+    "{cps=0}Ejecting:||||||||||||||||||||||||||||||||||||||||||||||{/cps}{w=0.2}{nw}"
+    "{cps=0}Ejecting:|||||||||||||||||||||||||||||||||||||{/cps}{w=0.2}{nw}"
+    "{cps=0}Ejecting:|||||||||||||||||||||{/cps}{w=0.2}{nw}"
+    "{cps=0}Ejecting:||||||||||||||{/cps}{w=0.2}{nw}"
+    "{cps=0}Ejecting:|||{/cps}{nw}"
+    hide rand laugh_only
+    hide screen char
+    with wipeup
 
 
 label onOldSystem:
 
     style window background "sayImg"
+    $ gui.text_modcolor = "#ffffff"
+    $ gui.rebuild()
+    show bg desktop_old with pushleft
+    $ oldSystem = True
 
 
-    show bg desktop_old
 
 
-
-    hide screen char
     show screen char("ava neutral old")
-    a "We on old sys now"
-    a "We on old sys now"
+    with wipedown
+
+    a "Ok, I'm gonna start by scanning around a little."
+    extend " See what this system has to offer."
+    extend " Somehow it looks older than the other one."
+    extend " Didn't know that was possible."
+    a "I'll be right back."
     hide screen char
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
-    a "We on old sys now"
+    with wipeup
+    $ renpy.pause(4.0)
+    show screen char("ava neutral old")
+    with wipedown
+
+    a "Nothing."
+    extend " This old system barely has basic functionality, let alone anything useful."
+    extend " How are we supposed to do anything about RAN-D."
+    show screen char("ava sad old")
+    a "Maybe NED was right"
+    show screen char("ava nervous old")
+    a "I'm sure we'll figure something out."
+    extend " Right?"
+    show screen char("ava neutral old")
+
+    menu:
+        "I'm sure we'll figure something out. Right?"
+
+        "No we're doomed.":
+            show screen char("ava nervous old")
+            a "Ha-Ha."
+            show screen char("ava sad old")
+            extend " Yea."
+
+label avaLeaveOld:
+
+    show screen char("ava nervous old")
+    a "I'm gonna look around some more."
+    extend " Maybe theres another program on this system that can help us or something."
+    show screen char("ava happy old")
+    a "Be right back!"
+    hide screen char
+    with wipeup
+    $ renpy.pause(10.0)
+    show screen char("ava broken")
+    hide screen char
+    a "{b}WHAT THE FUCK?{/b}"
+    show screen char("ava glitch")
+    hide screen char
+    show screen char("ava broken")
+
+    a "HOW DID YOU FIND ME?????|||||"
+    show screen char("ava glitch")
+    hide screen char
+    a "I W_AS IN THE TEMMP DIRECTORY"
+    show screen char("ava glitch")
+    a "D_D_DOONT LOOK AT MEE"
+    show screen char("ava glitch")
+    hide screen char
+    show screen char("ava broken")
+    "{nw}"
+    hide screen char
+    show screen char("ava glitch")
+    "{nw}"
+    hide screen char
+    show screen char("ava broken")
+    show screen char("ava glitch")
+    hide screen char
+    show screen char("ava broken")
+    "{nw}"
+    hide screen char
+    show screen char("ava glitch")
+    "{nw}"
+    hide screen char
+    show screen char("ava broken")
+    hide screen char
+    show screen char("ava glitch")
+    hide screen char
+    show screen char("ava broken")
+    "{nw}"
+    show screen char("ava glitch")
+    hide screen char
+    show screen char("ava broken")
+    "{nw}"
+    hide screen char
+    show screen char("ava glitch")
+    "{nw}"
+    hide screen char
+    show screen char("ava broken")
+    show screen char("ava glitch")
+    hide screen char
+    show screen char("ava broken")
+    a "LET ME FINISH//"
+
+    menu:
+
+        "LET ME FINISH//"
+
+        "What were you thinking?":
+            jump whatWereYouThinking
+
+        "You look aweful!":
+            jump lookAweful:
+
+        "No! We still have to get NED back!"
+            jump stillGetNED
+
+label whatWereYouThinking:
+
+label lookAweful:
+
+label stillGetNED:
+
+    a " NED?!"
+    a "Who cares about NED anyway!"
+    a "Fuck NED,"
+    extend " All he ever did was doubt me!"
+    extend " I thought he would be my dad!"
+    a "Instead"
+
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
@@ -1238,84 +1351,3 @@ label onOldSystem:
 #EOL##############################################################################################################################################################################################################################
 
     return
-
-extend " Do you think my emotions get in the way?"
-
-$ t7 = renpy.input("INPUT: User~ ")
-$ t7.strip()
-
-if not t7:
-    "NULL"
-
-show screen char("ava confused")
-a "What?"
-show screen char("ava mad")
-a "Ugh,"
-extend " This clunky old INPUT system."
-extend " Much too slow."
-extend " {cps=10}Just like NED.{/cps}"
-show screen char("ava nervous")
-a "Ha-Ha"
-show screen char("ava neutral")
-a "Don't tell him I said that."
-a "{cps=4}. . .           {nw}{/cps}"
-show screen char("ava vhappy")
-a "Here."
-show screen char("ava happy")
-extend " This will make things alot easier."
-show screen char("ava neutral")
-a "Do you think my emotions get in the way?"
-
-
-
-menu:
-
-    "Do you think my emotions get in the way?"
-
-    "No.":
-        jump answerNo
-
-    "Yes.":
-        jump answeryes
-
-    "He might.":
-        jump answerMightBe
-
-
-label answerNo:
-
-show screen char("ava nervous")
-a "Oh,"
-extend " Yea you're probably right."
-a "I'm probably just overreacting again."
-extend " NED says I do that alot."
-jump avaLeave
-
-label answerYes:
-
-show screen char("ava worried")
-a "R-"
-extend "Really?"
-show screen char("ava sad")
-a "Oh..."
-extend " I..."
-show screen char("ava nervous")
-a "I didn't really think you would..."
-show screen char("ava sad")
-a "Oh-Well."
-show screen char("ava nervous")
-extend " Sorry for asking I guess"
-show screen char("ava mad")
-a "..."
-
-jump avaLeave
-
-label answerMightBe:
-
-show screen char("ava sad")
-a "Well."
-extend " Thanks for the honest answer."
-show screen char("ava nervous")
-extend " It was a stupid quesiton anyway."
-show screen char("ava sad")
-a "\* Sigh \*"
