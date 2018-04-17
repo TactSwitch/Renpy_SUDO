@@ -1,0 +1,6 @@
+To Do:
+
+-Set default text colour back to black
+-perfect win screen
+-ava suicide polish
+-

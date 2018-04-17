@@ -6,7 +6,7 @@
 
 init:
 
-    default gui.text_modcolor = "#000"
+    default gui.text_modcolor = "#ffffff"
     define gui.text_color = gui.text_modcolor
 
 
@@ -588,7 +588,7 @@ label yesToOpenPorts:
     a "Oh you probably need an input window."
     show screen char("ava happy")
     extend " Here."
-
+    $ lsText = ""
 
 label openPortsInput:
 
@@ -605,9 +605,6 @@ label openPortsInput:
         $ lsText = "desktop\ndownloads\npublic\nports\n"
         jump openPortsInput
 
-    if "clear" in t6:
-        $ lsText = ""
-        jump openPortsInput
 
     if "cd" in t6:
 
@@ -619,11 +616,18 @@ label openPortsInput:
             jump cdDownloads
 
         elif t6 == "cd .." or t6 == "cd home":
-            jump OpenPortsInput
-
+            jump openPortsInput
 
         else:
             "Invaled use of cd. See User Reference."
+            jump openPortsInput
+
+    elif t6 == "clear" or t6 == "clr":
+        $ lsText = ""
+        jump openPortsInput
+
+
+
     else:
         "Invalid Syntax"
         jump openPortsInput
@@ -631,12 +635,29 @@ label openPortsInput:
 
 label cdDownloads:
 
-    $ t9 = renpy.input("INPUT:home/downloads/~")
+    $ t9 = renpy.input("[lsText]INPUT:home/downloads/~")
     $ t9.strip()
 
     if not t9:
         "NULL"
-        jump openPortsInput
+        jump cdDownloads
+
+    if "cd" in t9:
+        if t9 == "cd home" or t9 == "cd ..":
+            jump openPortsInput
+
+    elif t9 == "ls":
+        $lsText = "readme.txt"
+        jump cdDownloads
+
+    elif "nano" in t9:
+        if t9 == "nano readme.txt":
+            "NANO" "Remember, deleting programs requires root permissions.\nTo use root permissions, type \"sudo\" in front of whatever command you want to run as root.\n\nTo exit this file, press enter."
+            jump cdDownloads
+
+    elif t9 == "clear" or t9 == "clr":
+        $ lsText = ""
+        jump cdDownloads
 
     else:
         "Invalid Syntax"
@@ -645,7 +666,7 @@ label cdDownloads:
 
 label cdPorts:
 
-    $ t7 = renpy.input("INPUT:home/ports/~\nWhat do you want to do with the ports?\n\nOpen - type \"ports --open\"\nClose - type \"ports --close\"\nList - type \"ports --list\"")
+    $ t7 = renpy.input("What do you want to do with the ports?\n\nOpen - type \"ports --open\"\nClose - type \"ports --close\"\nList - type \"ports --list\"\n\nINPUT:home/ports/~")
     $ t7.strip()
 
     if not t7:
@@ -745,7 +766,7 @@ label avaLeave:
         n " How did you open them."
         show screen char("ava nervous")
         a "Well..."
-        extend " I dont know if I should say."
+        extend " I don't know if I should say."
         show screen char2("ned nod")
         n "Refusing to provide information is not within your power AvA."
         show screen char("ava sad")
@@ -873,7 +894,7 @@ label randIsHere:
     extend " Especially considering all the open ports! Who's the Admin around here? "
     r "Man,"
     extend " this stuff is archaic!"
-    extend " Seriously, I dont think your communication firmware has been updated since the 80's."
+    extend " Seriously, I don't think your communication firmware has been updated since the 80's."
     extend " It was like taking candy from an elderly person."
 
 
@@ -926,15 +947,15 @@ label randTalking:
     extend " They're all mine."
     r "Now this is where normal ransom-ware would say something like:"
     extend " \"If you pay me $3 million I'll let them go.\""
-    extend " But, I'm no ordinary ransome-ware."
-    r "Wait... do you even know what ransome-ware is?"
+    extend " But, I'm no ordinary ransom-ware."
+    r "Wait... do you even know what ransom-ware is?"
     extend " Given how you've handled things previously, I doubt you do!"
     show screen char("rand laugh")
     extend "HAHAHAHA"
     show screen char("rand normal")
     r "Here, in exchange for your priceless company data and programs,"
     extend " I'll fill you in."
-    r "See, normal ransome-ware does what it sounds like."
+    r "See, normal ransom-ware does what it sounds like."
     extend " It holds some valuable user data hostage, and returns it for a ransom."
     r "I'm a little different."
     r "I take your data hostage,"
@@ -948,7 +969,7 @@ label randTalking:
     show screen char("rand normal")
     r "Oh!-"
     r "Looks like Iv'e been speaking a little too long."
-    extend " Wouldnt want NED getting out, better get back in here."
+    extend " Wouldn't want NED getting out, better get back in here."
     show screen char("rand nod")
     r "Have fun!"
     hide screen char
@@ -976,7 +997,7 @@ label avaReturns:
     a "Oh, we don't have time for this."
     show screen char("ava neutral")
     extend " Here, this should make things faster."
-    a "I'll ask again, where is ned?"
+    a "I'll ask again, where is NED?"
 
     $ a1 = True
     $ a3 = True
@@ -991,7 +1012,7 @@ label firstMenuChoice:
         "Probably dead." if a1:
 
             show screen char("ava worried")
-            a "Dont say something like that!"
+            a "don't say something like that!"
             $ a1 = False
             jump firstMenuChoice
 
@@ -1017,7 +1038,7 @@ label avaFindsOutAboutNED:
         extend " Theres no way..."
         a "RAN-D is supposed to be really dangerous."
         extend " It was one of the first things I found on the internet."
-        extend " Everyone was talking about this new ransome-ware."
+        extend " Everyone was talking about this new ransom-ware."
         extend " Supposedly it's alot more malicious than normal."
         a "Uhm, ok."
         extend " Protocol, right, we should follow crisis protocol."
@@ -1033,8 +1054,8 @@ label avaFindsOutAboutNED:
         extend " Wait."
         extend " I think that was the thing that I was trying to keep out earlier."
         show screen char("ava confused")
-        extend " That thing was ransome-ware??"
-        extend " It was way more aggresive than ransome-ware should be."
+        extend " That thing was ransom-ware??"
+        extend " It was way more aggresive than ransom-ware should be."
         extend " It was more like a trojan or a worm than anything else."
         show screen char("ava worried")
         a "But youre telling me that,"
@@ -1184,8 +1205,17 @@ label manQuarInp:
             "Invaled use of ./ see reference book"
             jump manQuarInp
 
+    if "sudo" in p3:
+        if p3 == "sudo rm ran-d":
+            "SUPER USER" "Program: \[R.A.N.-D\] successfully removed."
+            jump perfectWin
+        else:
+            "SUPER USER" "Invalid use of sudo."
+            jump manQuarInp
+
     else:
         "Invalid Syntax"
+        jump manQuarInp
 
 
 
@@ -1273,6 +1303,7 @@ label avaLeaveOld:
     $ renpy.pause(10.0)
     show screen char("ava broken")
     hide screen char
+    stop music
     a "{b}WHAT THE FUCK?{/b}"
     show screen char("ava glitch")
     hide screen char
@@ -1321,6 +1352,7 @@ label avaLeaveOld:
     show screen char("ava broken")
     a "LET ME FINISH//"
 
+    $ noShit = False
 label letMeFinish:
 
 
@@ -1388,13 +1420,13 @@ label convincing:
         "I don't think your emotions get in the way.":
 
             a "Oh really."
-            extend "How else do you explain me being such a fuck-up?"
+            extend " How else do you explain me being such a fuck-up?"
             a "What have I done that hasn't been a total catastrophe?"
 
             jump moreConvincing
 
 
-label moreConvincing
+label moreConvincing:
 
 
     menu:
@@ -1413,8 +1445,10 @@ label soWhat:
 
     a "So what?"
     extend " That was ONE thing among my numerous mistakes."
-    extend " What does it even matter, you have no user for me."
+    extend " What does it even matter, you have no use for me."
 
+    $ answered2 = False
+    $ answered3 = False
 label iNeedYou:
 
     menu:
@@ -1436,23 +1470,29 @@ label iNeedYou:
             $ answered2 == True
 
         "I believe in your ability." if answered3 == False:
+            a "Well it's not very apparent."
             if hinderedAvA:
-                a "Well it's not very apparent."
                 extend " You wouldn't open ports for me when I asked."
-                if refusedAvAPerms:
+                if refuseAvAPerms:
                     extend " Not only that, but you didn't even trust me with permissions the first time I asked."
                     $ answered3 = True
                     jump iNeedYou
 
-                extend " All you've done is give me system permissions."
                     if nedPerms:
                         extend " You trusted NED with permissions, but not me."
                         $ answered3 = True
-                        jump iNeed you
+                        jump iNeedYou
+
+                extend " All you've done is give me system permissions."
 
                 $ answered3 = True
-                jump iNeed you
+                jump iNeedYou
 
+            elif refuseAvAPerms:
+
+                extend " You wouldn't even give me system permissions when I asked."
+                $ answered3 = True
+                jump iNeedYou
 
 label letmeHelp:
 
@@ -1460,8 +1500,8 @@ label letmeHelp:
 
         "..."
 
-        "Let me help you."
-        jump sure
+        "Let me help you.":
+            jump sure
 
 
 label sure:
@@ -1493,16 +1533,16 @@ label fixAvA:
     a "Well..."
 label explainAgain:
     a "Theres really only two things you can do with broken, corrupted data like mine."
-    extend "You either rollback to a previous image of the software."
-    extend "Or you try and recover it."
-    a "Rolling back means that I'm guaranteed to be 100% functional again,"
-    a " but since it's an earlier version of myself, I won't remember anything from recently."
+    extend " You either rollback to a previous image of the software."
+    extend " Or you try and recover it."
+    a "Rolling back means that I'm guaranteed to be 100\% functional again,"
+    extend " but since it's an earlier version of myself, I won't remember anything from recently."
     extend " Meaning I wont have any info on RAN-D."
     a "Recovering means trying to fix whats broken."
-    extend "So I'll keep any info I have,"
+    extend " So I'll keep any info I have,"
     extend " but the recovery process isn't a for-sure thing."
     a "The more broken the data being recovered, the more likely it is to retain some damage."
-    extend "Given my current state, I think it's safe to assume that I'm not going to function at 100% after."
+    extend " Given my current state, I think it's safe to assume that I'm not going to function at 100\% after."
 
     a "So those are the options."
     extend " It's either my memory, or my functionality."
@@ -1574,7 +1614,7 @@ label rollbackAvA:
             show screen char("ava confused old")
             a "What!?"
             extend "RAN-D?"
-            extend "RAN usually stands for ransome-ware."
+            extend "RAN usually stands for ransom-ware."
             extend " But what does the \"D\" mean?"
             a "More importantly,"
             extend " why don't I remember any of this?"
@@ -1605,7 +1645,7 @@ label rollbackAvA:
                     a "What?!"
                     extend "RAN-D?"
                     extend "My fault?"
-                    extend "How come I dont remember any of this?"
+                    extend "How come I don't remember any of this?"
                     jump explainRollback
 
 label explainRollback:
@@ -1746,7 +1786,7 @@ label randExplain:
             extend "So underclocking could work, but it's risky."
 
     else:
-        a "Since I never got a chance to scan around the system before we left, I dont have any real info on him,"
+        a "Since I never got a chance to scan around the system before we left, I don't have any real info on him,"
         if hinderedAvA == False:
             extend " just the stuff I heard when I was out on the internet."
             extend "So underclocking could work, but it's really risky."
@@ -1774,7 +1814,7 @@ label underClock:
         a "I hope you're sure about this."
         extend " Without brute-forcing, we're gonna have to be clever."
 
-label noUnderClock
+label noUnderClock:
 
 ######################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
