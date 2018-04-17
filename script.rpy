@@ -1459,9 +1459,45 @@ label randExplain:
     if avaScanned:
         a "In the last scan I did before we left the other system, I was able to grab a bit of info on RAN-D."
         if hinderedAvA == False:
-            extend 
+            extend "That, plus what I already knew from my first time out on the internet, means underclocking might actually be a good idea."
+            a "I think I have enough info on RAN-D to be able to make some progress without bruite-forcing."
 
-#EOL##############################################################################################################################################################################################################################
+        else:
+            extend "But thats about all I have on him"
+            extend "So underclocking could work, but it's risky."
+
+    else:
+        a "Since I never got a chance to scan around the system before we left, I dont have any real info on him,"
+        if hinderedAvA == False:
+            extend " just the stuff I heard when I was out on the internet."
+            extend "So underclocking could work, but it's really risky."
+
+        else:
+            extend " even when I was out on the internet, I didn't have any time to do research."
+            extend " With so little info on RAN-D, I'm not sure underclocking is worth it."
+
+    show screen char("ava confused")
+    a "What do you think?"
+
+    menu:
+
+        "What do you think?"
+
+        "Lets under-clock.I'm sure we'll can figure something out.":
+            jump underClock
+
+        "Too risky. We should keep our options open.":
+            jump noUnderClock
+
+
+label underClock:
+
+        a "I hope you're sure about this."
+        extend " Without brute-forcing, we're gonne have to be clever."
+
+        
+
+######################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
