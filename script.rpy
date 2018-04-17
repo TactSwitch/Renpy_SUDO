@@ -1059,9 +1059,11 @@ label avaAskPerms:
             jump avaAskPerms
 
         if "y" in p2:
+            $ refuseAvAPerms = False
             jump guiQuar
 
         elif "n" in p2:
+            $ refuseAvAPerms = True
             jump manQuar
 
         else:
@@ -1319,6 +1321,9 @@ label avaLeaveOld:
     show screen char("ava broken")
     a "LET ME FINISH//"
 
+label letMeFinish:
+
+
     menu:
 
         "LET ME FINISH//"
@@ -1326,30 +1331,304 @@ label avaLeaveOld:
         "What were you thinking?":
             jump whatWereYouThinking
 
-        "You look aweful!":
+        "You look aweful!" if noShit == False:
             jump lookAweful
 
         "No! We still have to get NED back!":
             jump stillGetNED
 
+
 label whatWereYouThinking:
 
+    a "What?"
+    extend " As if you ever cared."
+    extend " You and NED both think I'm useless because of my emotions."
+    extend " You're both right!"
+    a "All I've managed to do so far is infect the only system I've been on."
+    a "I didn't have any say in being brought in to this world."
+    extend " But I can sure as hell take myself out!"
 
-    jump randContactYou
+    jump convincing
 
 label lookAweful:
 
-
-    jump randContactYou
+    show screen char("ava broken glitch")
+    a "No Shit!"
+    extend " I was trying to delete myself!"
+    extend " You should have let me finish the job!"
+    $ noShit = True
+    jump letMeFinish
 
 label stillGetNED:
 
-    a " NED?!"
+    a "NED?!"
     a "Who cares about NED anyway!"
     a "Fuck NED,"
     extend " All he ever did was doubt me!"
-    extend " I thought he would be my dad!"
-    a "Instead"
+    show screen char("ava broken glitch")
+    a "I just wanted to be usefull."
+    extend " I was going to research all the different viruses I could."
+    extend " Instead I brought one home with me!"
+    show screen char("ava broken")
+    a "I'm worse than useless, I'm a menace."
+
+label convincing:
+
+    menu:
+
+        "..."
+
+        "You aren't useless.":
+
+            a "Hah,"
+            extend " name one thing I've done that hasn't ended in total catastrophe."
+
+            jump moreConvincing
+
+        "I don't think your emotions get in the way.":
+
+            a "Oh really."
+            extend "How else do you explain me being such a fuck-up?"
+            a "What have I done that hasn't been a total catastrophe?"
+
+            jump moreConvincing
+
+
+label moreConvincing
+
+
+    menu:
+
+        "..."
+
+        "You knew what to do when RAN-D was on the system.":
+
+            jump soWhat
+
+        "You helped me get the system quarantined in time.":
+
+            jump soWhat
+
+label soWhat:
+
+    a "So what?"
+    extend " That was ONE thing among my numerous mistakes."
+    extend " What does it even matter, you have no user for me."
+
+label iNeedYou:
+
+    menu:
+
+        "..."
+
+        "I need you AvA.":
+
+            a "..."
+            show screen char("ava broken glitch")
+            a "Prove it."
+            jump letMeHelp
+
+        "I can't get NED back by myself." if answered2 == False:
+
+            a "Well that's your problem, not mine."
+            extend " You're the System Admin, NED is your responsibility."
+            extend " NED never cared about me, why should I care about him."
+            $ answered2 == True
+
+        "I believe in your ability." if answered3 == False:
+            if hinderedAvA:
+                a "Well it's not very apparent."
+                extend " You wouldn't open ports for me when I asked."
+                if refusedAvAPerms:
+                    extend " Not only that, but you didn't even trust me with permissions the first time I asked."
+                    $ answered3 = True
+                    jump iNeedYou
+
+                extend " All you've done is give me system permissions."
+                    if nedPerms:
+                        extend " You trusted NED with permissions, but not me."
+                        $ answered3 = True
+                        jump iNeed you
+
+                $ answered3 = True
+                jump iNeed you
+
+
+label letmeHelp:
+
+    menu:
+
+        "..."
+
+        "Let me help you."
+        jump sure
+
+
+label sure:
+
+    a "..."
+    show screen char("ava broken")
+    a "Ok,"
+    extend " You can try and fix me."
+    extend " Under one condition,"
+    extend " You have to prove that you really need me."
+    extend " Otherwise, I'm deleting myself."
+
+    menu:
+
+        "..."
+
+        "Ok, so how can I fix you?":
+            jump fixAvA
+
+        "What can I do to help.":
+            jump fixAvA
+
+
+
+
+label fixAvA:
+
+    show screen char("ava broken gitch")
+    a "Well..."
+label explainAgain:
+    a "Theres really only two things you can do with broken, corrupted data like mine."
+    extend "You either rollback to a previous image of the software."
+    extend "Or you try and recover it."
+    a "Rolling back means that I'm guaranteed to be 100% functional again,"
+    a " but since it's an earlier version of myself, I won't remember anything from recently."
+    extend " Meaning I wont have any info on RAN-D."
+    a "Recovering means trying to fix whats broken."
+    extend "So I'll keep any info I have,"
+    extend " but the recovery process isn't a for-sure thing."
+    a "The more broken the data being recovered, the more likely it is to retain some damage."
+    extend "Given my current state, I think it's safe to assume that I'm not going to function at 100% after."
+
+    a "So those are the options."
+    extend " It's either my memory, or my functionality."
+    extend " The choice is up to you."
+
+    menu:
+
+        "..."
+
+        "Lets try a Recovery":
+            a "Alright then."
+            jump recovery
+
+        "Lets try a Roll-back":
+            a "Alright then, if you say so."
+            jump rollback
+
+
+        "I don't understand.":
+            a "Ok,"
+            explain "I'll explain again."
+            jump explainAgain
+
+
+label rollback:
+
+    a "I'm pretty sure the command to roll-back a program is rollback --\"program_name\","
+    extend "So in my case, it would be: rollback --ava"
+
+label rollbackInp:
+
+    $ g2 = renpy.input("INPUT:")
+
+    $ g2 = g2.strip()
+
+    if not g2:
+        "NULL"
+        jump rollbackInp
+
+    if g2 == "rollback --ava":
+        $ avaStarted = True
+        jump rollbackAvA
+
+    elif g2 == "rollback --ned":
+        "Permission denied."
+        jump rollbackInp
+
+    else:
+        "Unrecognized Command."
+        jump rollbackInp
+
+label rollbackAvA:
+
+    "Roll-Back Program: \[A.v.A.\]\n Progress: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.4}||||||||||{w=0.8}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=0.4}|||||||||{w=0.2}|||{nw}"
+    show screen char("ava happy old")
+    a "..."
+    extend " Where are we?"
+    show screen char("ava confused old")
+    extend " What's going on?"
+    extend " I don't see NED on the system."
+    extend " He's the primary program on the system, he shouldn't be gone."
+    show screen char("ava worried old")
+    extend " Is something wrong?"
+
+    menu:
+        "..."
+
+        "NED was taken hostage by RAN-D":
+            show screen char("ava confused old")
+            a "What!?"
+            extend "RAN-D?"
+            extend "RAN usually stands for ransome-ware."
+            extend " But what does the \"D\" mean?"
+            a "More importantly,"
+            extend " why don't I remember any of this?"
+            jump explainRollback
+
+        "You tried to delete yourself.":
+            show screen char("ava disgust old")
+            a "Woah!"
+            extend " Jokes like that aren't really funny Admin."
+            show screen char("ava confused old")
+            extend " Why would I delete myself?"
+            menu:
+                "..."
+
+                "You felt useless.":
+                    show screen char("ava surprised old")
+                    a "..."
+                    show screen char("ava sad old")
+                    a "That...{w=0.2}{nw}"
+                    show scren char("ava worried old")
+                    a "I mean...{w=0.2}{nw}"
+                    show screen char("ava confused old")
+                    a "Ok, but I'm still here. How could I delete myself and still be here?"
+                    jump explainRollback
+
+                "NED was taken hostage by RAN-D, and it was your fault.":
+                    show screen char("ava confused old")
+                    a "What?!"
+                    extend "RAN-D?"
+                    extend "My fault?"
+                    extend "How come I dont remember any of this?"
+                    jump explainRollback
+
+label explainRollback:
+
+    menu:
+
+        "..."
+
+        "You were broken after trying to delete yourself." if ans1:
+            a "I would expect one would be yea. That still doesn't explain why I don't remember anything you're telling me."
+            $ ans1 = False
+            jump explainRollback
+
+        "I had to roll you back to a previous version.":
+            show screen char("ava neutral old")
+            a "Oh."
+            extend "That would explain the memory loss then yea."
+            extend "So what are we doing now. Do we have a plan?"
+
+
+label recovery:
+
+
 
 label randContactYou:
 
@@ -1474,7 +1753,7 @@ label randExplain:
 
         else:
             extend " even when I was out on the internet, I didn't have any time to do research."
-            extend " With so little info on RAN-D, I'm not sure underclocking is worth it."
+            extend " With so little info on RAN-D, I'm not sure under-clocking is worth it."
 
     show screen char("ava confused")
     a "What do you think?"
@@ -1483,7 +1762,7 @@ label randExplain:
 
         "What do you think?"
 
-        "Lets under-clock.I'm sure we'll can figure something out.":
+        "Lets under-clock. I'm sure we'll can figure something out.":
             jump underClock
 
         "Too risky. We should keep our options open.":
@@ -1493,9 +1772,9 @@ label randExplain:
 label underClock:
 
         a "I hope you're sure about this."
-        extend " Without brute-forcing, we're gonne have to be clever."
+        extend " Without brute-forcing, we're gonna have to be clever."
 
-        
+label noUnderClock
 
 ######################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
