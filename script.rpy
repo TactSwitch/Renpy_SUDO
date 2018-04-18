@@ -1072,25 +1072,26 @@ label avaFindsOutAboutNED:
 
 label avaAskPerms:
 
-        $ p2 = renpy.input("Do you wish to approve the request? Y/N:")
-        $ p2.strip()
+    $ p2 = renpy.input("Do you wish to approve the request? Y/N:")
+    $ p2.strip()
 
-        if not p2:
-            "NULL"
-            jump avaAskPerms
+    if not p2:
+        "NULL"
+        jump avaAskPerms
 
-        if "y" in p2:
-            $ refuseAvAPerms = False
-            jump guiQuar
+    if "y" in p2:
+        $ refuseAvAPerms = False
+        jump guiQuar
 
-        elif "n" in p2:
-            $ refuseAvAPerms = True
-            jump manQuar
+    elif "n" in p2:
+        $ refuseAvAPerms = True
+        jump manQuar
 
-        else:
-            "Invaled Syntax."
-            jump avaAskPerms
+    else:
+        "Invaled Syntax."
+        jump avaAskPerms
 
+    $ avaScanned = False
 
 label guiQuar:
 
@@ -1111,6 +1112,7 @@ label guiQuar:
             show screen char("ava confused")
             a "Alright, if you say so."
             extend " I think this is a mistake though."
+            $ avaScanned = False
             jump quarentine
 
 label manQuar:
@@ -1281,7 +1283,7 @@ label onOldSystem:
     a "I'm sure we'll figure something out."
     extend " Right?"
     show screen char("ava neutral old")
-
+########################################################################FIX
     menu:
         "I'm sure we'll figure something out. Right?"
 
@@ -1301,6 +1303,9 @@ label avaLeaveOld:
     hide screen char
     with wipeup
     $ renpy.pause(10.0)
+
+##########################################################FIX
+
     show screen char("ava broken")
     hide screen char
     stop music
@@ -1531,6 +1536,7 @@ label fixAvA:
 
     show screen char("ava broken gitch")
     a "Well..."
+
 label explainAgain:
     a "Theres really only two things you can do with broken, corrupted data like mine."
     extend " You either rollback to a previous image of the software."
@@ -1548,15 +1554,20 @@ label explainAgain:
     extend " It's either my memory, or my functionality."
     extend " The choice is up to you."
 
+    $ rollback = False
+    $ recovery = False
+
     menu:
 
         "..."
 
         "Lets try a Recovery":
+            $ recovery = True
             a "Alright then."
             jump recovery
 
         "Lets try a Roll-back":
+            $ rollBack = True
             a "Alright then, if you say so."
             jump rollback
 
@@ -1569,8 +1580,8 @@ label explainAgain:
 
 label rollback:
 
-    a "I'm pretty sure the command to roll-back a program is rollback --\"program_name\","
-    extend "So in my case, it would be: rollback --ava"
+    a "I'm pretty sure the command to roll-back a program is rollback --\"program_name\"."
+    extend " So in my case, it would be: rollback --ava"
 
 label rollbackInp:
 
@@ -1583,7 +1594,6 @@ label rollbackInp:
         jump rollbackInp
 
     if g2 == "rollback --ava":
-        $ avaStarted = True
         jump rollbackAvA
 
     elif g2 == "rollback --ned":
@@ -1662,26 +1672,120 @@ label explainRollback:
         "I had to roll you back to a previous version.":
             show screen char("ava neutral old")
             a "Oh."
-            extend "That would explain the memory loss then yea."
-            extend "So what are we doing now. Do we have a plan?"
+            extend " That would explain the memory loss then yea."
+            extend " So what are we doing now. Do we have a plan?"
+            extend " I'm pretty sure we would be able t-{w=0.2}{nw}"
+            jump randContactYou
 
 
 label recovery:
 
+    a "I'm pretty sure the command to recover a program is recover --\"program_name\"."
+    extend " So in my case, it would be: recover --ava"
+    a "Just remember to re-launch me once the process is over."
 
+
+label recoverInp:
+
+    $ g2 = renpy.input("INPUT:")
+
+    $ g2 = g2.strip()
+
+    if not g2:
+        "NULL"
+        jump recoverInp
+
+    if g2 == "recover --ava":
+        show screen char("ava sleep old")
+        jump recoverAvA
+
+    elif g2 == "recover --ned":
+        "Permission denied."
+        jump recoverInp
+
+    else:
+        "Unrecognized Command."
+        jump recoverInp
+
+
+label recoverAvA:
+
+    hide screen char
+    "Recover Program: \[A.v.A.\]\n Progress: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.1}||||||||||{w=0.1}||{w=0.2}||||||||{w=0.3}|||||||||||||{w=0.1}|||||||||{w=0.2}|||{nw}"
+    "Recovery Complete: fix rate 63\%."
+
+
+label reLaunchAvAInp:
+
+    $ t2 = renpy.input("INPUT:")
+
+    $ t2 = t2.strip()
+
+    if not t2:
+        "NULL"
+        jump reLaunchAvAInp
+
+    if t2 == "./ava":
+        jump reLaunchAvA
+
+    elif t2 == "./ned":
+        "Program not found."
+        jump reLaunchAvAInp
+
+    else:
+        "Unrecognized Command."
+        jump reLaunchAvAInp
+
+label reLaunchAvA:
+
+
+    "Launching: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.4}||||||||||{w=0.1}||{w=0.3}||||||||{w=0.2}|||||||||||||{w=0.1}|||||||||{w=0.2}|||{nw}"
+    show screen char("ava sleep old")
+    "{w=0.5}{nw}"
+    show screen char("ava neutral old")
+    a "Ok,"
+    extend " I still remember everything."
+    show screen char("ava broken")
+    "{nw}"
+    show screen char("ava neutral old")
+    "{nw}"
+    "{w=0.1}{nw}"
+    show screen char("ava neutral old")
+    a "..."
+    extend " Definitely not at 100\% functionality though."
+    a "Oh well, to late to turn back now I guess."
+    extend " Let's just hope I have enough info on RAN-D."
+    extend " As far as a plan of attack we could probabl-{w=0.5}{nw}"
+    jump randContactYou
 
 label randContactYou:
 
+    play sound "/sounds/Chung.wav"
     show rand normal_only
+    show screen char("ava surprised old")
     r "There you guys are!"
     r "I've been scanning the network for hours now."
     extend " I wanted to see you guys scramble to try to get NED back."
     show rand nod_only
-    r "Oh!"
-    extend "AvA!"
-    extend " I think you took the whole scrambling thing way too seriously,"
-    extend " your code looks like it's been through a blender!"
+
+    if recovery:
+        r "Oh!"
+        extend " AvA!"
+        extend " I think you took the whole scrambling thing way too seriously,"
+        extend " your code looks like it's been through a blender!"
+        show screen char("ava broken")
+        "{nw}"
+        show screen char("ava mad old")
+
+    elif rollback:
+        r "Oh!"
+        extend " AvA you're looking mighty..."
+        extend " Fresh."
+        a "You look even younger than when I first met you!"
+        extend " Did something happen while I was away?"
+
     show rand laugh_only
+    show screen char("ava mad old")
     r "HAHAHAHAHAHA!"
     show rand normal_only
     r "Anyways,"
@@ -1689,9 +1793,9 @@ label randContactYou:
 
     show screen char("ava confused old")
     a "What corruption process?"
-    show screen char("ava neutral old")
-    r "What do you think the \"D\" in my name stood for?"
 
+    r "What do you think the \"D\" in my name stood for?"
+    show screen char("ava disgust old")
     menu:
 
         "What do you think the \"D\" in my name stood for?"
@@ -1701,7 +1805,7 @@ label randContactYou:
             r "HAHAHAHAHAHA!"
             show rand nod_only
             r "You're funny,"
-            extend " but sadly no, it doesnt stand for dirt-bag."
+            extend " but sadly no, it doesn't stand for dirt-bag."
             jump randExplain
 
         "Degenerative?":
@@ -1723,9 +1827,10 @@ label randContactYou:
 
 label randExplain:
 
-    extend " The \"D\" stands for Degenerative."
+    extend " The \"D\" stands for De-generative."
+    show screen char("ava worried old")
     extend " Meaning, whatever I get my paws on, slowly degenerates!"
-    extend " Our good friend NED is slowly, maticuloisly having every bit and byte in his code rearranged."
+    extend " Our good friend NED is slowly, meticulously having every bit and byte in his code rearranged."
     extend " With NEDs code through the shredder, you and him might finally have something to relate on AvA!"
     show rand laugh_only
     r "HAHAHAHAH"
@@ -1744,6 +1849,7 @@ label randExplain:
     show screen char("ava mad old")
     show rand nod_only
     r "Oh but I think you do,"
+    show screen char("ava mad old")
     show rand normal_only
     extend " I've seen the case-file that NED put together on you."
     r "I'm surprised he isn't able to piece it together for himself."
@@ -1762,18 +1868,50 @@ label randExplain:
 
     show screen char("ava sad old")
     a "..."
+    if recovery:
+        show screen char("ava broken")
+        "{nw}"
     show screen char("ava mad old")
-    a "I'm sick of this RAN-D guy."
-    extend "Let's get NED back."
+    a "I dislike NED."
+    extend " But I HATE that RAN-D guy."
+    a "Let's get NED back,"
+    extend " just to spite him."
+    a "Firstly, we need a plan of attack."
+    show screen char("ava neutral old")
+    extend " Any ideas?"
+    menu:
+        "Any ideas?"
+
+        "No.":
+            a "Well,"
+            extend " I've got one."
+
+        "Get NED back.":
+            a "Hilarious."
+            a "Now..."
+
 
     a "We need to buy ourselves some time."
-    extend " The way I see it, the only way to do that is to slow down the corruption process."
+    a "Theres no point in trying to get NED back if he's just a bucket of mangled code."
+    extend " We need a way to slow down the corruption process."
     extend " The only way to do that is to under-clock the system that RAN-D and NED are on."
-    a "What we can do after that is dependent on whether or not we under-clock."
+    a "What we can do after that is limited though."
     extend " Under-clocking decreases performance significantly."
     extend " Brute-forcing anything on the system would be out of the question."
-    extend " There are still other things we could try, but brute-forcing doesn't take any knowledge of our target."
+    extend " There are still other things we could try, but brute-forcing doesn't take any info on RAN-D."
     extend " Other methods would require knowing what we're up against."
+    a "the effectiveness of a brute-force approach also depends on how functional I am."
+
+    if recovery:
+        show screen char("ava broken")
+        "{nw}"
+        show screen char("ava neutral old")
+        extend " Given my current condition, I don't think brute-forcing is our best option."
+    elif rollback:
+        extend " Luckily i still have full functionality."
+        extend " So we have that going for us."
+
+    a "But thats not all."
 
     if avaScanned:
         a "In the last scan I did before we left the other system, I was able to grab a bit of info on RAN-D."
@@ -1782,20 +1920,20 @@ label randExplain:
             a "I think I have enough info on RAN-D to be able to make some progress without bruite-forcing."
 
         else:
-            extend "But thats about all I have on him"
-            extend "So underclocking could work, but it's risky."
+            extend " But thats about all I have on him,"
+            extend " So under-clocking could work, but it's risky."
 
     else:
         a "Since I never got a chance to scan around the system before we left, I don't have any real info on him,"
         if hinderedAvA == False:
             extend " just the stuff I heard when I was out on the internet."
-            extend "So underclocking could work, but it's really risky."
+            extend " So under-clocking could work, but it's really risky."
 
         else:
             extend " even when I was out on the internet, I didn't have any time to do research."
             extend " With so little info on RAN-D, I'm not sure under-clocking is worth it."
 
-    show screen char("ava confused")
+    show screen char("ava confused old")
     a "What do you think?"
 
     menu:
@@ -1812,7 +1950,9 @@ label randExplain:
 label underClock:
 
         a "I hope you're sure about this."
-        extend " Without brute-forcing, we're gonna have to be clever."
+        extend " Brute-forcing will be essentially useless."
+        extend " We'll have to rely on being clever with what we know about RAN-D."
+        a " Without brute-forcing, our only other option is to try port-sniffing."
 
 label noUnderClock:
 
