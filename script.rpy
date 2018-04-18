@@ -1953,6 +1953,7 @@ label underClock:
         extend " Brute-forcing will be essentially useless."
         extend " We'll have to rely on being clever with what we know about RAN-D."
         a " Without brute-forcing, our only other option is to try port-sniffing."
+        extend " We'll sift throught every packet going in or out in search of an exploit. "
 
 label noUnderClock:
 
