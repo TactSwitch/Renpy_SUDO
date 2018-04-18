@@ -86,6 +86,7 @@ init:
     image ned normal = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Normal.png", 550,550))
     image ned nod_only = im.Scale("NED_Nod.png", 550,550)
     image ned nod = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Nod.png", 550,550))
+    image ava broken = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("NED_Broken.png", 550,550))
 
     #RAN-D Images
     image rand normal_only = im.Scale("Rand_Normal.png", 800,800)
