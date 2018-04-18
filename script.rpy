@@ -1953,10 +1953,165 @@ label underClock:
         extend " Brute-forcing will be essentially useless."
         extend " We'll have to rely on being clever with what we know about RAN-D."
         a " Without brute-forcing, our only other option is to try port-sniffing."
-        extend " We'll sift throught every packet going in or out in search of an exploit. "
+        extend " We can sift through every packet going in or out in search of an exploit."
+        jump attkDecide
 
 label noUnderClock:
 
+
+
+label attkDecide:
+
+    a "That being said,"
+    extend " the decision is still up to you"
+    a "So what's it going to be?"
+
+    menu:
+
+        "So what's it going to be?"
+
+        "Let's Brute-Force":
+            jump bruteForce
+
+        "Let's Sniff-Ports":
+            jump sniffPorts
+
+
+label bruteForce:
+
+    a "Ok."
+    extend " Let's hope this works."
+
+    "SYSTEM" "Program \[A.v.A\] is sending 3.14*10^-e.999 through ports: --ALL to system ID# 117"
+    "SYSTEM" "SENDING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "DE_AUTH:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:|||||{nw}"
+    "SYSTEM" "CRACKING:|||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||{nw}"
+    "SYSTEM" "CRACKING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{w=3.0}{nw}"
+
+    if recovery == False:
+        "SYSTEM" "CRACK COMPLETE PORTS OPEN: \[80.80.80.80\], \[123.456.789\]."
+
+        show screen char("ava surprised old")
+
+        jump attkSucc
+    else:
+        "SYSTEM" "CRACK COMPLETE PORTS OPEN: NULL."
+        jump attkFail
+
+
+
+label sniffPorts:
+
+    "SYSTEM" "Program \[A.v.A\] is sending 3.14*10^-e.999 through ports: --ALL to system ID# 117"
+    "SYSTEM" "SENDING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "DE_AUTH:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||||||||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:|||||{nw}"
+    "SYSTEM" "SNIFFING:|||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||{nw}"
+    "SYSTEM" "SNIFFING:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{w=3.0}{nw}"
+
+    if rollback == False:
+        "SYSTEM" "SNIFF COMPLETE: Exploits found: \"KEYS_GATH_SYS_ARCH\", \"VERMILLION_DATA_SANDY_BREACH\""
+
+        show screen char("ava surprised old")
+        jump attkSucc
+
+    else:
+        "SYSTEM" "CRACK COMPLETE PORTS OPEN: NULL."
+        jump attkFail
+
+label attkSucc:
+
+    a "Oh!"
+    a "It worked!"
+
+    play sound "/sounds/Chung.wav"
+    r laugh_only "GAAH!!"
+    r normal_only "You GOT me!"
+    r "..."
+    r laugh_only "HAHAHAHAHAHAHA"
+    r normal_only "Well that WOULD be the case."
+    extend " If you guys didn't take so long."
+    extend " Luckily I was able to finish the job before you got anywhere near me."
+    r "So this is were I say good-bye."
+    r "Thanks for hosting,"
+    extend " You guys threw one hell of a party"
+    r laugh_only "HAHAHAHAHAH"
+    r normal_only "Here,"
+    extend " a little parting gift."
+
+    show screen char2("ned broken")
+
+    r "Until next time!"
+    hide rand normal_only
+    with pixellate
+
+label attkFail:
+
+    show screen char("ava sad old")
+    a "..."
+    a "It failed"
+
+
+    if recovery:
+        play sound "/sounds/Chung.wav"
+        r normal "That was cute!"
+        with hpunch
+        r "You thought brute-forcing was really your best option?"
+        extend " With AvA in her current state?"
+        r laugh_only "HAHAHAHAHAHAH"
+    elif rollback:
+        r normal "That was cute!"
+        r "You really thought port-sniffing was your best option?"
+        extend " You typically want to know a little more than your targets name."
+        r laugh_only "HAHAHAHAHAHAH"
+
+    r nod_only "*Sign*"
+    r normal_only "Welp,"
+    extend " my work is done."
+    extend " Thanks for hosting."
+    r "You guys throw an awesome party."
+    r laugh_only "HAHAHAHAHAHA"
+    r "Here,"
+    extend " a little parting gift!"
+
+    show screen char2("ned broken")
 ######################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
