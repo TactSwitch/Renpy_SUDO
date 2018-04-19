@@ -1899,7 +1899,10 @@ label randExplain:
     extend " Brute-forcing anything on the system would be out of the question."
     extend " There are still other things we could try, but brute-forcing doesn't take any info on RAN-D."
     extend " Other methods would require knowing what we're up against."
-    a "the effectiveness of a brute-force approach also depends on how functional I am."
+    a "If we wanted to brute-force it, then we would need to leave the system at normal clock-speed."
+    extend " Which means NED gets corrupted just as fast as he is now."
+    a "Not only that,"
+    extend " but the effectiveness of a brute-force also depends on how functional I am."
 
     if recovery:
         show screen char("ava broken")
@@ -1910,10 +1913,10 @@ label randExplain:
         extend " Luckily i still have full functionality."
         extend " So we have that going for us."
 
-    a "But thats not all."
+    a "Oh and keep in mind, "
 
     if avaScanned:
-        a "In the last scan I did before we left the other system, I was able to grab a bit of info on RAN-D."
+        extend " in the last scan I did before we left the other system, I was able to grab a bit of info on RAN-D."
         if hinderedAvA == False:
             extend "That, plus what I already knew from my first time out on the internet, means underclocking might actually be a good idea."
             a "I think I have enough info on RAN-D to be able to make some progress without bruite-forcing."
@@ -1923,7 +1926,7 @@ label randExplain:
             extend " So under-clocking could work, but it's risky."
 
     else:
-        a "Since I never got a chance to scan around the system before we left, I don't have any real info on him,"
+        extend " since I never got a chance to scan around the system before we left, I don't have any real info on him,"
         if hinderedAvA == False:
             extend " just the stuff I heard when I was out on the internet."
             extend " So under-clocking could work, but it's really risky."
@@ -1948,15 +1951,18 @@ label randExplain:
 
 label underClock:
 
-        a "I hope you're sure about this."
-        extend " Brute-forcing will be essentially useless."
-        extend " We'll have to rely on being clever with what we know about RAN-D."
-        a " Without brute-forcing, our only other option is to try port-sniffing."
-        extend " We can sift through every packet going in or out in search of an exploit."
-        jump attkDecide
+    a "I hope you're sure about this."
+    extend " Brute-forcing will be essentially useless."
+    extend " We'll have to rely on being clever with what we know about RAN-D."
+    a " Without brute-forcing, our only other option is to try port-sniffing."
+    extend " We can sift through every packet going in or out in search of an exploit."
+    jump attkDecide
+
 
 label noUnderClock:
 
+    a "Alright,"
+    extend "Just re"
 
 
 label attkDecide:
