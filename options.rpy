@@ -4,7 +4,8 @@
 ## them. Lines beginning with a single '#' mark are commented-out code, and you
 ## may want to uncomment them when appropriate.
 
-
+init python:
+    config.debug_sound = True
 ## Basics ######################################################################
 
 ## A human-readable name of the game. This is used to set the default window
@@ -32,6 +33,9 @@ define config.version = "1.0"
 define gui.about = _p("""This is a simple game that was made as an assignment for the Non-Linear Narrative class in Sheridan College's Game Design program.
 
 It was made entirely by one person in the span of a few weeks. There are definitely improvements to be made, and this project is open-source, so modify things as you see fit.
+
+{a=https://github.com/TactSwitch}GitHub{/a}
+
 """)
 
 
@@ -63,7 +67,7 @@ define config.has_voice = True
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-# define config.main_menu_music = "main-menu-theme.ogg"
+define config.main_menu_music = "/sounds/Title.wav"
 
 
 ## Transitions #################################################################

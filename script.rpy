@@ -211,7 +211,6 @@ label startAvA:
 
     hide screen char
     show screen char("ava surprised")
-    voice "/voice/A_OH.wav"
     a "OH!"
 
     hide screen char
@@ -220,7 +219,6 @@ label startAvA:
 
     hide screen char
     show screen char("ava neutral")
-    voice "/voice/A_VShort.wav"
     a "Uhm..."
 
     hide screen char
@@ -524,7 +522,7 @@ label avaTalkAlone:
     extend " and effort."
     show screen char("ava nervous")
     a "Yea it's almost not even worth it."
-    extend " It would be alot easier to just open some ports"
+    extend " It would be alot easier to just open some ports."
     show screen char("ava confused")
     a " But to open ports to the internet,"
     extend " takes more system permissions than what I've got."
@@ -535,7 +533,7 @@ label avaTalkAlone:
     a "I would need."
     show screen char("ava confused")
     extend " Like..."
-    extend " Admin permi-"
+    extend " Admin per- {w=0.3}.{w=0.3}.{w=0.3}.{w=0.3}{nw}"
     show screen char("ava surprised")
     a "ADMIN PERMISSIONS!"
     show screen char("ava happy")
@@ -848,7 +846,7 @@ label randHacks:
     extend " Where has AvA gone."
     extend " Why did she leave so fast."
     extend " Administrator, if you know something that I do not."
-    extend " Tell me immidia-"
+    extend " Tell me immidia-{w=0.2}{nw}"
     play sound "/sounds/Chung.wav"
     show screen char2("ned nod")
     with Fade(0.001,0.0,0.001)
@@ -2112,7 +2110,13 @@ label attkFail:
     r "Here,"
     extend " a little parting gift!"
 
+    show screen char("ava surprised old")
     show screen char2("ned broken")
+    r laugh_only "HAHAHAHAHAHAHAHAHAHAHAHAHA"
+    hide rand laugh_only with pixellate
+
+
+
 ######################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
 #EOL##############################################################################################################################################################################################################################
