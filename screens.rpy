@@ -84,9 +84,45 @@ style frame:
 ################################################################################
 $ choiceHappening = False
 
+## Notif Window ################################################################
+
+screen haltOrDie():
+
+    zorder 20
+    drag:
+        drag_raise True
+        yalign 0.3 xalign 0.5
+        drag_handle (0, 0, 1.0, 40)
+
+        window:
+            ymaximum 150
+            xmaximum 250
+            background Frame("/gui/textboxold.png", 200, 200, 200, 200, tile = True)
+
+
+            textbutton "Halt":
+                xalign 0.1
+                yalign 0.5
+                action Jump("savedAva")
+                text_hover_color "#ff6363"
+                text_color "#ff0000"
+                background Frame(Solid("#ff5959"))
+                hover_background Frame(Solid("#8e3030"))
+
+            textbutton "Approve":
+
+                xalign 0.9
+                yalign 0.5
+                action Jump("killedAva")
+                text_hover_color "#57ba41"
+                text_color "#ff0000"
+                background Frame(Solid("#77ff59"))
+                hover_background Frame(Solid("#357228"))
+
 ## Character Window ################################################################
 python:
     Drag(drag_name="char", draggable=True, droppable=True)
+
 
 
 screen char(charimg):
@@ -163,7 +199,7 @@ screen ref_page():
                 anchor (-20,-50)
                 draggable True
                 mousewheel True
-                text "{b}{size=20}Programs:{/size}{/b}\n\n-Key programs are located in the home directory\n-To launch programs in the home directory, use the {u}./{/u} command:\n\n./{i}program_name{/i}\n\nExample:\nTo launch the AvA program, type: \"./ava\"\n\n{b}Program List:\n\n- ava\n- ned\n- sadman{/b} \n\n\n{b}{size=20}Directories:{/size}{/b}\n\n-Directories are files in the system\n-Whenever you open an INPUT window, you are placed in the Home directory.\n-To navigate directories, use the {u}cd{/u} command:\n\ncd {i}directory_name{/i}\n\nExample:\nTo enter the \"desktop\" directory, type: cd desktop\n\n-To list the contents of the current directory, use the {u}ls{/u} command\n\n\n{b}{size=20}Crisis Protocol:{/size}{/b}\n\nIn the case of an emergency, the first thing to do is always to quarentine the system and assess the situation from outside. To do this means using the \"./quarentine\" command.":
+                text "{b}{size=20}Programs:{/size}{/b}\n\n -Key programs are located in the home directory\n -To launch programs in the home directory, use the {u}./{/u} command:\n\n  ./{i}program_name{/i}\n\n Example:\n  To launch the AvA program, type: \"./ava\"\n\n {b}Program List:\n\n  - ava\n  - ned\n  - sadman{/b} \n\n\n{b}{size=20}Directories:{/size}{/b}\n\n -Directories are files in the system\n -Whenever you open an INPUT window, you are placed in the\n   home directory.\n -To navigate directories, use the {u}cd{/u} command:\n\n  cd {i}directory_name{/i}\n\n Example:\n  To enter the \"desktop\" directory, type: cd desktop\n\n -To list the contents of the current directory, type {u}ls{/u} and hit enter.\n -To clear the list of directories from the input window, type either\n   \"clr\" or \"clear\" and hit enter.\n\n{b}{size=20}Crisis Protocol:{/size}{/b}\n\n In the case of an emergency, the first thing to do is always to\n quarantine the system and assess the situation from outside. To\n do this means using the \"./quarantine\" command.\n\n\n{b}{size=20}Deletion:{/size}{/b}\n\n -To delete a file or program, use the rm command by typing \"rm {i}file/program_name{/i}\"\n -This command requires super-user permission status.":
                     text_align 0.0
                     slow_cps 1000
 

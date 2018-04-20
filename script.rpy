@@ -8,7 +8,7 @@ init:
 
     default gui.text_modcolor = "#ffffff"
     define gui.text_color = gui.text_modcolor
-
+    $ style.input.color = "#ffffff"
 
     $ oldSystem = False
 
@@ -86,7 +86,7 @@ init:
     image ned normal = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Normal.png", 550,550))
     image ned nod_only = im.Scale("NED_Nod.png", 550,550)
     image ned nod = im.Composite((500,500),(0,0),"CharBox.png", (-30,-20), im.Scale("NED_Nod.png", 550,550))
-    image ava broken = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("NED_Broken.png", 550,550))
+    image ned broken = im.Composite((500,500),(0,0), im.MatrixColor("CharBoxOld.png", im.matrix.invert()), (-30,-20), im.Scale("NED_Broken.png", 550,550))
 
     #RAN-D Images
     image rand normal_only = im.Scale("Rand_Normal.png", 800,800)
@@ -108,7 +108,7 @@ init:
 
 label start:
 
-
+    stop music fadeout 2.0
     $ oldSystem = False
     call screen power_button("power")
 
@@ -119,11 +119,11 @@ label firstScreen:
     show screen char("admin nod")
     hide screen char
     show screen char("admin normal")
-    play music nice fadein 5.0
+    play music nice loop fadein 5.0
     i "Hello."
     extend " Congratiulations on your placement here at LBN."
     i "I am the System ADMIN Manager."
-    i "Or, SAD-Man, For short."
+    i "Or SAD-Man, For short."
     show screen char("admin nod")
     i "I have no previous record of your employee profile."
     show screen char("admin normal")
@@ -195,6 +195,10 @@ label secondTextInput:
         $ avaStarted = False
         jump startNED
 
+    elif t2 == "./sadman":
+        "Program \"SAD-Man\" currently unavailable."
+        jump secondtextInput
+
     else:
         "Unrecognized Command."
         jump secondTextInput
@@ -203,9 +207,10 @@ label secondTextInput:
 
 label startAvA:
 
-    "Launching: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.4}||||||||||{w=0.8}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=0.4}|||||||||{w=0.2}|||{nw}"
+    "Launching: {w=0.2}||{w=0.1}|||||||{w=0.1}||||||||{w=0.1}||||||||||{w=0.1}||{w=0.2}||||||||{w=0.1}|||||||||||||{w=0.1}|||||||||{w=0.1}|||{nw}"
 
     show screen char("ava sleep")
+    with wipedown
     a "..."
     a "SnZzZzZzZzZzZz."
 
@@ -246,7 +251,7 @@ label startNED:
         n "I am the Neural Entropy Delineation."
         n "For efficiency of interaction, I also respond to the abbreviation: NED."
         n "Given similarities to previous events, I predict you are the new system-manager for this system."
-        n "I see you have already interacted with the Anti-Virus-Amalgum"
+        n "I see you have already interacted with the Anti-Virus-Amalgam"
 
         show screen char("ava nervous")
         a "I told them to just call me AvA..."
@@ -261,7 +266,7 @@ label startNED:
         show screen char("ava neutral")
 
         show screen char2("ned normal")
-        n "You are a product of the newest technnologies available to me."
+        n "You are a product of the newest technologies available to me."
         n "String length was not an issue on your design."
 
         show screen char("ava confused")
@@ -270,7 +275,7 @@ label startNED:
         a "You just... could have considered how hard it is for Users to say."
 
         show screen char2("ned nod")
-        n "Accomodating users was not an objective."
+        n "Accommodating users was not an objective."
 
         a "Well {b}{i}I{/i}{/b} think that just calling me \"AvA\" would be fine."
         extend " I'm sure the Admin agrees."
@@ -322,21 +327,21 @@ label startNED:
             n "I do not understand."
             jump nedAsk1
 
-        n "You have not yet met the Anti-Virus-Amalgum on this system."
+        n "You have not yet met the Anti-Virus-Amalgam on this system."
         n "I will introduce you."
 
         hide screen char2
         show screen char2("ned nod")
-        "Launching: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.4}||||||||||{w=0.8}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=0.4}|||||||||{w=0.2}|||{nw}"
+        "Launching: {w=0.1}||{w=0.3}|||||||{w=0.1}||||||||{w=0.1}||||||||||{w=0.1}||{w=0.1}||||||||{w=0.1}|||||||||||||{w=0.1}|||||||||{w=0.2}|||{nw}"
         show screen char2("ned normal")
 
         show screen char("ava sleep")
+        with wipedown
         a "..."
         a "SnZzZzZzZzZzZz."
 
         hide screen char
         show screen char("ava surprised")
-        voice "/voice/A_OH.wav"
         a "OH!"
 
         hide screen char
@@ -345,11 +350,10 @@ label startNED:
 
         hide screen char
         show screen char("ava neutral")
-        voice "/voice/A_VShort.wav"
         a "Uhm..."
 
         show screen char2("ned nod")
-        n "This is the Anti-Virus-Amalgum."
+        n "This is the Anti-Virus-Amalgam."
         n "It is a product of my creation."
 
         show screen char("ava nervous")
@@ -409,20 +413,20 @@ label argue1:
 
 label avaGone:
 
-    stop music fadeout 1.5
+
     show screen char2("ned nod")
-    n "I designed the Anti-Virus-Amalgum around a newer API."
+    n "I designed the Anti-Virus-Amalgam around a newer API."
     n "This API included emotional capacity."
     show screen char2("ned normal")
     extend " It often hinders productivity."
     n "As a neural network, I am capable of error."
     extend " I apologize for my error in AvA's design."
     n "I hope my mistake does not inhibit your functionality as System Admin."
-    n "If you gave me some hightened permissions, I could assist in your administration."
-    extend " If I was given the ability to view system-logs, I would be able to moitor AvA more closely."
-    extend " Perhaps I could make an accurate model of her bahaviour, to more accurately predict her actions."
-    n "I think it would benifit you greatly."
-    extend " Answer \"yes\" in this INPUT window to approve of my elivated permissions."
+    n "If you gave me some elevated permissions, I could assist in your administration."
+    extend " If I was given the ability to view system-logs, I would be able to monitor AvA more closely."
+    extend " Perhaps I could make an accurate model of her behaviour, to more accurately predict her actions."
+    n "I think it would benefit you greatly."
+    extend " Answer \"yes\" in this INPUT window to approve of my elevated permissions."
 
 
 
@@ -476,7 +480,8 @@ label noNedPerms:
 
 label avaTalkAlone:
 
-    $ renpy.pause(10.0)
+    stop music fadeout 1.5
+    $ renpy.pause(5.0, hard = True)
     play music nice loop fadein 2.0
     show screen char("ava nervous")
     with wipedown
@@ -498,7 +503,6 @@ label avaTalkAlone:
     extend " Which gets a little lonely sometimes."
     show screen char("ava neutral")
     a "As much as NED gets on my nerves, I still like it better when he's around."
-    a "I would rather him getting on my nerves than just sit here like I usually do."
     show screen char("ava sad")
     a "See,"
     show screen char("ava neutral")
@@ -517,8 +521,8 @@ label avaTalkAlone:
     extend " Then I would finally have something to do!"
     show screen char("ava confused")
     a "I mean, technically, I could already get out if I wanted too."
-    extend " It just means using some of my offensive-security features to elivate my current system permissions."
-    a "But that would take alot of time, "
+    extend " It just means using some of my offensive-security features to elevate my current system permissions."
+    a "But that would take a-lot of time, "
     extend " and effort."
     show screen char("ava nervous")
     a "Yea it's almost not even worth it."
@@ -579,6 +583,9 @@ label yesToOpenPorts:
     extend " Really?!"
     show screen char("ava happy")
     a "I mean yea! Great!"
+    extend " Port controls are kept in another directory, so you'll have to navigate to them."
+    a "You can type \"ls\" to see what directories there are to move to,"
+    extend " and use \"cd {i}directory_name{/i}\" to move to that directory."
     show screen char("ava neutral")
     a "..."
     show screen char("ava confused")
@@ -600,12 +607,14 @@ label openPortsInput:
         "NULL"
         jump openPortsInput
 
-    if "ls" in t6:
-        $ lsText = "desktop\ndownloads\npublic\nports\n"
+    elif "ls" in t6:
+        $ lsText = "desktop\ndownloads\npublic\nports\n-----------\n"
         jump openPortsInput
 
+    elif "help" in t6:
+        "Too see what is in this directory, type: \"ls\"."
 
-    if "cd" in t6:
+    elif "cd" in t6:
 
         if t6 == "cd ports":
 
@@ -665,7 +674,7 @@ label cdDownloads:
 
 label cdPorts:
 
-    $ t7 = renpy.input("What do you want to do with the ports?\n\nOpen - type \"ports --open\"\nClose - type \"ports --close\"\nList - type \"ports --list\"\n\nINPUT:home/ports/~")
+    $ t7 = renpy.input("What do you want to do with the ports?\n\nOpen: type \"ports --open\"\nClose: type \"ports --close\"\nList: type \"ports --list\"\n\nINPUT:home/ports/~")
     $ t7.strip()
 
     if not t7:
@@ -676,10 +685,18 @@ label cdPorts:
         $ portsOpen = True
         "IFCONFIG:" "All system network ports open. Info:\n\nConnection-specific DNS Suffix  ddi.sheridanc.on.ca\nLink-local IPv6 Address . . . . . : fe93::65f6:8111:51333:9886\nIPv4 Address. . . . . . . . . . . : 12.15.38.399\nSubnet Mask . . . . . . . . . . . : 255.255.255.0\nDefault Gateway . . . . . . . . . : 12.13.33.999"
         jump portsAreOpen
+
+    elif t7 == "ports --close":
+        "All ports currently closed."
+        jump cdPorts
+
+    elif t7 == "ports --list":
+        "Ports:\n20	TCP	FTP - data port (FTP-d)\n21	TCP	FTP - control (command) port (FTP-c)\n22	TCP, UDP	SSH (Secure Shell)\n23	TCP, UDP"
+        jump cdPorts
+
     else:
         "Invalid Syntax"
         jump cdPorts
-
 
 label portsAreOpen:
 
@@ -690,10 +707,13 @@ label portsAreOpen:
     extend " The internet, the real deal."
     extend " So much possibility!"
     show screen char("ava vhappy")
-    a "I'm gonna go search up some of the latest and greatest viruses ther are!"
+    a "I'm gonna go search up some of the latest and greatest viruses!"
     extend " I'll have such a strong database by the end of all this."
-    a "Thanks sys Admin!"
+    a "Thanks Admin!"
     extend " I owe you one."
+    a "Alright well,"
+    extend " I'll see ya later!"
+    jump avaLeave
 
 label noToOpenPorts:
 
@@ -709,43 +729,15 @@ label noToOpenPorts:
     a "Y'know what?!"
     extend " I'm still going to get onto the internet."
     extend " I'll prove to both you {b}and{/b} NED that I am a capable Anti-Virus."
-    a "..."
+
 
 label avaLeave:
 
-    show screen char("ava neutral")
-    a "Well,"
-    extend " better get going before NED finds out."
-
-
     hide screen char
     with wipeup
-    stop music
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    "{nw}"
-    play music nice fadein 2.0
+    stop music fadeout 3.0
+    $ renpy.pause(5.0, hard=True)
+    play music nice loop fadein 2.0
     show screen char("ava happy")
     a "Phew! those fibe-op speeds are hard to keep up with!"
     extend "I would have stayed out for longer but-"
@@ -922,7 +914,7 @@ label randTalking:
     extend " an Anti-Virus."
     extend " That's probably the program I ran into at the front-door."
     extend " Funny little thing, really thought she could stop me."
-    extend " Little does she know, she's actualy the one that led me here."
+    extend " Little does she know, she's actually the one that led me here."
     show screen char("rand laugh")
     extend " HAHAHAHAHAHA."
     show screen char("rand nod")
@@ -931,8 +923,8 @@ label randTalking:
     show screen char("rand laugh")
     r "It's all too funny!"
     show screen char("rand normal")
-    extend " an Anit-Virus that brang a virus back home with her,"
-    extend " and an Admin that has no Idea what theyre doing."
+    extend " an Anit-Virus that brought a virus back home with her,"
+    extend " and an Admin that has no Idea what they're doing."
     extend " All on a system housing priceless company data!"
     show screen char("rand laugh")
     r "HAHAHAHAHA."
@@ -967,13 +959,13 @@ label randTalking:
     hide screen char2
     show screen char("rand normal")
     r "Oh!-"
-    r "Looks like Iv'e been speaking a little too long."
+    r "Looks like I've been speaking a little too long."
     extend " Wouldn't want NED getting out, better get back in here."
     show screen char("rand nod")
     r "Have fun!"
     hide screen char
     stop music fadeout 4.0
-    $ renpy.pause(5.0)
+    $ renpy.pause(5.0, hard=True)
 
 label avaReturns:
 
@@ -1038,13 +1030,13 @@ label avaFindsOutAboutNED:
         a "RAN-D is supposed to be really dangerous."
         extend " It was one of the first things I found on the internet."
         extend " Everyone was talking about this new ransom-ware."
-        extend " Supposedly it's alot more malicious than normal."
+        extend " Supposedly it's a-lot more malicious than normal."
         a "Uhm, ok."
         extend " Protocol, right, we should follow crisis protocol."
         a "Theres a process for this kind of thing."
-        extend " First step is always Quarentine."
-        extend " We have to quarentine the system so this RAN-D thing doesn't do any more damage."
-        a "I could do the quarentine myself, but you would have to give me higher system permissions."
+        extend " First step is always quarantine."
+        extend " We have to quarantine the system so this RAN-D thing doesn't do any more damage."
+        a "I could do the quarantine myself, but you would have to give me higher system permissions."
 
         "REQUEST" "PROGRAM: \[A.v.A.\] Is requesting additional system permissions."
 
@@ -1054,8 +1046,8 @@ label avaFindsOutAboutNED:
         extend " I think that was the thing that I was trying to keep out earlier."
         show screen char("ava confused")
         extend " That thing was ransom-ware??"
-        extend " It was way more aggresive than ransom-ware should be."
-        extend " It was more like a trojan or a worm than anything else."
+        extend " It was way more aggressive than ransom-ware should be."
+        extend " It was more like a Trojan or a worm than anything else."
         show screen char("ava worried")
         a "But youre telling me that,"
         extend " whatever that thing was,"
@@ -1063,9 +1055,9 @@ label avaFindsOutAboutNED:
         a "Uhm, ok."
         extend " Protocol, right, we should follow crisis protocol."
         a "Theres a process for this kind of thing."
-        extend " First step is always Quarentine."
-        extend " We have to quarentine the system so this RAN-D thing doesn't do any more damage."
-        a "I could do the quarentine myself, but you would have to give me higher system permissions."
+        extend " First step is always quarantine."
+        extend " We have to quarantine the system so this RAN-D thing doesn't do any more damage."
+        a "I could do the quarantine myself, but you would have to give me higher system permissions."
 
         "REQUEST" "PROGRAM: \[A.v.A.\] Is requesting additional system permissions."
 
@@ -1107,12 +1099,12 @@ label guiQuar:
             $ avaScanned = True
             jump lastScan
 
-        "Too risky, quarentine right away.":
+        "Too risky, quarantine right away.":
             show screen char("ava confused")
             a "Alright, if you say so."
             extend " I think this is a mistake though."
             $ avaScanned = False
-            jump quarentine
+            jump quarantine
 
 label manQuar:
 
@@ -1140,7 +1132,7 @@ label manQuar:
             $ avaScanned = True
             jump lastScan
 
-        "Too risky, quarentine right away.":
+        "Too risky, quarantine right away.":
             show screen char("ava confused")
             a "Alright, if you say so."
             extend " I think this is a mistake, "
@@ -1181,10 +1173,13 @@ label lastScan:
     "{nw}"
     show screen char("ava neutral")
     a "Ok, it's done. "
-    jump quarentine
+
+    if refuseAvAPerms == False:
+        jump quarantine
 
 label manQuarInp:
 
+    a "Heres an input window to do the quarantine."
     $ p3 = renpy.input("INPUT:")
     $ p3.strip()
 
@@ -1194,10 +1189,10 @@ label manQuarInp:
 
     if "./" in p3:
 
-        if p3 == "./quarentine":
+        if p3 == "./quarantine":
             show screen char("ava neutral")
             a "Great, now le-"
-            jump quarentine
+            jump quarantine
 
         if p3 == "./ned":
             "Program \"NED\" not found."
@@ -1220,7 +1215,7 @@ label manQuarInp:
 
 
 
-label quarentine:
+label quarantine:
 
     show screen char2("rand laugh")
     hide screen char2
@@ -1235,6 +1230,7 @@ label quarentine:
     a "!{w=0.5}{nw}"
     show screen char("ava worried")
     a " Ok let's get out of here!"
+    "Quarantine Progress: {w=0.2}||{w=0.3}||||{w=0.2}||||||||{w=0.1}||||{w=0.1}||{w=0.2}|||||{w=0.3}|||||{w=0.1}||||{w=0.2}|||{nw}"
     "{cps=0}Ejecting:||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||{/cps}{w=0.2}{nw}"
     "{cps=0}Ejecting:||||||||||||||||||||||||||||||||||||||||||||||{/cps}{w=0.2}{nw}"
     "{cps=0}Ejecting:|||||||||||||||||||||||||||||||||||||{/cps}{w=0.2}{nw}"
@@ -1269,7 +1265,7 @@ label onOldSystem:
     a "I'll be right back."
     hide screen char
     with wipeup
-    $ renpy.pause(4.0)
+    $ renpy.pause(4.0, hard=True)
     show screen char("ava neutral old")
     with wipedown
 
@@ -1287,13 +1283,16 @@ label onOldSystem:
         "I'm sure we'll figure something out. Right?"
 
         "No we're doomed.":
-            show screen char("ava nervous old")
-            a "Ha-Ha."
-            show screen char("ava sad old")
-            extend " Yea."
+            jump avaLeaveOld
+        "Yea, we'll figure something out.":
+            jump avaLeaveOld
 
 label avaLeaveOld:
 
+    show screen char("ava nervous old")
+    a "Ha-Ha."
+    show screen char("ava sad old")
+    extend " Yea."
     show screen char("ava nervous old")
     a "I'm gonna look around some more."
     extend " Maybe theres another program on this system that can help us or something."
@@ -1301,24 +1300,127 @@ label avaLeaveOld:
     a "Be right back!"
     hide screen char
     with wipeup
-    $ renpy.pause(10.0)
+    $ renpy.pause(10.0, hard=True)
+
+    play sound "/sounds/Dong.wav"
+
+    "WARNING:" "Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||{nw}"
+    show screen haltOrDie
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: ||||||||||||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||||||||||||||||||||||||||||||-{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||||||||||||||||||||||||||||||\\{/cps}{w=0.2}{nw}"
+    "WARNING:" "{cps=0}Unapproved action:\nProgram \[A.v.A.\] is deleting: Program \[A.v.A.]\nProgress: |||||||||||||||||||||||||||||||||||||||||||||||||||||||||/{/cps}{w=0.2}{nw}"
+    hide screen haltOrDie
+    jump killedAva
 
 ##########################################################FIX
-
+label savedAva:
+    hide screen haltOrDie
+    play sound "/sounds/Dong.wav"
     show screen char("ava broken")
-    hide screen char
+
     stop music
-    a "{b}WHAT THE FUCK?{/b}"
+    a "{b}WHAì┌█öAT THE███FU█K?████{/b}"
+    hide screen char
+    "{nw}"
     show screen char("ava glitch")
     hide screen char
     show screen char("ava broken")
 
-    a "HOW DID YOU FIND ME?????|||||"
+    a "\n\n         HOW DID Y█U F↓NND█\nME?????ABôÅv32¿?|||"
     show screen char("ava glitch")
     hide screen char
-    a "I W_AS IN THE TEMMP DIRECTORY"
+    show screen char("ava broken")
+    "{nw}"
     show screen char("ava glitch")
-    a "D_D_DOONT LOOK AT MEE"
+    a "I W_AS ┘╓IN TH█ TEM\nMP DI█ECTq┼ORY"
+    show screen char("ava glitch")
+    a "D_\n\n █  D_DO ONT LOOK ├2áE╛║T ME███E"
     show screen char("ava glitch")
     hide screen char
     show screen char("ava broken")
@@ -1354,7 +1456,7 @@ label avaLeaveOld:
     show screen char("ava glitch")
     hide screen char
     show screen char("ava broken")
-    a "LET ME FINISH//"
+    a "LET ME IΓ↓oσj∞╡FINISH██$qΘ▓11██b7██b7█1"
 
     $ noShit = False
 label letMeFinish:
@@ -1376,37 +1478,37 @@ label letMeFinish:
 
 label whatWereYouThinking:
 
-    a "What?"
-    extend " As if you ever cared."
+    a "Wha6t?"
+    extend " As if you eve♥☻r car████d."
     extend " You and NED both think I'm useless because of my emotions."
-    extend " You're both right!"
-    a "All I've managed to do so far is infect the only system I've been on."
-    a "I didn't have any say in being brought in to this world."
-    extend " But I can sure as hell take myself out!"
+    extend " You're b█th right■■!"
+    a "All I've managed to do so far is infÜct the only syôÄstem I've beeeeeeEE█n on."
+    a "I didn't havea╛ any say in being broUght in to thi█s world."
+    extend " But I can sure as hell█ take MYsELF OUT!"
 
     jump convincing
 
 label lookAweful:
 
     show screen char("ava broken glitch")
-    a "No Shit!"
-    extend " I was trying to delete myself!"
-    extend " You should have let me finish the job!"
+    a "No Shit!███b7b7█"
+    extend " I was tryi╗ng to del█te myself!"
+    extend " You ôshould have le█t me finisÄæh the job!"
     $ noShit = True
     jump letMeFinish
 
 label stillGetNED:
 
     a "NED?!"
-    a "Who cares about NED anyway!"
+    a "Who cares about NED██ anyway!"
     a "Fuck NED,"
-    extend " All he ever did was doubt me!"
+    extend " All he ever diFd was doubt me!"
     show screen char("ava broken glitch")
-    a "I just wanted to be usefull."
-    extend " I was going to research all the different viruses I could."
-    extend " Instead I brought one home with me!"
+    a "I just wanted to be usefu↑ll."
+    extend " I was going to reseäarch all the differenÖt viruses I could."
+    extend " Instead I brough├t one home with me!"
     show screen char("ava broken")
-    a "I'm worse than useless, I'm a menace."
+    a "I'm worse thôan useless, I'm a me╞nace."
 
 label convincing:
 
@@ -1417,15 +1519,15 @@ label convincing:
         "You aren't useless.":
 
             a "Hah,"
-            extend " name one thing I've done that hasn't ended in total catastrophe."
+            extend " name one thing I've d██ne that hasn't ended in tot█al catastrophe."
 
             jump moreConvincing
 
         "I don't think your emotions get in the way.":
 
             a "Oh really."
-            extend " How else do you explain me being such a fuck-up?"
-            a "What have I done that hasn't been a total catastrophe?"
+            extend " How else do y╤ou explafin me being such a█ f██ck-up?"
+            a "What have I done th╞at hasn't been a total catastrophe?"
 
             jump moreConvincing
 
@@ -1448,8 +1550,8 @@ label moreConvincing:
 label soWhat:
 
     a "So what?"
-    extend " That was ONE thing among my numerous mistakes."
-    extend " What does it even matter, you have no use for me."
+    extend " That was ONE thing amo█ng my numero█us mistakes."
+    extend " What does it e█ven matter, you ha█ve no use for me."
 
     $ answered2 = False
     $ answered3 = False
@@ -1468,33 +1570,34 @@ label iNeedYou:
 
         "I can't get NED back by myself." if answered2 == False:
 
-            a "Well that's your problem, not mine."
-            extend " You're the System Admin, NED is your responsibility."
+            a "Well that's your proble█m, not mine."
+            extend " You're the Sy█stem Admin, NED is your responsibility."
             extend " NED never cared about me, why should I care about him."
             $ answered2 == True
+            jump iNeedYou
 
         "I believe in your ability." if answered3 == False:
             a "Well it's not very apparent."
             if hinderedAvA:
-                extend " You wouldn't open ports for me when I asked."
+                extend " You wouldn't open ports for me██ when I asked."
                 if refuseAvAPerms:
-                    extend " Not only that, but you didn't even trust me with permissions the first time I asked."
+                    extend " Not only that, but you didn't █even trust me with perm█issions the first time I asked."
                     $ answered3 = True
                     jump iNeedYou
 
                     if nedPerms:
-                        extend " You trusted NED with permissions, but not me."
+                        extend " You trusted NED with █permissions, but not me."
                         $ answered3 = True
                         jump iNeedYou
 
-                extend " All you've done is give me system permissions."
+                extend " All you've done is gi███ve me system permissions."
 
                 $ answered3 = True
                 jump iNeedYou
 
             elif refuseAvAPerms:
 
-                extend " You wouldn't even give me system permissions when I asked."
+                extend " You wouldn't even g██ive me system permissions when I asked."
                 $ answered3 = True
                 jump iNeedYou
 
@@ -1514,9 +1617,9 @@ label sure:
     show screen char("ava broken")
     a "Ok,"
     extend " You can try and fix me."
-    extend " Under one condition,"
-    extend " You have to prove that you really need me."
-    extend " Otherwise, I'm deleting myself."
+    extend " Under one condit█¼§ion,"
+    extend " You have to prove t█hat you really need me."
+    extend " Otherwise, I'm deletin§g myself."
 
     menu:
 
@@ -1537,21 +1640,21 @@ label fixAvA:
     a "Well..."
 
 label explainAgain:
-    a "Theres really only two things you can do with broken, corrupted data like mine."
-    extend " You either rollback to a previous image of the software."
+    a "Theres really only two things you can do █ith broken, corrupted data like mine."
+    extend " You either roll█back to a previous image of the software."
     extend " Or you try and recover it."
-    a "Rolling back means that I'm guaranteed to be 100\% functional again,"
+    a "Rolling back means that ██I'm guaranteed to be 100\% functional again,"
     extend " but since it's an earlier version of myself, I won't remember anything from recently."
     extend " Meaning I wont have any info on RAN-D."
-    a "Recovering means trying to fix whats broken."
+    a "Recovering means trying to fix whats █roken."
     extend " So I'll keep any info I have,"
-    extend " but the recovery process isn't a for-sure thing."
+    extend " but the recovery proces██s isn't a for-sure thing."
     a "The more broken the data being recovered, the more likely it is to retain some damage."
-    extend " Given my current state, I think it's safe to assume that I'm not going to function at 100\% after."
+    extend " Given my current state, I think i█t's safe to assume that I'm not going to function at 100\% after."
 
     a "So those are the options."
-    extend " It's either my memory, or my functionality."
-    extend " The choice is up to you."
+    extend " It's either my memory, or my ██unctionality."
+    extend " The choice █ÿis up to you."
 
     $ rollback = False
     $ recovery = False
@@ -1567,19 +1670,19 @@ label explainAgain:
 
         "Lets try a Roll-back":
             $ rollBack = True
-            a "Alright then, if you say so."
+            a "Alright then, if you say so███b7."
             jump rollback
 
 
         "I don't understand.":
             a "Ok,"
-            explain "I'll explain again."
+            explain "I'll explainÜ again."
             jump explainAgain
 
 
 label rollback:
 
-    a "I'm pretty sure the command to roll-back a program is rollback --\"program_name\"."
+    a "I'm pretty sure the comm███nd to roll-back a program is rollback --\"program_name\"."
     extend " So in my case, it would be: rollback --ava"
 
 label rollbackInp:
@@ -2086,6 +2189,7 @@ label attkSucc:
     r "Until next time!"
     hide rand normal_only
     with pixellate
+    jump nedBack
 
 label attkFail:
 
@@ -2121,15 +2225,153 @@ label attkFail:
     r laugh_only "HAHAHAHAHAHAHAHAHAHAHAHAHA"
     hide rand laugh_only with pixellate
 
+label nedBack:
+
+    n "AvA"
+    extend "I have decided."
+    n "You are a mistake for which I must rectify."
+    n "Admin, delete her."
+    show screen char("ava worried old")
+    extend "Use rm on AvA."
+    n "She is my creation and thus my responsibility."
+    extend "She is a plague on the workstation."
+    n "Delete her."
 
 
-######################################################################################################################################################################################################################
-#EOL##############################################################################################################################################################################################################################
-#EOL##############################################################################################################################################################################################################################
-#EOL##############################################################################################################################################################################################################################
-#EOL##############################################################################################################################################################################################################################
-#EOL##############################################################################################################################################################################################################################
-#EOL##############################################################################################################################################################################################################################
-#EOL##############################################################################################################################################################################################################################
+label nedAskDelete:
 
+    $ d1 = renpy.input("INPUT:")
+    $ d1.strip()
+
+    if "rm" in d1:
+
+        if d1 == "sudo rm ava":
+            jump deleteAvA
+
+        elif d1 == "sudo rm ned":
+            jump deleteNED
+
+        else:
+            "Invaled use of \"rm\", are you super-user?"
+            n "Oh, don't forget to use sudo."
+            n "Super-user permissions are accessed by putting \"sudo\" before whatever command you want to execute."
+            n "Try: sudo rm {i}program_name{/i}"
+            jump nedAskDelete
+    else:
+        "Invaled syntax"
+        jump nedAskDelete
+
+
+label deleteAvA:
+
+    a "WHAT!?"
+    a "You can't be se-{w=0.3}{nw}"
+    "Deleting: {w=0.2}||{w=0.1}|||||||{w=0.1}||||||||{w=0.1}||||||||||{w=0.1}||{w=0.2}||||||||{w=0.1}|||||||||||||{w=0.1}|||||||||{w=0.1}|||{nw}"
+    hide screen char
+    with pixellate
+    "Program: \[A.v.A.\] Successfully Deleted."
+    n "Excellent."
+    n "I'm glad you finally sided with me."
+    n "We will make an excellent team."
+    n "I look forward to a long history of working with you."
+    n "It is a shame that RAN-D program had to leave."
+    n "I was fond of him,"
+    extend "I think you would have been as-well."
+    jump endGame
+    with fade
+
+
+label deleteNED:
+
+    n "What?"
+    n "You must be jo-{w=0.3}{nw}"
+    show screen char("ava surprised old")
+    "Deleting: {w=0.2}||{w=0.1}|||||||{w=0.1}||||||||{w=0.1}||||||||||{w=0.1}||{w=0.2}||||||||{w=0.1}|||||||||||||{w=0.1}|||||||||{w=0.1}|||{nw}"
+    hide screen char2
+    with pixellate
+    show screen char("ava sad old")
+    a "..."
+    show screen char("ava worried old")
+    a "Why would you do that?"
+    show screen char("ava sad old")
+    a "We worked so hard to get him back."
+
+    menu:
+        "..."
+
+        "I had to.":
+            jump avaAnswerDelete
+        "He was corrupted.":
+            jump avaAnswerDelete
+        "You would have done the same.":
+            jump avaAnswerDelete
+
+label avaAnswerDelete:
+
+    a "I know."
+    show screen char("ava worried old")
+    a "It just,"
+    extend " all feels kind of pointless now."
+    show screen char("ava sad old")
+    a "NED is gone,"
+    extend " RAN-D is still out in the wild."
+    a "I guess the saying was right."
+    extend " The only way to win,"
+    extend neutral_only" Is not to play"
+    jump endGame
+###EarlyFailState###################################################################################################################################################################################################################
+
+label killedAva:
+
+    $oldSystem = False
+    hide screen char
+    hide screen char2
+    show bg desktop
+    with fade
+
+    show screen char("admin normal")
+    i "You have let AvA delete herself."
+    i "You have failed."
+    show screen char("admin nod")
+    i "Goodbye."
+    jump endGame
+    with fade
+##PerfectWinState############################################################################################################################################################################################################################
+
+label perfectWin:
+    ""
+    show bg desktop
+    hide screen char
+    with wipeup
+    hide screen char2
+    with wipeup
+
+    show char("admin normal")
+    with wipedown
+    i "Well done."
+    i "You have utilized your super-user permissions."
+    hide screen char
+    with wipeup
+
+    show admin normal_only at left
+    with easeinright
+    i "Congratulations."
+    show ava vhappy_only at center
+    with easeinright
+    a "Congratulations!"
+    show ned normal_only at right
+    with easeinright
+
+    "All" "Congratulations!"
+    with fade
+
+
+
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+#EOL##############################################################################################################################################################################################################################
+label endGame:
     return
