@@ -6,7 +6,7 @@
 
 init:
 
-    default gui.text_modcolor = "#ffffff"
+    default gui.text_modcolor = "#000000"
     define gui.text_color = gui.text_modcolor
     $ style.input.color = "#ffffff"
 
@@ -21,11 +21,9 @@ init:
     define audio.rand2 = "/sounds/ran-d2.wav"
 
 
-
-
     #backgrouns and UI Images
-
     image sayImg = ConditionSwitch("oldSystem", im.MatrixColor("/gui/textboxold.png", im.matrix.invert()), "oldSystem == False", "/gui/textbox.png", xalign=0.5)
+    image bg black = color("#000000")
     image bg start = im.Scale("startbackground.png",2000,2000)
     image power = "power button.png"
     image bg desktop = "desktop.png"
@@ -113,9 +111,10 @@ label start:
     $ oldSystem = False
     call screen power_button()
 
+
 label firstScreen:
 
-    show bg desktop
+    show bg desktop with fade
 
     show screen char("admin nod")
     hide screen char
@@ -198,7 +197,7 @@ label secondTextInput:
 
     elif t2 == "./sadman":
         "Program \"SAD-Man\" currently unavailable."
-        jump secondtextInput
+        jump secondTextInput
 
     else:
         "Unrecognized Command."
@@ -614,6 +613,7 @@ label openPortsInput:
 
     elif "help" in t6:
         "Too see what is in this directory, type: \"ls\"."
+        jump openPortsInput
 
     elif "cd" in t6:
 
@@ -656,7 +656,7 @@ label cdDownloads:
             jump openPortsInput
 
     elif t9 == "ls":
-        $lsText = "readme.txt"
+        $lsText = "readme.txt\n"
         jump cdDownloads
 
     elif "nano" in t9:
@@ -982,6 +982,10 @@ label avaReturns:
 
     if not t7:
         "NULL"
+
+    if "sudo" in t7:
+        if t7 == "sudo rm ran-d":
+            jump perfectWin
 
     show screen char("ava confused")
     a "What?"
@@ -1460,6 +1464,7 @@ label savedAva:
     a "LET ME IΓ↓oσj∞╡FINISH██$qΘ▓11██b7██b7█1"
 
     $ noShit = False
+    play music ominous loop fadein 5.0
 label letMeFinish:
 
 
@@ -1510,6 +1515,7 @@ label stillGetNED:
     extend " Instead I brough├t one home with me!"
     show screen char("ava broken")
     a "I'm worse thôan useless, I'm a me╞nace."
+    a "It's my emotions, █if I didnt have them Everything would be fine."
 
 label convincing:
 
@@ -1574,7 +1580,7 @@ label iNeedYou:
             a "Well that's your proble█m, not mine."
             extend " You're the Sy█stem Admin, NED is your responsibility."
             extend " NED never cared about me, why should I care about him."
-            $ answered2 == True
+            $ answered2 = True
             jump iNeedYou
 
         "I believe in your ability." if answered3 == False:
@@ -1602,13 +1608,13 @@ label iNeedYou:
                 $ answered3 = True
                 jump iNeedYou
 
-label letmeHelp:
+label letMeHelp:
 
     menu:
 
         "..."
 
-        "Let me help you.":
+        "Let me help you first.":
             jump sure
 
 
@@ -2340,31 +2346,38 @@ label killedAva:
 ##PerfectWinState############################################################################################################################################################################################################################
 
 label perfectWin:
-    ""
+
+    play sound "/sounds/Hooray.wav" fadeout 0.3
     show bg desktop
     hide screen char
     with wipeup
     hide screen char2
     with wipeup
 
-    show char("admin normal")
+    play music "/sounds/Happy.wav" loop fadein 6.0
+
+    show screen char("admin normal")
     with wipedown
     i "Well done."
     i "You have utilized your super-user permissions."
     hide screen char
     with wipeup
 
-    show admin normal_only at left
+    show bg black with fade
+    show admin normal_only at topleft
     with easeinright
     i "Congratulations."
-    show ava vhappy_only at center
+    show ava vhappy_only at top
     with easeinright
     a "Congratulations!"
-    show ned normal_only at right
+    show ned normal_only at topright
     with easeinright
-
+    n "Congratulations."
     "All" "Congratulations!"
     with fade
+    stop music fadeout 10.0
+    "{nw}"
+
 
 
 
