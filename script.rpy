@@ -6,9 +6,11 @@
 
 init:
 
+
+
     default gui.text_modcolor = "#000000"
     define gui.text_color = gui.text_modcolor
-    $ style.input.color = "#ffffff"
+
 
     $ oldSystem = False
 
@@ -22,7 +24,7 @@ init:
 
 
     #backgrouns and UI Images
-    image sayImg = ConditionSwitch("oldSystem", im.MatrixColor("/gui/textboxold.png", im.matrix.invert()), "oldSystem == False", "/gui/textbox.png", xalign=0.5)
+    image sayImg = ConditionSwitch("oldSystem", "/gui/textboxold.png", "oldSystem == False", "/gui/textbox.png", xalign=0.5)
     image bg black = color("#000000")
     image bg start = im.Scale("startbackground.png",2000,2000)
     image power = "power button.png"
@@ -1251,8 +1253,9 @@ label onOldSystem:
 
     stop music fadeout .40
     style window background "sayImg"
-    $ gui.text_modcolor = "#ffffff"
-    $ gui.rebuild()
+###########################################################Sets text color to white
+    #$ gui.text_modcolor = "#ffffff"
+    #$ gui.rebuild()
     show bg desktop_old with pushleft
     $ oldSystem = True
 
@@ -1683,7 +1686,7 @@ label explainAgain:
 
         "I don't understand.":
             a "Ok,"
-            explain "I'll explainÜ again."
+            extend "I'll explainÜ again."
             jump explainAgain
 
 

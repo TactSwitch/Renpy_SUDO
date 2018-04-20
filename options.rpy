@@ -5,6 +5,10 @@
 ## may want to uncomment them when appropriate.
 
 init python:
+    style.prompt.color = "#000000"
+    style.input_text.color = "#000000"
+    style.input.color = "#000000"
+    style.input_prompt.color = "#000000"
     config.debug_sound = True
 ## Basics ######################################################################
 
