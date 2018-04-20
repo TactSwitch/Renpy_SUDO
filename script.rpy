@@ -1718,6 +1718,7 @@ label rollbackInp:
 
 label rollbackAvA:
 
+    $ ans1 = True
     "Roll-Back Program: \[A.v.A.\]\n Progress: {w=0.2}||{w=0.3}|||||||{w=0.2}||||||||{w=0.4}||||||||||{w=0.8}||{w=0.5}||||||||{w=0.8}|||||||||||||{w=0.4}|||||||||{w=0.2}|||{nw}"
     show screen char("ava happy old")
     a "..."
@@ -1756,7 +1757,7 @@ label rollbackAvA:
                     a "..."
                     show screen char("ava sad old")
                     a "That...{w=0.2}{nw}"
-                    show scren char("ava worried old")
+                    show screen char("ava worried old")
                     a "I mean...{w=0.2}{nw}"
                     show screen char("ava confused old")
                     a "Ok, but I'm still here. How could I delete myself and still be here?"
@@ -1776,7 +1777,7 @@ label explainRollback:
 
         "..."
 
-        "You were broken after trying to delete yourself." if ans1:
+        "You were broken after trying to delete yourself." if ans1 == True:
             a "I would expect one would be yea. That still doesn't explain why I don't remember anything you're telling me."
             $ ans1 = False
             jump explainRollback
@@ -2237,14 +2238,14 @@ label attkFail:
 
 label nedBack:
 
-    n "AvA"
-    extend "I have decided."
+    n "AvA."
+    extend " I have decided."
     n "You are a mistake for which I must rectify."
     n "Admin, delete her."
     show screen char("ava worried old")
-    extend "Use rm on AvA."
+    extend " Use rm on AvA."
     n "She is my creation and thus my responsibility."
-    extend "She is a plague on the workstation."
+    extend " She is a plague on the workstation."
     n "Delete her."
 
 
@@ -2327,7 +2328,9 @@ label avaAnswerDelete:
     extend " RAN-D is still out in the wild."
     a "I guess the saying was right."
     extend " The only way to win,"
-    extend neutral_only" Is not to play"
+    show screen char("ava neutral")
+    a " Is not to play"
+    with fade
     jump endGame
 ###EarlyFailState###################################################################################################################################################################################################################
 
