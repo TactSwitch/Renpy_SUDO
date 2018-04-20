@@ -226,11 +226,13 @@ screen ref_book(idlimg, hovimg):
 
 ## Image Button Test Screen ####################################################
 
-screen power_button(img):
+screen power_button():
 
     imagebutton:
         xalign 0.5 yalign 0.5
-        idle img
+        idle "StartButton.png"
+        hover "StartButtonPress.png"
+        selected_hover "StartButtonHover.png"
         action [Jump ("firstScreen")]
 
 ## Say screen ##################################################################

@@ -26,7 +26,7 @@ init:
     #backgrouns and UI Images
 
     image sayImg = ConditionSwitch("oldSystem", im.MatrixColor("/gui/textboxold.png", im.matrix.invert()), "oldSystem == False", "/gui/textbox.png", xalign=0.5)
-
+    image bg start = im.Scale("startbackground.png",2000,2000)
     image power = "power button.png"
     image bg desktop = "desktop.png"
     image bg desktop_old = "DesktopOld.png"
@@ -108,9 +108,10 @@ init:
 
 label start:
 
+    show bg start
     stop music fadeout 2.0
     $ oldSystem = False
-    call screen power_button("power")
+    call screen power_button()
 
 label firstScreen:
 
